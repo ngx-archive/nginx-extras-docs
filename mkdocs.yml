@@ -1,43 +1,109 @@
-site_name: NGINX Extras docs
-site_description: "Automatic documentation from sources, for NGINX Extras."
-site_url: https://www.getpagespeed.com/nginx-extras
-theme:
-  name: "material"
-  palette:
-    scheme: slate
-    primary: teal
-    accent: purple
-  features:
-    - navigation.expand
-plugins:
-  - search
-  - mkdocstrings:
-      handlers:
-        python:
-          setup_commands:
-            - import sys
-            - sys.path.append("docs")
-          selection:
-            new_path_syntax: yes
-      watch:
-        - lastversion
-nav:
-  - Overview: index.md
-  - Modules:
-    - lastversion.py: reference/lastversion.md
-    - Version.py: reference/Version.md
-  - 'RPM repository': 'https://www.getpagespeed.com/posts'
-markdown_extensions:
-  - admonition
-  - markdown_include.include
-  - pymdownx.emoji
-  - pymdownx.magiclink
-  - pymdownx.superfences
-  - pymdownx.tabbed
-  - pymdownx.tasklist
-  - pymdownx.snippets:
-      check_paths: true
-  - toc:
-      permalink: "¤"
 extra:
   generator: false
+markdown_extensions:
+- admonition
+- markdown_include.include
+- pymdownx.emoji
+- pymdownx.magiclink
+- pymdownx.superfences
+- pymdownx.tabbed
+- pymdownx.tasklist
+- pymdownx.snippets:
+    check_paths: true
+- toc:
+    permalink: "\xA4"
+nav:
+- Overview: index.md
+- Modules:
+  - accept-language: accept-language.md
+  - ajp: ajp.md
+  - auth-ldap: auth-ldap.md
+  - auth-pam: auth-pam.md
+  - aws-auth: aws-auth.md
+  - bot-verifier: bot-verifier.md
+  - cache-purge: cache-purge.md
+  - captcha: captcha.md
+  - concat: concat.md
+  - cookie-flag: cookie-flag.md
+  - cookie-limit: cookie-limit.md
+  - coolkit: coolkit.md
+  - doh: doh.md
+  - dynamic-etag: dynamic-etag.md
+  - dynamic-limit-req: dynamic-limit-req.md
+  - echo: echo.md
+  - execute: execute.md
+  - f4fhds: f4fhds.md
+  - fancyindex: fancyindex.md
+  - fips-check: fips-check.md
+  - flv: flv.md
+  - geoip2: geoip2.md
+  - google: google.md
+  - graphite: graphite.md
+  - headers-more: headers-more.md
+  - hmac-secure-link: hmac-secure-link.md
+  - html-sanitize: html-sanitize.md
+  - immutable: immutable.md
+  - ipscrub: ipscrub.md
+  - jpeg: jpeg.md
+  - jwt: jwt.md
+  - length-hiding: length-hiding.md
+  - lua: lua.md
+  - memc: memc.md
+  - naxsi: naxsi.md
+  - nbr: nbr.md
+  - nchan: nchan.md
+  - ndk: ndk.md
+  - pagespeed: pagespeed.md
+  - passenger: passenger.md
+  - phantom-token: phantom-token.md
+  - postgres: postgres.md
+  - push-stream: push-stream.md
+  - rdns: rdns.md
+  - redis2: redis2.md
+  - rtmp: rtmp.md
+  - secure-token: secure-token.md
+  - security: security.md
+  - security-headers: security-headers.md
+  - shibboleth: shibboleth.md
+  - slowfs: slowfs.md
+  - small-light: small-light.md
+  - srcache: srcache.md
+  - statsd: statsd.md
+  - sticky: sticky.md
+  - stream-upsync: stream-upsync.md
+  - substitutions: substitutions.md
+  - sysguard: sysguard.md
+  - testcookie: testcookie.md
+  - traffic-accounting: traffic-accounting.md
+  - ts: ts.md
+  - untar: untar.md
+  - upload: upload.md
+  - upstream-fair: upstream-fair.md
+  - upsync: upsync.md
+  - vts: vts.md
+  - webp: webp.md
+  - zip: zip.md
+- RPM Repository: https://www.getpagespeed.com/redhat
+plugins:
+- search
+- mkdocstrings:
+    handlers:
+      python:
+        selection:
+          new_path_syntax: true
+        setup_commands:
+        - import sys
+        - sys.path.append("docs")
+    watch:
+    - lastversion
+site_description: Automatic documentation from sources, for NGINX Extras.
+site_name: NGINX Extras docs
+site_url: https://www.getpagespeed.com/nginx-extras
+theme:
+  features:
+  - navigation.expand
+  name: material
+  palette:
+    accent: purple
+    primary: teal
+    scheme: slate

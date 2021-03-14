@@ -265,30 +265,6 @@ Nginx cores older than 1.6.0 (exclusive) are *not* supported.
 
 [Back to TOC](#table-of-contents)
 
-## C Macro Configurations
-
-While building this module either via OpenResty or with the Nginx core,
-you can define the following C macros via the C compiler options:
-
-  - `NGX_LUA_USE_ASSERT` When defined, will enable assertions in the
-    ngx\_lua C code base. Recommended for debugging or testing builds.
-    It can introduce some (small) runtime overhead when enabled. This
-    macro was first introduced in the `v0.9.10` release.
-  - `NGX_LUA_ABORT_AT_PANIC` When the LuaJIT VM panics, ngx\_lua will
-    instruct the current nginx worker process to quit gracefully by
-    default. By specifying this C macro, ngx\_lua will abort the current
-    nginx worker process (which usually result in a core dump file)
-    immediately. This option is useful for debugging VM panics. This
-    option was first introduced in the `v0.9.8` release.
-
-To enable one or more of these macros, just pass extra C compiler
-options to the `./configure` script of either Nginx or OpenResty. For
-instance,
-
-    ./configure --with-cc-opt="-DNGX_LUA_USE_ASSERT -DNGX_LUA_ABORT_AT_PANIC"
-
-[Back to TOC](#table-of-contents)
-
 # Community
 
 [Back to TOC](#table-of-contents)
