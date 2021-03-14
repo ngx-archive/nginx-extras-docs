@@ -59,7 +59,8 @@ Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
         'this module is not distributed',
         'installation instructions](#installation).',
         '[![build',
-        'status]'
+        'status]',
+        '[![travisci build'
     )
     for l in lines:
         check_l = l.strip().lower().lstrip('*_')

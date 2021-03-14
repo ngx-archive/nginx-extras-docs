@@ -106,4 +106,4 @@ theme:
   palette:
     accent: purple
     primary: teal
-    scheme: slate
+    scheme: default
