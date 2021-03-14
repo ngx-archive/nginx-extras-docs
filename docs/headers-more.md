@@ -19,7 +19,6 @@ Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 **ngx\_headers\_more** - Set and clear input and output headers...more
 than "add"\!
 
-installation instructions](#installation).
 
 # Version
 

@@ -18,7 +18,6 @@ Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 
 ngx\_redis2 - Nginx upstream module for the Redis 2.0 protocol
 
-installation instructions](#installation).
 
 # Status
 

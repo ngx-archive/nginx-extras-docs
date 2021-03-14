@@ -19,7 +19,6 @@ Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 **ngx\_memc** - An extended version of the standard memcached module
 that supports set, add, delete, and many more memcached commands.
 
-installation instructions](#installation).
 
 # Version
 

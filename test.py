@@ -57,6 +57,7 @@ Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
     bad_lines = (
         '[back to toc](#table-of-contents)',
         'this module is not distributed',
+        'installation instructions](#installation).',
         '[![build',
         'status]'
     )

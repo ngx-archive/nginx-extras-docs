@@ -19,7 +19,6 @@ Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 **ngx\_echo** - Brings "echo", "sleep", "time", "exec" and more
 shell-style goodies to Nginx config file.
 
-installation instructions](#installation).
 
 # Status
 

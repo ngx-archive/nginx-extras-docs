@@ -18,7 +18,6 @@ Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 
 An nginx module for collecting location stats into Graphite.
 
-installation instructions](#installation).
 
 # Features
 

@@ -19,7 +19,6 @@ Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 **ngx\_srcache** - Transparent subrequest-based caching layout for
 arbitrary nginx locations
 
-installation instructions](#installation).
 
 # Status
 
