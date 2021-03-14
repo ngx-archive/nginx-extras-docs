@@ -105,5 +105,5 @@ theme:
   name: material
   palette:
     accent: purple
-    primary: teal
+    primary: blue
     scheme: default
