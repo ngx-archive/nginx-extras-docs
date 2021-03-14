@@ -1,4 +1,20 @@
-# Name
+# _ndk_: Nginx Development Kit
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-ndk
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ndk_http_module.so;
+
+<hr />
 
 Nginx Development Kit (NDK)
 
@@ -23,14 +39,12 @@ features of the NDK they wish to use (explained below).
 If you are not an Nginx module developer, then the only useful part of
 this project will be the 'usage for users' section below.
 
-[Back to TOC](#table-of-contents)
 
 # Status
 
 The NDK is now considered to be stable. It is already being used in
 quite a few third party modules (see list below).
 
-[Back to TOC](#table-of-contents)
 
 # Features
 
@@ -42,7 +56,6 @@ quite a few third party modules (see list below).
   - ngx\_auto\_lib\_core generic external library handler is included
     (see separate readme)
 
-[Back to TOC](#table-of-contents)
 
 # Design
 
@@ -52,7 +65,6 @@ The kit itself is designed in a modular way, so that only the required
 code is compiled. It's possible to add just a single NDK module, a few
 or all of them.
 
-[Back to TOC](#table-of-contents)
 
 ## auto-generated & easily extensible
 
@@ -61,7 +73,6 @@ configuration files. This makes creating similar macros for your own
 code very simple - it's usually just the case of adding an extra line to
 a config file and re-running the build script.
 
-[Back to TOC](#table-of-contents)
 
 # Usage for users
 
@@ -80,7 +91,6 @@ e.g.
             --add-module=/path/to/another/module
 ```
 
-[Back to TOC](#table-of-contents)
 
 # Usage for developers
 
@@ -121,7 +131,6 @@ CFLAGS="$CFLAGS -DNDK_[module_name]"
 is now deprecated. It will still work, but results in unnecessary lines
 being displayed when compiling Nginx.
 
-[Back to TOC](#table-of-contents)
 
 ## Warning: Using NDK\_ALL
 
@@ -135,7 +144,6 @@ Although the NDK is fairly small now, it could in time become a large
 repository of code that would, if using NDK\_ALL, result in considerably
 more code being compiled than is necessary.
 
-[Back to TOC](#table-of-contents)
 
 # Modules using NDK
 
@@ -151,7 +159,6 @@ The following 3rd-party modules make use of
 
 If you would like to add your module to this list, please let us know.
 
-[Back to TOC](#table-of-contents)
 
 # TODO
 
@@ -161,7 +168,6 @@ If you would like to add your module to this list, please let us know.
   - remove dependency of set\_var on OpenSSL being compiled in
   - for backward compatability, add the ndk\_macros
 
-[Back to TOC](#table-of-contents)
 
 # License
 
@@ -194,7 +200,6 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-[Back to TOC](#table-of-contents)
 
 # Contributing / Feedback
 
@@ -203,17 +208,19 @@ that are generic in nature (or would be easily adapted to be so), then
 please send them to me at the address below, and I'll addmclyne to the
 kit.
 
-[Back to TOC](#table-of-contents)
 
 # Author
 
 [Marcus Clyne](https://github.com/mclyne)
 
-[Back to TOC](#table-of-contents)
 
 # Special Thanks
 
 A special thanks goes to [Yichun Zhang](https://github.com/agentzh) for
 helping to maintain this module.
 
-[Back to TOC](#table-of-contents)
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-ndk](https://github.com/vision5/ngx_devel_kit).

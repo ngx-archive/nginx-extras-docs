@@ -1,4 +1,20 @@
-# nginx-upsync-module
+# _upsync_: NGINX module for syncing upstreams from consul or etcd
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-upsync
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_upsync_module.so;
+
+<hr />
 
 Nginx C module, which can sync upstreams from Consul or others. It
 dynamically modifies backend-servers attributes (weight,
@@ -191,7 +207,6 @@ The parameters' meanings are:
     when strong\_dependency is on, nginx will pull servers from
     consul/etcd every time when nginx start up or reload.
 
-[Back to TOC](#table-of-contents)
 
 ## upsync\_dump\_path
 
@@ -203,7 +218,6 @@ context: upstream
 
 description: dump the upstream backends to the $path.
 
-[Back to TOC](#table-of-contents)
 
 ## upsync\_lb
 
@@ -216,7 +230,6 @@ context: upstream
 description: mainly for least\_conn and hash consistent, when using one
 of them, you must point out using upsync\_lb.
 
-[Back to TOC](#table-of-contents)
 
 ## upstream\_show
 
@@ -244,7 +257,6 @@ curl http://127.0.0.1:8500/upstream_list;
 show all upstreams.
 ```
 
-[Back to TOC](#table-of-contents)
 
 # Consul\_interface
 
@@ -334,7 +346,6 @@ or
     curl http://$consul_ip:$port/v1/kv/upstreams/$upstream_name?recurse
 ```
 
-[Back to TOC](#table-of-contents)
 
 # Etcd\_interface
 
@@ -392,7 +403,6 @@ server-down
     curl http://$etcd_ip:$port/v2/keys/upstreams/$upstream_name
 ```
 
-[Back to TOC](#table-of-contents)
 
 # Check\_module
 
@@ -440,35 +450,22 @@ http {
 }
 ```
 
-[Back to TOC](#table-of-contents)
 
 # TODO
 
   - support zookeeper and so on
 
-[Back to TOC](#table-of-contents)
-
-# Compatibility
-
-Master branch is compatible with nginx-1.9.8+.
-
-The branch of nginx-upsync-1.8.x is compatible with Nginx-1.8.x and with
-tengine-2.2.0.
-
-[Back to TOC](#table-of-contents)
 
 # Code style
 
 Code style is mainly based on
 [style](http://tengine.taobao.org/book/appendix_a.html)
 
-[Back to TOC](#table-of-contents)
 
 # Author
 
 Xiaokai Wang (王晓开) <xiaokai.wang@live.com>, Weibo Inc.
 
-[Back to TOC](#table-of-contents)
 
 # Copyright and License
 
@@ -504,7 +501,6 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-[Back to TOC](#table-of-contents)
 
 # see also
 
@@ -515,11 +511,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   - or based on
     <https://github.com/xiaokai-wang/nginx_upstream_check_module>
 
-[back to toc](#table-of-contents)
 
 # source dependency
 
   - Cjson: <https://github.com/kbranigan/cJSON>
   - http-parser: <https://github.com/nodejs/http-parser>
 
-[back to toc](#table-of-contents)
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-upsync](https://github.com/weibocom/nginx-upsync-module).

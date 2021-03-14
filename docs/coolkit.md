@@ -1,4 +1,20 @@
-## ABOUT:
+# _coolkit_: NGINX CoolKit Module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-coolkit
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_coolkit_module.so;
+
+<hr />
 
 ngx\_coolkit is collection of small and useful nginx
 add-ons.
@@ -63,3 +79,8 @@ Required modules (other than ngx\_coolkit):
   - ngx\_http\_auth\_request\_module,
   - ngx\_postgres (PostgreSQL) or ngx\_drizzle (MySQL, Drizzle, SQLite),
   - ngx\_set\_misc.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-coolkit](https://github.com/dvershinin/ngx_coolkit).

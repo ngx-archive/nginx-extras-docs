@@ -1,4 +1,20 @@
-# Secure token module for Nginx [![Build Status](https://travis-ci.org/kaltura/nginx-secure-token-module.svg?branch=master)](https://travis-ci.org/kaltura/nginx-secure-token-module)
+# _secure-token_: Secure token module for NGINX
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-secure-token
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_secure_token_filter_module.so;
+
+<hr />
 
 Generates CDN tokens, either as a cookie or as a query string parameter
 (m3u8,mpd,f4m only). Currently supports Akamai v2 tokens, and Amazon
@@ -508,3 +524,8 @@ license for a particular library is specified in the applicable library
 path.
 
 Copyright © Kaltura Inc. All rights reserved.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-secure-token](https://github.com/kaltura/nginx-secure-token-module).

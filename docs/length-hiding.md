@@ -1,7 +1,21 @@
-# Nginx Length Hiding Filter Module
+# _length-hiding_: NGINX Length Hiding Filter Module
 
-[![Build
-Status](https://travis-ci.org/nulab/nginx-length-hiding-filter-module.svg?branch=master)](https://travis-ci.org/nulab/nginx-length-hiding-filter-module)
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-length-hiding
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_length_hiding_filter_module.so;
+
+<hr />
+
 
 ## Introduction
 
@@ -95,3 +109,8 @@ If this module is built as dynamic module, do NOT forget including
   - [Backlog](https://backlogtool.com/)
   - [Typetalk](https://typetalk.in/)
   - [Nulab Account](https://apps.nulab-inc.com/)
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-length-hiding](https://github.com/nulab/nginx-length-hiding-filter-module).

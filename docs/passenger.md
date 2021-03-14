@@ -1,3 +1,20 @@
+# _passenger_: Passenger module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-passenger
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_passenger_module.so;
+
+<hr />
 [![Gem
 Version](https://badge.fury.io/rb/passenger.svg)](https://badge.fury.io/rb/passenger)
 
@@ -65,3 +82,8 @@ try</a>.
 
 "Passenger" and "Phusion Passenger" are registered trademarks of Phusion
 Holding B.V.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-passenger](https://github.com/phusion/passenger).

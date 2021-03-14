@@ -1,4 +1,20 @@
-# Nginx Push Stream Module
+# _push-stream_: NGINX push stream module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-push-stream
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_push_stream_module.so;
+
+<hr />
 
 A pure stream http push technology for your Nginx setup.
 
@@ -297,3 +313,8 @@ Group](discussion)
 \[push\_stream\_allow\_connections\_to\_events\_channel\]docs/directives/subscribers.textile\#push\_stream\_allow\_connections\_to\_events\_channel  
 \[wiki\]https://github.com/wandenberg/nginx-push-stream-module/wiki/\_pages  
 \[nginx\_debugging\]http://wiki.nginx.org/Debugging
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-push-stream](https://github.com/wandenberg/nginx-push-stream-module).

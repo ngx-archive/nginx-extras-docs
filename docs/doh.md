@@ -1,3 +1,20 @@
+# _doh_: NGINX module for serving DNS-over-HTTPS (DOH) requests
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-doh
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_doh_module.so;
+
+<hr />
 Simple Nginx module for serving DNS-over-HTTPS (DOH) requests.
 
 CAVEAT EMPTOR: This module is experimental, even though I have been
@@ -51,3 +68,8 @@ seconds:
         doh_port 5353;
         doh_timeout 2;
     }
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-doh](https://github.com/dvershinin/Nginx-DOH-Module).

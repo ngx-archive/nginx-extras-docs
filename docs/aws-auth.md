@@ -1,7 +1,21 @@
-# AWS proxy module
+# _aws-auth_: NGINX module to proxy to authenticated AWS services
 
-[![Build
-Status](https://travis-ci.org/anomalizer/ngx_aws_auth.svg?branch=master)](https://travis-ci.org/anomalizer/ngx_aws_auth)
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-aws-auth
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_aws_auth_module.so;
+
+<hr />
+
 [![Gitter
 chat](https://badges.gitter.im/anomalizer/ngx_aws_auth.png)](https://gitter.im/ngx_aws_auth/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 
@@ -122,3 +136,8 @@ Original idea based on
 suggestion of moving to variables rather than patching the proxy module.
 
 Subsequent contributions can be found in the commit logs of the project.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-aws-auth](https://github.com/anomalizer/ngx_aws_auth).

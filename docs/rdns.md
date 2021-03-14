@@ -1,4 +1,20 @@
-# Nginx HTTP rDNS module
+# _rdns_: NGINX HTTP rDNS module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-rdns
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_rdns_module.so;
+
+<hr />
 
 ## Summary
 
@@ -152,3 +168,8 @@ Stolyarov, written by Timofey Kirillov, CJSC Flant (flant.com).
     <https://github.com/flant/nginx-http-rdns>
   - The module homepage (in Russian):
     <http://flant.ru/projects/nginx-http-rdns>
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-rdns](https://github.com/dvershinin/nginx-http-rdns).

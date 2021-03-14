@@ -1,7 +1,22 @@
+# _pagespeed_: PageSpeed dynamic module for NGINX
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-pagespeed
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_pagespeed.so;
+
+<hr />
 ![ngx\_pagespeed](https://lh6.googleusercontent.com/-qufedJIJq7Y/UXEvVYxyYvI/AAAAAAAADo8/JHDFQhs91_c/s401/04_ngx_pagespeed.png)
 
-[![Build
-Status](https://travis-ci.org/pagespeed/ngx_pagespeed.svg?branch=master)](https://travis-ci.org/pagespeed/ngx_pagespeed)
 
 ngx\_pagespeed speeds up your site and reduces page load time by
 automatically applying web performance best practices to pages and
@@ -23,12 +38,6 @@ To see ngx\_pagespeed in action, with example pages for each of the
 optimizations, see our <a href="http://ngxpagespeed.com">demonstration
 site</a>.
 
-## How to build
-
-Follow the steps on <a
-href="https://developers.google.com/speed/pagespeed/module/build_ngx_pagespeed_from_source">build
-ngx\_pagespeed from source</a>.
-
 ## How to use
 
 Follow the steps on <a
@@ -41,3 +50,8 @@ For feedback, questions, and to follow the progress of the project:
     list](https://groups.google.com/forum/#!forum/ngx-pagespeed-discuss)
   - [ngx-pagespeed-announce mailing
     list](https://groups.google.com/forum/#!forum/ngx-pagespeed-announce)
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-pagespeed](https://github.com/apache/incubator-pagespeed-ngx).

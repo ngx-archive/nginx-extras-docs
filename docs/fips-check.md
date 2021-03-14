@@ -1,4 +1,20 @@
-# FIPS status check module for NGINX
+# _fips-check_: FIPS status check module for NGINX
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-fips-check
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_fips_check_module.so;
+
+<hr />
 
 ## Introduction
 
@@ -22,3 +38,8 @@ which applies to both NGINX open source builds and NGINX Plus. To
 determine which TLS ciphers NGINX offers, the [nmap
 ssl-enum-ciphers](https://nmap.org/nsedoc/scripts/ssl-enum-ciphers.html)
 script is useful.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-fips-check](https://github.com/ogarrett/nginx-fips-check-module).

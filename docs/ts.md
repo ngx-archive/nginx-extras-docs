@@ -1,4 +1,20 @@
-# NGINX MPEG-TS Live Module
+# _ts_: NGINX MPEG-TS Live Module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-ts
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_ts_module.so;
+
+<hr />
 
 <div class="contents">
 
@@ -11,10 +27,6 @@
     [HLS](https://tools.ietf.org/html/draft-pantos-http-live-streaming-23)
   - produces and manages live
     [MPEG-DASH](https://en.wikipedia.org/wiki/Dynamic_Adaptive_Streaming_over_HTTP)
-
-## Compatibility
-
-  - [nginx](http://nginx.org) version \>= 1.11.5
 
 # static module
 $ ./configure --add-module=/path/to/nginx-ts-module
@@ -220,3 +232,8 @@ $ ffmpeg -re -i ~/Movies/sintel.mp4 -bsf:v h264_mp4toannexb
          -program "st=0:st=1" -program "st=2:st=3"
          -f mpegts http://127.0.0.1:8000/publish/sintel
 ```
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-ts](https://github.com/arut/nginx-ts-module).

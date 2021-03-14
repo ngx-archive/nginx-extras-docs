@@ -1,7 +1,21 @@
-# ngx\_dynamic\_etag
+# _dynamic-etag_: NGINX module for adding ETag to dynamic content
 
-[![Build
-Status](https://travis-ci.org/dvershinin/ngx_dynamic_etag.svg?branch=master)](https://travis-ci.org/dvershinin/ngx_dynamic_etag)
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-dynamic-etag
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_dynamic_etag_module.so;
+
+<hr />
+
 
 This NGINX module empowers your dynamic content with automatic
 [`ETag`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/ETag)
@@ -142,3 +156,8 @@ Any comment and/or improvement and/or fork is welcome.
 
 Thanks to <http://github.com/kkung/nginx-static-etags/> for...
 inspiration.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-dynamic-etag](https://github.com/dvershinin/ngx_dynamic_etag).

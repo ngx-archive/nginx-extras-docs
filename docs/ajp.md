@@ -1,4 +1,20 @@
-# Name
+# _ajp_: Support AJP protocol proxy with NGINX
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-ajp
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_ajp_module.so;
+
+<hr />
 
 **nginx\_ajp\_module** - support AJP protocol proxy with Nginx
 
@@ -555,13 +571,6 @@ Sets the amount of data that will be flushed to the ajp\_temp\_path when
 writing. It may be used to prevent a worker process blocking for too
 long while spooling data.
 
-# Compatibility
-
-  - The master branch is for Nginx-1.1.4+
-  - If you want to use it with Nginx-1.0.x, you can use this nginx-1.0
-    (<https://github.com/yaoweibin/nginx_ajp_module/tree/nginx-1.0>)
-    branch.
-
 # TODO
 
   - SSL
@@ -639,3 +648,8 @@ below:**
   - Around line 212:
     
     L\<\> starts or ends with whitespace
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-ajp](https://github.com/dvershinin/nginx_ajp_module).

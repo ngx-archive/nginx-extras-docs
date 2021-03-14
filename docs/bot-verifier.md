@@ -1,4 +1,20 @@
-# NGINX Search Index Bot Verification Module [![Build Status](https://secure.travis-ci.org/abedra/ngx_bot_verifier.png)](http://travis-ci.org/abedra/ngx_bot_verifier?branch=master) ![Coverity Build Status](https://scan.coverity.com/projects/16736/badge.svg)
+# _bot-verifier_: A search index bot verification module for NGINX
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-bot-verifier
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_bot_verifier_module.so;
+
+<hr />
 
 ## Status
 
@@ -7,7 +23,6 @@ websites. It has not yet been evaluated at scale. If you would like to
 consider testing this at scale I would be happy to assist and allocate
 time to correct any issues.
 
-[Back to TOC](#table-of-contents)
 
 ## Version
 
@@ -15,7 +30,6 @@ This document describes version
 [0.0.5](https://github.com/abedra/ngx_bot_verifier/tags) released on
 9/12/2018.
 
-[Back to TOC](#table-of-contents)
 
 ## Synopsis
 
@@ -31,7 +45,6 @@ location / {
 }
 ```
 
-[Back to TOC](#table-of-contents)
 
 ## Description
 
@@ -46,13 +59,11 @@ search engine indexers, you must validate according to their published
 standards. This module performs that validation and caches the results
 to ensure you do not pay validation penalties on every request.
 
-[Back to TOC](#table-of-contents)
 
 # Directives
 
 The following directives are used only for module configuration.
 
-[Back to TOC](#table-of-contents)
 
 ## bot\_verifier
 
@@ -67,7 +78,6 @@ The following directives are used only for module configuration.
 Enables or disables the module. The module will not act unless it is set
 to *on*.
 
-[Back to TOC](#table-of-contents)
 
 ## bot\_verifier\_redis\_host
 
@@ -82,7 +92,6 @@ to *on*.
 Sets the Redis host. This setting is used to connect to the Redis
 database used for caching lookup results.
 
-[Back to TOC](#table-of-contents)
 
 ## bot\_verifier\_redis\_port
 
@@ -97,7 +106,6 @@ database used for caching lookup results.
 Sets the Redis port. This setting is used to connect to the Redis
 database used for caching lookup results.
 
-[Back to TOC](#table-of-contents)
 
 ## bot\_verifier\_redis\_connection\_timeout
 
@@ -112,7 +120,6 @@ database used for caching lookup results.
 Sets the timeout when connecting to Redis. This setting is used to
 connect to the Redis database used for caching lookup results.
 
-[Back to TOC](#table-of-contents)
 
 ## bot\_verifier\_redis\_read\_timeout
 
@@ -127,7 +134,6 @@ connect to the Redis database used for caching lookup results.
 Sets the timeout when querying Redis. This setting is used to connect to
 the Redis database used for caching lookup results.
 
-[Back to TOC](#table-of-contents)
 
 ## bot\_verifier\_redis\_expiry
 
@@ -142,7 +148,6 @@ the Redis database used for caching lookup results.
 Sets the timeout when querying Redis. This setting is used to connect to
 the Redis database used for caching lookup results.
 
-[Back to TOC](#table-of-contents)
 
 ## bot\_verifier\_repsheet\_enabled
 
@@ -157,7 +162,6 @@ the Redis database used for caching lookup results.
 Enables blacklisting of failed actors in Repsheet. Assumes Repsheet
 cache lives on already configured redis server.
 
-[Back to TOC](#table-of-contents)
 
 ## Verifying Functionality
 
@@ -180,7 +184,6 @@ This will spoof the `X-Forwarded-For` header and pretend to be from a
 valid google address. The request should succeed and return a normal
 response.
 
-[Back to TOC](#table-of-contents)
 
 ## Developer Setup
 
@@ -209,7 +212,6 @@ If you are making changes to the module, you can recompile them by
 running `make compile`. Remember to restart the NGINX after this
 completes successfully.
 
-[Back to TOC](#table-of-contents)
 
 ## Running the Test Suite
 
@@ -224,4 +226,8 @@ If you are submitting a change to this module please make sure to run
 the test suite before you do. Any changes that break the test suite will
 not be accepted.
 
-[Back to TOC](#table-of-contents)
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-bot-verifier](https://github.com/repsheet/ngx_bot_verifier).

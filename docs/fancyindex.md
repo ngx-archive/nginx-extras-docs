@@ -1,7 +1,21 @@
-# Nginx Fancy Index module
+# _fancyindex_: NGINX Fancy Index module
 
-[![Build
-Status](https://travis-ci.com/aperezdc/ngx-fancyindex.svg?branch=master)](https://travis-ci.com/aperezdc/ngx-fancyindex)
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-fancyindex
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_fancyindex_module.so;
+
+<hr />
+
 
 <div class="contents">
 
@@ -22,77 +36,6 @@ a certain degree of customization of the generated content:
 This module is designed to work with [Nginx](https://nginx.org), a high
 performance open source web server written by [Igor
 Sysoev](http://sysoev.ru).
-
-## Requirements
-
-### CentOS 7
-
-For users of the [official
-stable](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/)
-Nginx repository, [extra packages repository with dynamic
-modules](https://www.getpagespeed.com/redhat) is available and
-fancyindex is included.
-
-Install
-    directly:
-
-    yum install https://extras.getpagespeed.com/redhat/7/x86_64/RPMS/nginx-module-fancyindex-1.12.0.0.4.1-1.el7.gps.x86_64.rpm
-
-Alternatively, add extras repository first (for future updates) and
-install the module:
-
-    yum install nginx-module-fancyindex
-
-Then load the module in /etc/nginx/nginx.conf using:
-
-    load_module "modules/ngx_http_fancyindex_module.so";
-
-### Other platforms
-
-In most other cases you will need the sources for
-[Nginx](https://nginx.org). Any version starting from the 0.8 series
-should work.
-
-In order to use the `fancyindex_header_` and `fancyindex_footer_`
-directives you will also need the
-[ngx\_http\_addition\_module](https://nginx.org/en/docs/http/ngx_http_addition_module.html)
-built into Nginx.
-
-## Building
-
-1.  Unpack the [Nginx](https://nginx.org) sources:
-    
-        $ gunzip -c nginx-?.?.?.tar.gz | tar -xvf -
-
-2.  Unpack the sources for the fancy indexing module:
-    
-        $ gunzip -c nginx-fancyindex-?.?.?.tar.gz | tar -xvf -
-
-3.  Change to the directory which contains the
-    [Nginx](https://nginx.org) sources, run the configuration script
-    with the desired options and be sure to put an `--add-module` flag
-    pointing to the directory which contains the source of the fancy
-    indexing module:
-    
-        $ cd nginx-?.?.?
-        $ ./configure --add-module=../nginx-fancyindex-?.?.? \
-           [--with-http_addition_module] [extra desired options]
-    
-    Since version 0.4.0, the module can also be built as a [dynamic
-    module](https://www.nginx.com/resources/wiki/extending/converting/),
-    using `--add-dynamic-module=…` instead and `load_module
-    "modules/ngx_http_fancyindex_module.so";` in the configuration file
-
-4.  Build and install the software:
-    
-        $ make
-    
-    And then, as `root`:
-    
-        # make install
-
-5.  Configure [Nginx](https://nginx.org) by using the modules'
-    configuration [directives](#directives).
 
 ## Example
 
@@ -433,3 +376,8 @@ fancyindex\_hide\_parent\_dir off :Context: http, server, location
       - `%y`: Year as a decimal number without a century (range 00 to
         99).
       - `%Y`: Year as a decimal number including the century.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-fancyindex](https://github.com/aperezdc/ngx-fancyindex).

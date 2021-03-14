@@ -1,4 +1,20 @@
-# Name
+# _stream-upsync_: NGINX module for syncing stream backends from consul or etcd
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-stream-upsync
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_stream_upsync_module.so;
+
+<hr />
 
 nginx-stream-upsync-module - Nginx C module, sync upstreams from consul
 or others, dynamically modify backend-servers attribute(weight,
@@ -154,7 +170,6 @@ stream {
 NOTE: upstream: include command is neccesary, first time the dumped file
 should include all the servers.
 
-[Back to TOC](#table-of-contents)
 
 # Description
 
@@ -252,7 +267,6 @@ curl http://localhost:2345/upstream_show
 show all upstreams
 ```
 
-[Back to TOC](#table-of-contents)
 
 # Consul\_interface
 
@@ -332,7 +346,6 @@ or
     curl http://$consul_ip:$port/v1/kv/upstreams/$upstream_name?recurse
 ```
 
-[Back to TOC](#table-of-contents)
 
 # Etcd\_interface
 
@@ -390,36 +403,22 @@ server-down
     curl http://$etcd_ip:$port/v2/keys/upstreams/$upstream_name
 ```
 
-[Back to TOC](#table-of-contents)
 
 # TODO
 
   - support zookeeper and so on
 
-[Back to TOC](#table-of-contents)
-
-# Compatibility
-
-The module was developed base on nginx-1.9.10.
-
-Master branch compatible with nginx-1.11.0+.
-
-Nginx-1.10.3- branch compatible with nginx-1.9.10 ~ nginx-1.11.0+.
-
-[Back to TOC](#table-of-contents)
 
 # Code style
 
 Code style is mainly based on
 [style](http://tengine.taobao.org/book/appendix_a.html)
 
-[Back to TOC](#table-of-contents)
 
 # Author
 
 Xiaokai Wang (王晓开) <xiaokai.wang@live.com>, Weibo Inc.
 
-[Back to TOC](#table-of-contents)
 
 # Copyright and License
 
@@ -455,7 +454,6 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-[Back to TOC](#table-of-contents)
 
 # see also
 
@@ -466,11 +464,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   - or based on
     <https://github.com/xiaokai-wang/nginx_upstream_check_module>
 
-[back to toc](#table-of-contents)
 
 # source dependency
 
   - Cjson: <https://github.com/kbranigan/cJSON>
   - http-parser: <https://github.com/nodejs/http-parser>
 
-[back to toc](#table-of-contents)
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-stream-upsync](https://github.com/xiaokai-wang/nginx-stream-upsync-module).

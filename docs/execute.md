@@ -1,4 +1,20 @@
-# NginxExecute
+# _execute_: NGINX Execute module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-execute
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_execute_module.so;
+
+<hr />
 
 ## Introduction
 
@@ -44,3 +60,8 @@ such as Postman, Fiddler.
 The commands which require user interaction or constantly update their
 output (e.g. `top`) will not run properly, so do not file a bug for
 this.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-execute](https://github.com/limithit/NginxExecute).

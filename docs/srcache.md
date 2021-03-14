@@ -1,9 +1,24 @@
-# Name
+# _srcache_: Transparent subrequest-based caching layout for arbitrary NGINX locations
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-srcache
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_srcache_filter_module.so;
+
+<hr />
 
 **ngx\_srcache** - Transparent subrequest-based caching layout for
 arbitrary nginx locations
 
-*This module is not distributed with the Nginx source.* See [the
 installation instructions](#installation).
 
 # Status
@@ -101,7 +116,6 @@ on 15 May 2016.
  }
 ```
 
-[Back to TOC](#table-of-contents)
 
 # Description
 
@@ -130,7 +144,6 @@ The workflow of this module looks like below:
 ![srcache flowchart](http://agentzh.org/misc/image/srcache-flowchart.png
 "srcache flowchart")
 
-[Back to TOC](#table-of-contents)
 
 ## Subrequest caching
 
@@ -152,7 +165,6 @@ Using this module for main request caching and Lua for subrequest
 caching is the approach that we're taking in our business. This hybrid
 solution works great in production.
 
-[Back to TOC](#table-of-contents)
 
 ## Distributed Memcached Caching
 
@@ -271,7 +283,6 @@ where we define a connection pool which holds up to 10 keep-alive
 connections (per nginx worker process) for our `moon` upstream
 (cluster).
 
-[Back to TOC](#table-of-contents)
 
 ## Caching with Redis
 
@@ -339,7 +350,6 @@ Note that, however, if you are using the
 [OpenResty](http://openresty.org/) 1.0.15.3 bundle or later, then you
 already have everything that you need here in the bundle.
 
-[Back to TOC](#table-of-contents)
 
 ## Cache Key Preprocessing
 
@@ -412,11 +422,9 @@ so that you can increase the cache hit rate. And the hash table entry
 order used by LuaJIT or Lua can be used to normalize the order as a nice
 side effect.
 
-[Back to TOC](#table-of-contents)
 
 # Directives
 
-[Back to TOC](#table-of-contents)
 
 ## srcache\_fetch
 
@@ -450,7 +458,6 @@ will always run *before* this.
 You can use the [srcache\_fetch\_skip](#srcache_fetch_skip) directive to
 disable cache look-up selectively.
 
-[Back to TOC](#table-of-contents)
 
 ## srcache\_fetch\_skip
 
@@ -517,7 +524,6 @@ but your
 statement should be put into the `http` config block in your
 `nginx.conf` file though.
 
-[Back to TOC](#table-of-contents)
 
 ## srcache\_store
 
@@ -569,7 +575,6 @@ client side, which adds no extra delay or other issues at all) or
 serving the next request sent on the same TCP connection (when HTTP
 keepalive is in action).
 
-[Back to TOC](#table-of-contents)
 
 ## srcache\_store\_max\_size
 
@@ -592,7 +597,6 @@ server has a default limit of `1 MB` by item.
 When `0` is specified (the default value), there's no limit check at
 all.
 
-[Back to TOC](#table-of-contents)
 
 ## srcache\_store\_skip
 
@@ -629,7 +633,6 @@ contain the string "/tmp":
  srcache_store_skip $nocache;
 ```
 
-[Back to TOC](#table-of-contents)
 
 ## srcache\_store\_statuses
 
@@ -661,7 +664,6 @@ At least one argument should be given to this directive.
 
 This directive was first introduced in the `v0.13rc2` release.
 
-[Back to TOC](#table-of-contents)
 
 ## srcache\_store\_ranges
 
@@ -690,7 +692,6 @@ keys. For example,
 
 This directive was first introduced in the `v0.27` release.
 
-[Back to TOC](#table-of-contents)
 
 ## srcache\_header\_buffer\_size
 
@@ -712,7 +713,6 @@ enough to hold the longest response header.
 
 This directive was first introduced in the `v0.12rc7` release.
 
-[Back to TOC](#table-of-contents)
 
 ## srcache\_store\_hide\_header
 
@@ -753,7 +753,6 @@ This directive was first introduced in the `v0.12rc7` release.
 
 See also [srcache\_store\_pass\_header](#srcache_store_pass_header).
 
-[Back to TOC](#table-of-contents)
 
 ## srcache\_store\_pass\_header
 
@@ -794,7 +793,6 @@ This directive was first introduced in the `v0.12rc7` release.
 
 See also [srcache\_store\_hide\_header](#srcache_store_hide_header).
 
-[Back to TOC](#table-of-contents)
 
 ## srcache\_methods
 
@@ -821,7 +819,6 @@ a response body.
 
 This directive was first introduced in the `v0.12rc7` release.
 
-[Back to TOC](#table-of-contents)
 
 ## srcache\_ignore\_content\_encoding
 
@@ -856,7 +853,6 @@ file:
 
 This directive was first introduced in the `v0.12rc7` release.
 
-[Back to TOC](#table-of-contents)
 
 ## srcache\_request\_cache\_control
 
@@ -886,7 +882,6 @@ This directive was first introduced in the `v0.12rc7` release.
 See also
 [srcache\_response\_cache\_control](#srcache_response_cache_control).
 
-[Back to TOC](#table-of-contents)
 
 ## srcache\_response\_cache\_control
 
@@ -918,7 +913,6 @@ This directive was first introduced in the `v0.12rc7` release.
 See also
 [srcache\_request\_cache\_control](#srcache_request_cache_control).
 
-[Back to TOC](#table-of-contents)
 
 ## srcache\_store\_no\_store
 
@@ -937,7 +931,6 @@ turned `on` *and* other conditions are met. Default to `off`.
 
 This directive was first introduced in the `v0.12rc7` release.
 
-[Back to TOC](#table-of-contents)
 
 ## srcache\_store\_no\_cache
 
@@ -956,7 +949,6 @@ turned `on` *and* other conditions are met. Default to `off`.
 
 This directive was first introduced in the `v0.12rc7` release.
 
-[Back to TOC](#table-of-contents)
 
 ## srcache\_store\_private
 
@@ -975,7 +967,6 @@ turned `on` *and* other conditions are met. Default to `off`.
 
 This directive was first introduced in the `v0.12rc7` release.
 
-[Back to TOC](#table-of-contents)
 
 ## srcache\_default\_expire
 
@@ -1011,7 +1002,6 @@ mean that the item will never expire.
 
 This directive was first introduced in the `v0.12rc7` release.
 
-[Back to TOC](#table-of-contents)
 
 ## srcache\_max\_expire
 
@@ -1044,11 +1034,9 @@ When `0` is specified, which is the default setting, then there will be
 
 This directive was first introduced in the `v0.12rc7` release.
 
-[Back to TOC](#table-of-contents)
 
 # Variables
 
-[Back to TOC](#table-of-contents)
 
 ## $srcache\_expire
 
@@ -1079,7 +1067,6 @@ You don't have to use this variable for the expiration time.
 
 This variable was first introduced in the `v0.12rc7` release.
 
-[Back to TOC](#table-of-contents)
 
 ## $srcache\_fetch\_status
 
@@ -1102,7 +1089,6 @@ processing phase, or `BYPASS` is always given.
 
 This variable was first introduced in the `v0.14` release.
 
-[Back to TOC](#table-of-contents)
 
 ## $srcache\_store\_status
 
@@ -1126,7 +1112,6 @@ can only be obtained after all the response body has been sent if the
 
 This variable was first introduced in the `v0.14` release.
 
-[Back to TOC](#table-of-contents)
 
 # Known Issues
 
@@ -1144,7 +1129,6 @@ This variable was first introduced in the `v0.14` release.
     subrequests, which should work with
     [srcache\_store](#srcache_store).
 
-[Back to TOC](#table-of-contents)
 
 # Caveats
 
@@ -1202,7 +1186,6 @@ This variable was first introduced in the `v0.14` release.
  }
 ```
 
-[Back to TOC](#table-of-contents)
 
 # Trouble Shooting
 
@@ -1235,48 +1218,21 @@ Several common pitfalls for beginners:
     default size of each slab page. Please read its manpage for more
     information.
 
-[Back to TOC](#table-of-contents)
-
-# Compatibility
-
-The following versions of Nginx should work with this module:
-
-  - 1.9.x (last tested: 1.9.15)
-  - 1.8.x
-  - 1.7.x (last tested: 1.7.10)
-  - 1.5.x (last tested: 1.5.12)
-  - 1.4.x (last tested: 1.4.4)
-  - 1.3.x (last tested: 1.3.7)
-  - 1.2.x (last tested: 1.2.9)
-  - 1.1.x (last tested: 1.1.5)
-  - 1.0.x (last tested: 1.0.11)
-  - 0.9.x (last tested: 0.9.4)
-  - 0.8.x \>= 0.8.54 (last tested: 0.8.54)
-
-Earlier versions of Nginx like 0.7.x, 0.6.x and 0.5.x will *not* work.
-
-If you find that any particular version of Nginx above 0.7.44 does not
-work with this module, please consider reporting a bug.
-
-[Back to TOC](#table-of-contents)
 
 # Community
 
-[Back to TOC](#table-of-contents)
 
 ## English Mailing List
 
 The [openresty-en](https://groups.google.com/group/openresty-en) mailing
 list is for English speakers.
 
-[Back to TOC](#table-of-contents)
 
 ## Chinese Mailing List
 
 The [openresty](https://groups.google.com/group/openresty) mailing list
 is for Chinese speakers.
 
-[Back to TOC](#table-of-contents)
 
 # Bugs and Patches
 
@@ -1286,14 +1242,12 @@ Please submit bug reports, wishlists, or patches by
     Tracker](https://github.com/openresty/srcache-nginx-module/issues),
 2.  or posting to the [OpenResty community](#community).
 
-[Back to TOC](#table-of-contents)
 
 # Source Repository
 
 Available on github at
 [openresty/srcache-nginx-module](https://github.com/openresty/srcache-nginx-module).
 
-[Back to TOC](#table-of-contents)
 
 # Test Suite
 
@@ -1328,7 +1282,6 @@ and
 [drizzle-nginx-module](https://github.com/openresty/drizzle-nginx-module)
 to be enabled as well when building Nginx.
 
-[Back to TOC](#table-of-contents)
 
 # TODO
 
@@ -1337,20 +1290,17 @@ to be enabled as well when building Nginx.
     `srcache_key_ignore_args`, `srcache_key_filter_args`, and
     `srcache_key_sort_args`.
 
-[Back to TOC](#table-of-contents)
 
 # Getting involved
 
 You'll be very welcomed to submit patches to the author or just ask for
 a commit bit to the source repository on GitHub.
 
-[Back to TOC](#table-of-contents)
 
 # Author
 
 Yichun "agentzh" Zhang (章亦春) <agentzh@gmail.com>, CloudFlare Inc.
 
-[Back to TOC](#table-of-contents)
 
 # Copyright & License
 
@@ -1391,4 +1341,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   - [set-misc-nginx-module](https://github.com/openresty/set-misc-nginx-module)
   - The [openresty bundle](http://openresty.org)
 
-[Back to TOC](#table-of-contents)
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-srcache](https://github.com/openresty/srcache-nginx-module).

@@ -1,4 +1,20 @@
-# ngx\_cookie\_limit\_req\_module
+# _cookie-limit_: NGINX module to limit the number of malicious ip forged cookies
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-cookie-limit
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_cookie_limit_req_module.so;
+
+<hr />
 
 ## Introduction
 
@@ -20,3 +36,8 @@ implementing improvements.
 ![Alipay](https://github.com/limithit/shellcode/blob/master/alipay.png)
 
 Author Gandalf <zhibu1991@gmail.com>
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-cookie-limit](https://github.com/limithit/ngx_cookie_limit_req_module).

@@ -1,4 +1,20 @@
-# About
+# _cache-purge_: NGINX Cache Purge module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-cache-purge
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_cache_purge_module.so;
+
+<hr />
 
 `ngx_cache_purge` is `nginx` module which adds ability to purge content
 from `FastCGI`, `proxy`, `SCGI` and `uWSGI` caches. A purge operation
@@ -260,3 +276,8 @@ You can test it by running:
 # See also
 
   - [ngx\_slowfs\_cache](http://github.com/FRiCKLE/ngx_slowfs_cache).
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-cache-purge](https://github.com/nginx-modules/ngx_cache_purge).

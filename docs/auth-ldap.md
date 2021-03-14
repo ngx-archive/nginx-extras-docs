@@ -1,4 +1,20 @@
-# LDAP Authentication module for nginx
+# _auth-ldap_: LDAP Authentication module for nginx
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-auth-ldap
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_auth_ldap_module.so;
+
+<hr />
 
 LDAP module for nginx which supports authentication against multiple
 LDAP servers.
@@ -135,3 +151,8 @@ expected value: on, off
 LDAP library default is on. This option disables usage of referral
 messages from LDAP server. Usefull for authenticating against read only
 AD server without access to read write.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-auth-ldap](https://github.com/dvershinin/nginx-auth-ldap).

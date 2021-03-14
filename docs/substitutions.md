@@ -1,3 +1,20 @@
+# _substitutions_: String substitutions module for nginx
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-substitutions
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_subs_filter_module.so;
+
+<hr />
 nginx\_substitutions\_filter *Note: this module is not distributed with
 the Nginx source. Installation instructions can be found below.*
 
@@ -169,3 +186,8 @@ Copyright & License This module is licensed under the BSD license.
     LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
     NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-substitutions](https://github.com/dvershinin/ngx_http_substitutions_filter_module).

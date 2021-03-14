@@ -1,9 +1,21 @@
-# Nginx jwt auth module
+# _jwt_: NGINX JWT Module
 
-[![Build
-Status](https://img.shields.io/github/license/maxx-t/nginx-jwt-module.svg)](/blob/master/LICENSE)
-[![Build
-Status](https://img.shields.io/docker/build/maxxt/nginx-jwt-module.svg)](https://hub.docker.com/r/maxxt/nginx-jwt-module/)
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-jwt
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_auth_jwt_module.so;
+
+<hr />
+
 [![Docker
 pulls](https://img.shields.io/docker/pulls/maxxt/nginx-jwt-module.svg)](https://hub.docker.com/r/maxxt/nginx-jwt-module/)
 
@@ -80,15 +92,6 @@ be a valid file path (pointing to a PEM encoded key).
 
 Specifies which algorithm the server expects to receive in the JWT.
 
-### Build:
-
-This module is built inside a docker container, from the
-[nginx](https://hub.docker.com/_/nginx/)-alpine image.
-
-``` bash
-./build.sh # Will create a "jwt-nginx" (Dockerfile)
-```
-
 ### Test:
 
 #### Default usage:
@@ -124,3 +127,8 @@ docker run --rm --name my-test-container -p 8000:8000 jwt-nginx-test
 # In a second one:
 ./test.sh --current my-test-container
 ```
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-jwt](https://github.com/max-lt/nginx-jwt-module).

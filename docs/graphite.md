@@ -1,8 +1,23 @@
-# graphite-nginx-module
+# _graphite_: An nginx module for collecting stats into Graphite
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-graphite
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_graphite_module.so;
+
+<hr />
 
 An nginx module for collecting location stats into Graphite.
 
-*This module is not distributed with the Nginx source.* See [the
 installation instructions](#installation).
 
 # Features
@@ -313,6 +328,14 @@ Set `value` to the gauge param with specified
 To calculate percentile value for any parameter, set percentile level
 via `/`. E.g. `request_time/50|request_time/90|request_time/99`.
 
+#### Build nginx with graphite module
+
+``` bash
+
+wget 'http://nginx.org/download/nginx-1.9.2.tar.gz'
+tar -xzf nginx-1.9.2.tar.gz
+cd nginx-1.9.2/
+
 # patch to add api for sending metrics from lua code (optional)
 patch -p1 < /path/to/graphite-nginx-module/lua_module_v0_9_11.patch
 cd ..
@@ -348,3 +371,8 @@ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
 LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-graphite](https://github.com/mailru/graphite-nginx-module).

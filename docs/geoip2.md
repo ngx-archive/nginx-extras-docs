@@ -1,4 +1,20 @@
-# Description
+# _geoip2_: NGINX GeoIP2 module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-geoip2
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_geoip2_module.so;
+
+<hr />
 
 **ngx\_http\_geoip2\_module** - creates variables with values from the
 maxmind geoip2 databases based on the client IP (default) or from a
@@ -108,3 +124,8 @@ This translates
     to:
 
     $country_name "default=United States" source=$remote_addr country names en
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-geoip2](https://github.com/leev/ngx_http_geoip2_module).

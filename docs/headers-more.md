@@ -1,9 +1,24 @@
-# Name
+# _headers-more_: NGINX Headers More dynamic module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-headers-more
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_headers_more_filter_module.so;
+
+<hr />
 
 **ngx\_headers\_more** - Set and clear input and output headers...more
 than "add"\!
 
-*This module is not distributed with the Nginx source.* See [the
 installation instructions](#installation).
 
 # Version
@@ -99,11 +114,9 @@ Unlike the standard
 module, this module's directives will by default apply to all the status
 codes, including `4xx` and `5xx`.
 
-[Back to TOC](#table-of-contents)
 
 # Directives
 
-[Back to TOC](#table-of-contents)
 
 ## more\_set\_headers
 
@@ -201,7 +214,6 @@ Behind the scene, use of this directive and its friend
 [more\_clear\_headers](#more_clear_headers) will (lazily) register an
 ouput header filter that modifies `r->headers_out` the way you specify.
 
-[Back to TOC](#table-of-contents)
 
 ## more\_clear\_headers
 
@@ -250,7 +262,6 @@ effectively clears *any* output headers starting by "`X-Hidden-`":
 
 The `*` wildcard support was first introduced in [v0.09](#v009).
 
-[Back to TOC](#table-of-contents)
 
 ## more\_set\_input\_headers
 
@@ -281,7 +292,6 @@ works in subrequests as well.
 If the `-r` option is specified, then the headers will be replaced to
 the new values *only if* they already exist.
 
-[Back to TOC](#table-of-contents)
 
 ## more\_clear\_input\_headers
 
@@ -337,7 +347,6 @@ effectively clears *any* input headers starting by "`X-Hidden-`":
      more_clear_input_headers 'X-Hidden-*';
 ```
 
-[Back to TOC](#table-of-contents)
 
 # Limitations
 
@@ -357,54 +366,21 @@ effectively clears *any* input headers starting by "`X-Hidden-`":
     `ngx_http_header_filter` in the
     `src/http/ngx_http_header_filter_module.c` file.
 
-[Back to TOC](#table-of-contents)
-
-# Compatibility
-
-The following versions of Nginx should work with this module:
-
-  - **1.13.x** (last tested: 1.13.6)
-  - **1.12.x**
-  - **1.11.x** (last tested: 1.11.2)
-  - **1.10.x**
-  - **1.9.x** (last tested: 1.9.15)
-  - **1.8.x**
-  - **1.7.x** (last tested: 1.7.10)
-  - **1.6.x** (last tested: 1.6.2)
-  - **1.5.x** (last tested: 1.5.8)
-  - **1.4.x** (last tested: 1.4.4)
-  - **1.3.x** (last tested: 1.3.7)
-  - **1.2.x** (last tested: 1.2.9)
-  - **1.1.x** (last tested: 1.1.5)
-  - **1.0.x** (last tested: 1.0.11)
-  - **0.9.x** (last tested: 0.9.4)
-  - **0.8.x** (last tested: 0.8.54)
-  - **0.7.x \>= 0.7.44** (last tested: 0.7.68)
-
-Earlier versions of Nginx like 0.6.x and 0.5.x will *not* work.
-
-If you find that any particular version of Nginx above 0.7.44 does not
-work with this module, please consider [reporting a bug](#report-bugs).
-
-[Back to TOC](#table-of-contents)
 
 # Community
 
-[Back to TOC](#table-of-contents)
 
 ## English Mailing List
 
 The [openresty-en](https://groups.google.com/group/openresty-en) mailing
 list is for English speakers.
 
-[Back to TOC](#table-of-contents)
 
 ## Chinese Mailing List
 
 The [openresty](https://groups.google.com/group/openresty) mailing list
 is for Chinese speakers.
 
-[Back to TOC](#table-of-contents)
 
 # Bugs and Patches
 
@@ -414,14 +390,12 @@ Please submit bug reports, wishlists, or patches by
     Tracker](https://github.com/chaoslawful/lua-nginx-module/issues),
 2.  or posting to the [OpenResty community](#community).
 
-[Back to TOC](#table-of-contents)
 
 # Source Repository
 
 Available on github at
 [openresty/headers-more-nginx-module](https://github.com/openresty/headers-more-nginx-module).
 
-[Back to TOC](#table-of-contents)
 
 # Changes
 
@@ -430,7 +404,6 @@ OpenResty bundle's change logs:
 
 <http://openresty.org/#Changes>
 
-[Back to TOC](#table-of-contents)
 
 # Test Suite
 
@@ -472,13 +445,11 @@ Some parts of the test suite requires modules
 and [echo](https://github.com/openresty/echo-nginx-module) to be enabled
 as well when building Nginx.
 
-[Back to TOC](#table-of-contents)
 
 # TODO
 
   - Support variables in new headers' keys.
 
-[Back to TOC](#table-of-contents)
 
 # Getting involved
 
@@ -486,7 +457,6 @@ You'll be very welcomed to submit patches to the [author](#author) or
 just ask for a commit bit to the [source repository](#source-repository)
 on GitHub.
 
-[Back to TOC](#table-of-contents)
 
 # Authors
 
@@ -497,7 +467,6 @@ on GitHub.
 This wiki page is also maintained by the author himself, and everybody
 is encouraged to improve this page as well.
 
-[Back to TOC](#table-of-contents)
 
 # Copyright & License
 
@@ -534,7 +503,6 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-[Back to TOC](#table-of-contents)
 
 # See Also
 
@@ -553,4 +521,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     [headers](http://nginx.org/en/docs/http/ngx_http_headers_module.html)
     module.
 
-[Back to TOC](#table-of-contents)
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-headers-more](https://github.com/openresty/headers-more-nginx-module).

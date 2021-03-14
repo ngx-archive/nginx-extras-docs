@@ -1,7 +1,21 @@
-# mod\_zip
+# _zip_: Streaming ZIP archiver for NGINX
 
-[![Build
-Status](https://travis-ci.org/evanmiller/mod_zip.svg?branch=master)](https://travis-ci.org/evanmiller/mod_zip)
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-zip
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_zip_module.so;
+
+<hr />
+
 
 mod\_zip assembles ZIP archives dynamically. It can stream component
 files from upstream servers with nginx's native proxying code, so that
@@ -96,3 +110,8 @@ extra field will contain `utf8-filename`.
     Accept-Encoding "";` in the location blocks for the component files.
 
 Questions/patches may be directed to Evan Miller, <emmiller@gmail.com>.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-zip](https://github.com/evanmiller/mod_zip).

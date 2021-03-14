@@ -1,4 +1,20 @@
-# Shibboleth auth request module for Nginx
+# _shibboleth_: Shibboleth Auth Request module for NGINX
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-shibboleth
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_shibboleth_module.so;
+
+<hr />
 
 [![image](https://travis-ci.org/nginx-shib/nginx-http-shibboleth.svg?branch=master)](https://travis-ci.org/nginx-shib/nginx-http-shibboleth)
 
@@ -333,3 +349,8 @@ manually (requires Perl & CPAN to be installed):
 This module uses [Semantic Versioning](http://semver.org/) and all
 releases are tagged on GitHub, which allows package downloads of
 individual tags.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-shibboleth](https://github.com/nginx-shib/nginx-http-shibboleth).

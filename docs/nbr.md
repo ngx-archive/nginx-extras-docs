@@ -1,4 +1,21 @@
-# ngx\_brotli
+# _nbr_: NGINX Brotli dynamic modules
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-nbr
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_brotli_filter_module.so;
+    load_module modules/ngx_http_brotli_static_module.so;
+
+<hr />
 
 Brotli is a generic-purpose lossless compression algorithm that
 compresses data using a combination of a modern variant of the LZ77
@@ -13,7 +30,6 @@ ngx\_brotli is a set of two nginx modules:
   - ngx\_brotli static module - used to serve pre-compressed files.
 
 [![TravisCI Build
-Status](https://travis-ci.org/google/ngx_brotli.svg?branch=master)](https://travis-ci.org/google/ngx_brotli)
 
 ## Status
 
@@ -135,3 +151,8 @@ See [Contributing](CONTRIBUTING.md).
     LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
     OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
     SUCH DAMAGE.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-nbr](https://github.com/GetPageSpeed/ngx_brotli).

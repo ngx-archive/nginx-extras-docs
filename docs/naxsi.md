@@ -1,3 +1,20 @@
+# _naxsi_: NGINX Anti XSS & SQL Injection module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-naxsi
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_naxsi_module.so;
+
+<hr />
 ![naxsi](https://raw.githubusercontent.com/nbs-system/naxsi/master/logo.png)
 
 [![coverity](https://scan.coverity.com/projects/1883/badge.svg)](https://scan.coverity.com/projects/1883)
@@ -100,3 +117,8 @@ user, on nbs-system.com, using the gpg key
     mZug
     =+eIv
     -----END PGP PUBLIC KEY BLOCK-----
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-naxsi](https://github.com/nbs-system/naxsi).

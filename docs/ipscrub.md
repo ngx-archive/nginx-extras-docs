@@ -1,4 +1,20 @@
-# `ipscrub`
+# _ipscrub_: IP address anonymizer module for NGINX
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-ipscrub
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_ipscrub_module.so;
+
+<hr />
 
 `ipscrub` is an IP address anonymizer for [nginx](https://www.nginx.com)
 log files. It's an nginx module that generates an IP-based hash. You can
@@ -6,16 +22,6 @@ use this hash to link requests from the same source, without identifying
 your users by IP address.
 
 ![Screenshot of nginx logs when using ipscrub](demo/demo.png)
-
-## TOC
-
-  - [Security Model](#security-model)
-  - [Threat Model](#threat-model)
-  - [Usage](#usage)
-  - [Changelog](#changelog)
-  - [GDPR](#gdpr)
-  - [YAGNI](#yagni)
-  - [License](#license)
 
 ## Security Model
 
@@ -147,3 +153,8 @@ If you would like to use `ipscrub` without attribution in your privacy
 policy, or to discuss custom development, get in touch and we can work
 something out (email address is in my GitHub profile,
 [@masonicb00m](https://twitter.com/masonicb00m) on Twitter).
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-ipscrub](https://github.com/masonicboom/ipscrub).

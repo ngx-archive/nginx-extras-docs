@@ -1,4 +1,20 @@
-# nginx-statsd
+# _statsd_: NGINX module for sending stats to statsd
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-statsd
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_statsd_module.so;
+
+<hr />
 
 An nginx module for sending statistics to statsd.
 
@@ -43,3 +59,8 @@ This is how to use the nginx-statsd module:
             }
         }
     }
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-statsd](https://github.com/dvershinin/nginx-statsd).

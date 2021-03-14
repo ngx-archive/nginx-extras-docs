@@ -1,7 +1,21 @@
-# nginx-upload-module
+# _upload_: NGINX module for handling file uploads
 
-[![Build
-Status](https://travis-ci.org/fdintino/nginx-upload-module.svg?branch=master)](https://travis-ci.org/fdintino/nginx-upload-module)
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-upload
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_upload_module.so;
+
+<hr />
+
 
 A module for [nginx](https://www.nginx.com/) for handling file uploads
 using multipart/form-data encoding
@@ -360,3 +374,8 @@ from this site you automatically agree to the terms and conditions of
 this license. If you don't agree to the terms and conditions of this
 license, you must immediately remove from your computer all materials
 downloaded from this site.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-upload](https://github.com/fdintino/nginx-upload-module).

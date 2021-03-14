@@ -1,4 +1,20 @@
-## Module:
+# _captcha_: NGINX Captcha Module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-captcha
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_captcha_module.so;
+
+<hr />
 
 ### Example Configuration:
 
@@ -91,3 +107,8 @@ Sets name of captcha cookie.<hr>
     Context: http, server, location
 
 Sets secret of captcha.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-captcha](https://github.com/dvershinin/ngx_http_captcha_module).

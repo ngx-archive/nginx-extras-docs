@@ -1,4 +1,20 @@
-# Nginx Accept Language module
+# _accept-language_: NGINX Accept-Language module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-accept-language
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_accept_language_module.so;
+
+<hr />
 
 This module parses the `Accept-Language` header and gives the most
 suitable locale for the user from a list of supported locales from your
@@ -60,3 +76,8 @@ Send Bugs to Guillaume Maury (<dev@gom-jabbar.org>)
 
 Thanks to Evan Miller for his [guide on writing nginx
 modules](http://emiller.info/nginx-modules-guide.html).
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-accept-language](https://github.com/dvershinin/nginx_accept_language_module).

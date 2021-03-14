@@ -1,4 +1,20 @@
-# Description
+# _testcookie_: NGINX testcookie robot mitigation module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-testcookie
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_testcookie_access_module.so;
+
+<hr />
 
 **testcookie-nginx-module** is a simple robot mitigation module using
 cookie based challenge/response.
@@ -334,10 +350,6 @@ interpreted as True.
 
 Expose port in redirect.
 
-# Compatibility
-
-Module was tested with nginx 1.1+, but should work with 1.0+.
-
 # Example configuration
 
     http {
@@ -468,3 +480,8 @@ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
 CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 THE POSSIBILITY OF SUCH DAMAGE.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-testcookie](https://github.com/dvershinin/testcookie-nginx-module).

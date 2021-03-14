@@ -1,4 +1,20 @@
-# The Nginx module for adding cookie flag
+# _cookie-flag_: NGINX cookie flag module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-cookie-flag
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_cookie_flag_filter_module.so;
+
+<hr />
 
 [![License](http://img.shields.io/badge/license-BSD-brightgreen.svg)](https://github.com/Airis777/nginx_cookie_flag_module/blob/master/LICENSE)
 
@@ -7,12 +23,6 @@ The Nginx module for adding cookie flag
 ## Dependencies
 
   - [nginx](http://nginx.org)
-
-## Compatibility
-
-  - 1.11.x (last tested: 1.11.2)
-
-Earlier versions is not tested.
 
 ## Synopsis
 
@@ -51,3 +61,8 @@ Description: Add flag to desired cookie.
 ## Author
 
 Anton Saraykin \[<Airisenator@gmail.com>\]
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-cookie-flag](https://github.com/AirisX/nginx_cookie_flag_module).

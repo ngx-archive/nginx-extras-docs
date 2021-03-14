@@ -1,8 +1,34 @@
-# Nginx virtual host traffic status module
+# _vts_: NGINX virtual host traffic status module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-vts
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_vhost_traffic_status_module.so;
+
+<hr />
 
 [![License](http://img.shields.io/badge/license-BSD-brightgreen.svg)](https://github.com/vozlt/nginx-module-vts/blob/master/LICENSE)
 
 Nginx virtual host traffic status module
+
+## Screenshots
+
+![screenshot-vts-0](https://cloud.githubusercontent.com/assets/3648408/23890539/a4c0de18-08d5-11e7-9a8b-448662454854.png
+"screenshot with default")
+
+-----
+
+![screenshot-vts-1](https://cloud.githubusercontent.com/assets/3648408/23890545/a9d5b504-08d5-11e7-88c2-eb55f39233db.png
+"screenshot with filter")
 
 ## Synopsis
 
@@ -1902,3 +1928,8 @@ http {
 ## Author
 
 YoungJoo.Kim(김영주) \[<vozltx@gmail.com>\]
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-vts](https://github.com/vozlt/nginx-module-vts).

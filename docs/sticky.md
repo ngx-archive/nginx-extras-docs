@@ -1,4 +1,20 @@
-# Nginx Sticky Module
+# _sticky_: NGINX sticky cookie module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-sticky
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_sticky_module.so;
+
+<hr />
 
 modified and extended version; see Changelog.txt
 
@@ -160,3 +176,8 @@ see Todo.md
     LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
     OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
     SUCH DAMAGE.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-sticky](https://github.com/dvershinin/nginx-sticky-module-ng).

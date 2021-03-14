@@ -1,4 +1,20 @@
-# f4fhds
+# _f4fhds_: NGINX module for Adobe f4f format
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-f4fhds
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_f4fhds_module.so;
+
+<hr />
 
 Nginx module for Adobe f4f format.
 
@@ -24,3 +40,8 @@ module.
     e.g. Seg1
   - The files should reside in a local non-networked filesystem, due to
     use of `mmap(2)`.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-f4fhds](https://github.com/GetPageSpeed/f4fhds).

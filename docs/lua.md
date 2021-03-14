@@ -1,3 +1,20 @@
+# _lua_: Lua scripting support for NGINX
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-lua
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_lua_module.so;
+
+<hr />
 <!---
 Don't edit this file manually! Instead you should generate it by using:
     wiki2markdown.pl doc/HttpLuaModule.wiki
@@ -10,7 +27,6 @@ ngx\_http\_lua\_module - Embed the power of Lua into Nginx HTTP Servers.
 This module is a core component of [OpenResty](https://openresty.org).
 If you are using this module, then you are essentially using OpenResty.
 
-*This module is not distributed with the Nginx source.* See [the
 installation instructions](#installation).
 
 # Status
@@ -141,7 +157,6 @@ was released on 3 Nov, 2020.
  }
 ```
 
-[Back to TOC](#table-of-contents)
 
 # Description
 
@@ -210,7 +225,6 @@ communications with the downstream clients, then you should use the
 [ngx\_stream\_lua](https://github.com/openresty/stream-lua-nginx-module#readme)
 module instead, which offers a compatible Lua API.
 
-[Back to TOC](#table-of-contents)
 
 # Typical Uses
 
@@ -241,7 +255,6 @@ thanks to LuaJIT 2.x.
 Other scripting language implementations typically struggle to match
 this performance level.
 
-[Back to TOC](#table-of-contents)
 
 # Nginx Compatibility
 
@@ -263,32 +276,27 @@ versions of Nginx:
 
 Nginx cores older than 1.6.0 (exclusive) are *not* supported.
 
-[Back to TOC](#table-of-contents)
 
 # Community
 
-[Back to TOC](#table-of-contents)
 
 ## English Mailing List
 
 The [openresty-en](https://groups.google.com/group/openresty-en) mailing
 list is for English speakers.
 
-[Back to TOC](#table-of-contents)
 
 ## Chinese Mailing List
 
 The [openresty](https://groups.google.com/group/openresty) mailing list
 is for Chinese speakers.
 
-[Back to TOC](#table-of-contents)
 
 # Code Repository
 
 The code repository of this project is hosted on GitHub at
 [openresty/lua-nginx-module](https://github.com/openresty/lua-nginx-module).
 
-[Back to TOC](#table-of-contents)
 
 # Bugs and Patches
 
@@ -298,7 +306,6 @@ Please submit bug reports, wishlists, or patches by
     Tracker](https://github.com/openresty/lua-nginx-module/issues),
 2.  or posting to the [OpenResty community](#community).
 
-[Back to TOC](#table-of-contents)
 
 # LuaJIT bytecode support
 
@@ -338,7 +345,6 @@ message such as the one
 Loading bytecode files via the Lua primitives like `require` and
 `dofile` should always work as expected.
 
-[Back to TOC](#table-of-contents)
 
 # System Environment Variable Support
 
@@ -355,7 +361,6 @@ example,
  env foo;
 ```
 
-[Back to TOC](#table-of-contents)
 
 # HTTP 1.0 support
 
@@ -381,7 +386,6 @@ Note that common HTTP benchmark tools such as `ab` and `http_load` issue
 HTTP 1.0 requests by default. To force `curl` to send HTTP 1.0 requests,
 use the `-0` option.
 
-[Back to TOC](#table-of-contents)
 
 # Statically Linking Pure Lua Modules
 
@@ -491,7 +495,6 @@ where `/path/to/lib` is the path of the directory containing the
 skipped because no symbols in our archive are mentioned in the main
 parts of the nginx executable.
 
-[Back to TOC](#table-of-contents)
 
 # Data Sharing within an Nginx Worker
 
@@ -576,11 +579,9 @@ following approaches:
     modules and Lua libraries that provide interfaces with these data
     storage mechanisms.
 
-[Back to TOC](#table-of-contents)
 
 # Known Issues
 
-[Back to TOC](#table-of-contents)
 
 ## TCP socket connect operation issues
 
@@ -594,7 +595,6 @@ operation.
 This issue is due to limitations in the Nginx event model and only
 appears to affect Mac OS X.
 
-[Back to TOC](#table-of-contents)
 
 ## Lua Coroutine Yielding/Resuming
 
@@ -608,7 +608,6 @@ appears to affect Mac OS X.
     these calls requiring yielding into your own Lua functions in the
     Lua file instead of the top-level scope of the file.
 
-[Back to TOC](#table-of-contents)
 
 ## Lua Variable Scope
 
@@ -686,7 +685,6 @@ accessing such variables. See [Data Sharing within an Nginx
 Worker](#data-sharing-within-an-nginx-worker) for the reasons behind
 this.
 
-[Back to TOC](#table-of-contents)
 
 ## Locations Configured by Subrequest Directives of Other Modules
 
@@ -725,7 +723,6 @@ directives.
 
 will not work as expected.
 
-[Back to TOC](#table-of-contents)
 
 ## Cosockets Not Available Everywhere
 
@@ -747,7 +744,6 @@ timer via the [ngx.timer.at](#ngxtimerat) API and do the cosocket
 results in the timer handler, which runs asynchronously as to the
 original context creating the timer.
 
-[Back to TOC](#table-of-contents)
 
 ## Special Escaping Sequences
 
@@ -874,7 +870,6 @@ modification.
  # evaluates to "1234"
 ```
 
-[Back to TOC](#table-of-contents)
 
 ## Mixing with SSI Not Supported
 
@@ -883,7 +878,6 @@ all. Just use ngx\_lua exclusively. Everything you can do with SSI can
 be done atop ngx\_lua anyway and it can be more efficient when using
 ngx\_lua.
 
-[Back to TOC](#table-of-contents)
 
 ## SPDY Mode Not Fully Supported
 
@@ -892,7 +886,6 @@ yet: [ngx.location.capture](#ngxlocationcapture),
 [ngx.location.capture\_multi](#ngxlocationcapture_multi), and
 [ngx.req.socket](#ngxreqsocket).
 
-[Back to TOC](#table-of-contents)
 
 ## Missing data on short circuited requests
 
@@ -913,7 +906,6 @@ rewrite or access phase. This also means that later phases that are run
 regardless, e.g. [log\_by\_lua](#log_by_lua), will not have access to
 information that is normally set in those phases.
 
-[Back to TOC](#table-of-contents)
 
 # TODO
 
@@ -942,7 +934,6 @@ information that is normally set in those phases.
     [mod\_lua](https://httpd.apache.org/docs/trunk/mod/mod_lua.html).
   - cosocket: add client SSL certificate support.
 
-[Back to TOC](#table-of-contents)
 
 # Changes
 
@@ -951,7 +942,6 @@ change logs of the OpenResty bundle:
 
 <https://openresty.org/#Changes>
 
-[Back to TOC](#table-of-contents)
 
 # Test Suite
 
@@ -1026,7 +1016,6 @@ details for various advanced testing modes. See also the test reports
 for the Nginx test cluster running on Amazon EC2:
 <https://qa.openresty.org>.
 
-[Back to TOC](#table-of-contents)
 
 # Copyright and License
 
@@ -1063,7 +1052,6 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-[Back to TOC](#table-of-contents)
 
 # See Also
 
@@ -1205,7 +1193,6 @@ directives are executed.
 ![Lua Nginx Modules
 Directives](https://cloud.githubusercontent.com/assets/2137369/15272097/77d1c09e-1a37-11e6-97ef-d9767035fc3e.png)
 
-[Back to TOC](#table-of-contents)
 
 ## lua\_load\_resty\_core
 
@@ -3936,7 +3923,6 @@ This directive was first introduced in the `v0.10.14` release.
   - [coroutine.running](#coroutinerunning)
   - [coroutine.status](#coroutinestatus)
 
-[Back to TOC](#table-of-contents)
 
 ## Introduction
 
@@ -10800,14 +10786,12 @@ This section is just holding obsolete documentation sections that have
 been either renamed or removed so that existing links over the web are
 still valid.
 
-[Back to TOC](#table-of-contents)
 
 ## Special PCRE Sequences
 
 This section has been renamed to [Special Escaping
 Sequences](#special-escaping-sequences).
 
-[Back to TOC](#table-of-contents)
 
 ## Lua/LuaJIT bytecode support
 
@@ -10815,3 +10799,8 @@ This section has been renamed to [LuaJIT bytecode
 support](#luajit-bytecode-support). As of version `v0.10.16` of this
 module, the standard Lua interpreter (also known as "PUC-Rio Lua") is
 not supported anymore.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-lua](https://github.com/openresty/lua-nginx-module).

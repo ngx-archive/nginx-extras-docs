@@ -1,4 +1,20 @@
-# Phantom Token NGINX Module
+# _phantom-token_: Phantom Token NGINX Module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-phantom-token
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_curity_http_phantom_token_module.so;
+
+<hr />
 
 [![Quality](https://img.shields.io/badge/quality-production-green)](https://curity.io/resources/code-examples/status/)
 [![Availability](https://img.shields.io/badge/availability-binary-blue)](https://curity.io/resources/code-examples/status/)
@@ -396,32 +412,6 @@ running it like so:
 
 After running, all 10 `.so` files will be in the `./build` directory.
 
-## Compatibility
-
-This module is compatible with Curity version \>= 2.2. It has been
-tested with NGINX 1.13.7 (NGINX Plus Release 14) and NGINX 1.13.10
-(NGINX Plus Release 15). It is likely to work with other, newish
-versions of NGINX, but only these have been tested, pre-built and
-verified.
-
-### Releases
-
-Pre-built binaries of this module are provided for the following
-versions of NGINX on the corresponding operating system
-distributions:
-
-|                                  |                                                           NGINX 1.17.9 / NGINX Plus R21                                                           |                                                           NGINX 1.19.0 / NGINX Plus R22                                                           |                                                           NGINX 1.19.5 / NGINX Plus R23                                                           |
-| -------------------------------- | :-----------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------: |
-| Amazon Linux                     |      [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/amzn.ngx_curity_http_phantom_token_module_1.17.9.so)      |      [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/amzn.ngx_curity_http_phantom_token_module_1.19.0.so)      |      [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/amzn.ngx_curity_http_phantom_token_module_1.19.5.so)      |
-| Amazon Linux 2                   |     [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/amzn2.ngx_curity_http_phantom_token_module_1.17.9.so)      |     [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/amzn2.ngx_curity_http_phantom_token_module_1.19.0.so)      |     [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/amzn2.ngx_curity_http_phantom_token_module_1.19.5.so)      |
-| CentOS 7.0+                      |    [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/centos.7.ngx_curity_http_phantom_token_module_1.17.9.so)    |    [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/centos.7.ngx_curity_http_phantom_token_module_1.19.0.so)    |    [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/centos.7.ngx_curity_http_phantom_token_module_1.19.5.so)    |
-| CentOS 8.0+                      |    [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/centos.8.ngx_curity_http_phantom_token_module_1.17.9.so)    |    [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/centos.8.ngx_curity_http_phantom_token_module_1.19.0.so)    |    [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/centos.8.ngx_curity_http_phantom_token_module_1.19.5.so)    |
-| Debian 9.0 (Stretch)             | [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/debian.stretch.ngx_curity_http_phantom_token_module_1.17.9.so) | [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/debian.stretch.ngx_curity_http_phantom_token_module_1.19.0.so) | [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/debian.stretch.ngx_curity_http_phantom_token_module_1.19.5.so) |
-| Debian 10.0 (Buster)             | [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/debian.buster.ngx_curity_http_phantom_token_module_1.17.9.so)  | [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/debian.buster.ngx_curity_http_phantom_token_module_1.19.0.so)  | [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/debian.buster.ngx_curity_http_phantom_token_module_1.19.5.so)  |
-| Alpine                           |     [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/alpine.ngx_curity_http_phantom_token_module_1.17.9.so)     |     [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/alpine.ngx_curity_http_phantom_token_module_1.19.0.so)     |     [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/alpine.ngx_curity_http_phantom_token_module_1.19.5.so)     |
-| Ubuntu 18.04 LTS (Bionic Beaver) |  [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/ubuntu.18.04.ngx_curity_http_phantom_token_module_1.17.9.so)  |  [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/ubuntu.18.04.ngx_curity_http_phantom_token_module_1.19.0.so)  |  [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/ubuntu.18.04.ngx_curity_http_phantom_token_module_1.19.5.so)  |
-| Ubuntu 20.04 LTS (Focal Fossa)   |  [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/ubuntu.20.04.ngx_curity_http_phantom_token_module_1.17.9.so)  |  [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/ubuntu.20.04.ngx_curity_http_phantom_token_module_1.19.0.so)  |  [⇓](https://github.com/curityio/nginx_phantom_token_module/releases/download/1.1.1/ubuntu.20.04.ngx_curity_http_phantom_token_module_1.19.5.so)  |
-
 ## Testing
 
 To test this module, you'll need the [Test::Nginx Perl
@@ -475,3 +465,8 @@ This software is copyright (C) 2017 Curity AB. It is open source
 software that is licensed under the [Apache v. 2](LICENSE). For
 commercial support of this module, please contact [Curity
 sales](mailto:sales@curity.io).
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-phantom-token](https://github.com/curityio/nginx_phantom_token_module).

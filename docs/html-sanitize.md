@@ -1,4 +1,20 @@
-# Name
+# _html-sanitize_: NGINX module to sanitize HTML 5 with whitelisted elements, attributes and CSS
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-html-sanitize
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_html_sanitize_module.so;
+
+<hr />
 
 [ngx\_http\_html\_sanitize\_module](https://github.com/youzan/ngx_http_html_sanitize_module)
 - It's base on google's
@@ -9,45 +25,8 @@ inline CSS parser to sanitize HTML with whitelisted elements,
 whitelisted attributes and whitelisted CSS
         property.
 
-# TOC
-
-  - [Name](#name)
-  - [Status](#status)
-  - [Example](#example)
-  - [Description](#description)
-  - [Benchrmark](#benchmark)
-  - [TODO](#todo)
-  - [Directive](#directive)
-      - [html\_sanitize](#html_sanitize)
-      - [html\_sanitize\_hash\_max\_size](#html_sanitize_hash_max_size)
-      - [html\_sanitize\_hash\_bucket\_size](#html_sanitize_hash_bucket_size)
-      - [html\_sanitize\_element](#html_sanitize_element)
-      - [html\_sanitize\_attribute](#html_sanitize_attribute)
-      - [html\_sanitize\_url\_protocol](#html_sanitize_url_protocol)
-      - [html\_sanitize\_url\_domain](#html_sanitize_url_domain)
-      - [html\_sanitize\_iframe\_url\_protocol](#html_sanitize_iframe_url_protocol)
-      - [html\_sanitize\_iframe\_url\_domain](#html_sanitize_iframe_url_domain)
-  - [Querystring](#querystring)
-      - [document](#document)
-      - [html](#html)
-      - [script](#script)
-      - [style](#style)
-      - [namespace](#namespace)
-      - [context](#context)
-      - [element](#element)
-      - [attribute](#attribute)
-      - [style\_property](#style_property)
-      - [style\_property\_value](#style_property_value)
-      - [url\_protocol](#url_protocol)
-      - [url\_domain](#url_domain)
-      - [iframe\_url\_protocol](#iframe_url_protocol)
-      - [iframe\_url\_domain](#iframe_url_domain)
-  - [Copyright](#copyright)
-
 # Status
 
-[![Build
-Status](https://travis-ci.org/youzan/ngx_http_html_sanitize_module.svg?branch=master)](https://travis-ci.org/youzan/ngx_http_html_sanitize_module)
 
 Production Ready :-)
 
@@ -729,3 +708,8 @@ google/gumbo-parser: <https://github.com/google/gumbo-parser>
 
 hackers-painters/katana-parser:
 [https://github.com/hackers-painters/katana-parser](https://github.com/hackers-painters/katana-parse)
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-html-sanitize](https://github.com/dvershinin/ngx_http_html_sanitize_module).

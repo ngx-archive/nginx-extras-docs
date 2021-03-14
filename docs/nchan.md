@@ -1,3 +1,20 @@
+# _nchan_: Scalable, flexible pub/sub server for the modern web
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-nchan
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_nchan_module.so;
+
+<hr />
 <img class="logo" alt="NCHAN" src="https://nchan.io/github-logo.png" />
 
 <https://nchan.io>
@@ -2076,3 +2093,8 @@ one location:
 Please support this project with a donation to keep me warm through the
 winter. I accept bitcoin at 15dLBzRS4HLRwCCVjx4emYkxXcyAPmGxM3 . Other
 donation methods can be found at <https://nchan.io>
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-nchan](https://github.com/slact/nchan).

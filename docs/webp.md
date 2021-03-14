@@ -1,4 +1,20 @@
-## ngx\_webp
+# _webp_: NGINX WebP module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-webp
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_webp_module.so;
+
+<hr />
 
 Webp is new (and smaller) image format. This module will convert jpg/png
 image on fly and send webp response.
@@ -57,3 +73,8 @@ Content-Type: image/jpeg
 
 As webp convertion takes some CPU usage I recommend to use some kind of
 caching of nginx responses, like Varnish.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-webp](https://github.com/dvershinin/ngx_webp).

@@ -1,4 +1,20 @@
-# ngx\_http\_auth\_pam\_module
+# _auth-pam_: PAM authentication dynamic module for NGINX
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-auth-pam
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_auth_pam_module.so;
+
+<hr />
 
 ## Nginx module to use PAM for simple http authentication
 
@@ -82,3 +98,8 @@ the PAM environment will include the following variables:
 You may use this information for request based authentication. You need
 a recent pam release (\>= version 1.0.90) to expose environment
 variables to pam\_exec.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-auth-pam](https://github.com/sto/ngx_http_auth_pam_module).

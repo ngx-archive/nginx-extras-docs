@@ -1,4 +1,20 @@
-# ngx\_small\_light
+# _small-light_: Dynamic image transformation module For NGINX
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-small-light
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_small_light_module.so;
+
+<hr />
 
 A dynamic image transformation module for [nginx](http://nginx.org/).
 
@@ -333,3 +349,8 @@ NGINX_BIN=${nginx_prefix_dir}/sbin/nginx prove t/**/*.t
 
 Please read the
 [COPYING](https://github.com/cubicdaiya/ngx_small_light/blob/master/COPYING).
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-small-light](https://github.com/dvershinin/ngx_small_light).

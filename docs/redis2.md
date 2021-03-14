@@ -1,8 +1,23 @@
-# Name
+# _redis2_: NGINX upstream module for the Redis 2.0 protocol
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-redis2
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_redis2_module.so;
+
+<hr />
 
 ngx\_redis2 - Nginx upstream module for the Redis 2.0 protocol
 
-*This module is not distributed with the Nginx source.* See [the
 installation instructions](#installation).
 
 # Status
@@ -83,7 +98,6 @@ on 19 April 2018.
  }
 ```
 
-[Back to TOC](#table-of-contents)
 
 # Description
 
@@ -114,11 +128,9 @@ to implement.
 Another option is to parse the redis responses on your client side
 yourself.
 
-[Back to TOC](#table-of-contents)
 
 # Directives
 
-[Back to TOC](#table-of-contents)
 
 ## redis2\_query
 
@@ -156,7 +168,6 @@ then `GET /pipelined` will yield two successive raw Redis responses
 
 while newlines here are actually `CR LF` (`\r\n`).
 
-[Back to TOC](#table-of-contents)
 
 ## redis2\_raw\_query
 
@@ -174,7 +185,6 @@ receive an error. If you want to specify multiple pipelined commands in
 a single query, use the [redis2\_raw\_queries](#redis2_raw_queries)
 directive instead.
 
-[Back to TOC](#table-of-contents)
 
 ## redis2\_raw\_queries
 
@@ -212,7 +222,6 @@ Note that in the second sample above, the
 directive is provided by the
 [set-misc-nginx-module](http://github.com/openresty/set-misc-nginx-module).
 
-[Back to TOC](#table-of-contents)
 
 ## redis2\_literal\_raw\_query
 
@@ -228,7 +237,6 @@ recognized. In other words, you're free to use the dollar sign character
 
 Only One redis command is allowed in the `QUERY` argument.
 
-[Back to TOC](#table-of-contents)
 
 ## redis2\_pass
 
@@ -244,7 +252,6 @@ Only One redis command is allowed in the `QUERY` argument.
 
 Specify the Redis server backend.
 
-[Back to TOC](#table-of-contents)
 
 ## redis2\_connect\_timeout
 
@@ -262,7 +269,6 @@ Time units supported are `s`(seconds), `ms`(milliseconds), `y`(years),
 
 This time must be less than 597 hours.
 
-[Back to TOC](#table-of-contents)
 
 ## redis2\_send\_timeout
 
@@ -279,7 +285,6 @@ It's wise to always explicitly specify the time unit to avoid confusion.
 Time units supported are `s`(seconds), `ms`(milliseconds), `y`(years),
 `M`(months), `w`(weeks), `d`(days), `h`(hours), and `m`(minutes).
 
-[Back to TOC](#table-of-contents)
 
 ## redis2\_read\_timeout
 
@@ -296,7 +301,6 @@ It's wise to always explicitly specify the time unit to avoid confusion.
 Time units supported are `s`(seconds), `ms`(milliseconds), `y`(years),
 `M`(months), `w`(weeks), `d`(days), `h`(hours), and `m`(minutes).
 
-[Back to TOC](#table-of-contents)
 
 ## redis2\_buffer\_size
 
@@ -311,7 +315,6 @@ required to be as big as the largest possible Redis reply.
 
 This default size is the page size, may be 4k or 8k.
 
-[Back to TOC](#table-of-contents)
 
 ## redis2\_next\_upstream
 
@@ -344,7 +347,6 @@ Here's an artificial example:
  }
 ```
 
-[Back to TOC](#table-of-contents)
 
 # Connection Pool
 
@@ -376,7 +378,6 @@ A sample config snippet looks like this
  }
 ```
 
-[Back to TOC](#table-of-contents)
 
 # Selecting Redis Databases
 
@@ -391,7 +392,6 @@ redis2_query select 8;
 redis2_query get foo;
 ```
 
-[Back to TOC](#table-of-contents)
 
 # Lua Interoperability
 
@@ -514,7 +514,6 @@ complicated hashing rules. For instance,
  }
 ```
 
-[Back to TOC](#table-of-contents)
 
 ## Pipelined Redis Requests by Lua
 
@@ -589,7 +588,6 @@ Redis backend and enable TCP connection pool via the
 [keepalive](http://wiki.nginx.org/HttpUpstreamKeepaliveModule#keepalive)
 directive in it.
 
-[Back to TOC](#table-of-contents)
 
 # Redis Publish/Subscribe Support
 
@@ -615,7 +613,6 @@ You can surely parse the replies with the
 [lua-redis-parser](http://github.com/openresty/lua-redis-parser) library
 if you're using Lua to access this module's location.
 
-[Back to TOC](#table-of-contents)
 
 ## Limitations For Redis Publish/Subscribe
 
@@ -637,7 +634,6 @@ to switch to the
 [lua-resty-redis](https://github.com/openresty/lua-resty-redis) library
 for [lua-nginx-module](http://github.com/openresty/lua-nginx-module).
 
-[Back to TOC](#table-of-contents)
 
 # Performance Tuning
 
@@ -655,56 +651,21 @@ for [lua-nginx-module](http://github.com/openresty/lua-nginx-module).
     flushing the `error.log` file, which is always non-buffered and
     blocking and thus very expensive.
 
-[Back to TOC](#table-of-contents)
-
-# Compatibility
-
-Redis 2.0, 2.2, 2.4, and above should work with this module without any
-issues. So is the [Alchemy
-Database](http://code.google.com/p/alchemydatabase/) (aka redisql in its
-early days).
-
-The following versions of Nginx should work with this module:
-
-  - 1.11.x (last tested: 1.11.2)
-  - 1.10.x
-  - 1.9.x (last tested: 1.9.15)
-  - 1.8.x
-  - 1.7.x (last tested: 1.7.10)
-  - 1.6.x
-  - 1.5.x (last tested: 1.5.12)
-  - 1.4.x (last tested: 1.4.3)
-  - 1.3.x (last tested: 1.3.7)
-  - 1.2.x (last tested: 1.2.7)
-  - 1.1.x (last tested: 1.1.5)
-  - 1.0.x (last tested: 1.0.10)
-  - 0.9.x (last tested: 0.9.4)
-  - 0.8.x \>= 0.8.31 (last tested: 0.8.54)
-
-Earlier versions of Nginx will *not* work.
-
-If you find that any particular version of Nginx above 0.8.31 does not
-work with this module, please consider reporting a bug.
-
-[Back to TOC](#table-of-contents)
 
 # Community
 
-[Back to TOC](#table-of-contents)
 
 ## English Mailing List
 
 The [openresty-en](https://groups.google.com/group/openresty-en) mailing
 list is for English speakers.
 
-[Back to TOC](#table-of-contents)
 
 ## Chinese Mailing List
 
 The [openresty](https://groups.google.com/group/openresty) mailing list
 is for Chinese speakers.
 
-[Back to TOC](#table-of-contents)
 
 # Bugs and Patches
 
@@ -714,33 +675,28 @@ Please submit bug reports, wishlists, or patches by
     Tracker](http://github.com/openresty/redis2-nginx-module/issues),
 2.  or posting to the [OpenResty community](#community).
 
-[Back to TOC](#table-of-contents)
 
 # Source Repository
 
 Available on github at
 [openresty/redis2-nginx-module](http://github.com/openresty/redis2-nginx-module).
 
-[Back to TOC](#table-of-contents)
 
 # TODO
 
   - Add the `redis2_as_json` directive to allow emitting JSON directly.
 
-[Back to TOC](#table-of-contents)
 
 # Author
 
 Yichun "agentzh" Zhang (章亦春) <agentzh@gmail.com>, OpenResty Inc.
 
-[Back to TOC](#table-of-contents)
 
 # Getting involved
 
 You'll be very welcomed to submit patches to the author or just ask for
 a commit bit to the source repository on GitHub.
 
-[Back to TOC](#table-of-contents)
 
 # Copyright & License
 
@@ -774,7 +730,6 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-[Back to TOC](#table-of-contents)
 
 # SEE ALSO
 
@@ -789,4 +744,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     [lua-nginx-module](http://github.com/openresty/lua-nginx-module)
     cosocket API.
 
-[Back to TOC](#table-of-contents)
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-redis2](https://github.com/openresty/redis2-nginx-module).

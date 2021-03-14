@@ -1,9 +1,24 @@
-# Name
+# _memc_: Extended version of the standard NGINX memcached module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-memc
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_memc_module.so;
+
+<hr />
 
 **ngx\_memc** - An extended version of the standard memcached module
 that supports set, add, delete, and many more memcached commands.
 
-*This module is not distributed with the Nginx source.* See [the
 installation instructions](#installation).
 
 # Version
@@ -146,7 +161,6 @@ recommended to use the
 library instead of this module though, because the former is much more
 flexible and memory-efficient.
 
-[Back to TOC](#table-of-contents)
 
 ## Keep-alive connections to memcached servers
 
@@ -179,7 +193,6 @@ Here's a sample configuration:
    }
 ```
 
-[Back to TOC](#table-of-contents)
 
 ## How it works
 
@@ -191,7 +204,6 @@ memcached servers across requests, just like other upstream modules. For
 a working solution, see section [Keep-alive connections to memcached
 servers](#keep-alive-connections-to-memcached-servers).
 
-[Back to TOC](#table-of-contents)
 
 # Memcached commands supported
 
@@ -215,7 +227,6 @@ The following memcached commands have been implemented and tested (with
 their parameters marked by corresponding nginx variables defined by this
 module):
 
-[Back to TOC](#table-of-contents)
 
 ## get $memc\_key
 
@@ -241,7 +252,6 @@ directive](http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header
 
 It returns `502` for `ERROR`, `CLIENT_ERROR`, or `SERVER_ERROR`.
 
-[Back to TOC](#table-of-contents)
 
 ## set $memc\_key $memc\_flags $memc\_exptime $memc\_value
 
@@ -284,21 +294,18 @@ Returns `201 Created` if the upstream memcached server replies `STORED`,
 The original memcached responses are returned as the response body
 except for `404 NOT FOUND`.
 
-[Back to TOC](#table-of-contents)
 
 ## add $memc\_key $memc\_flags $memc\_exptime $memc\_value
 
 Similar to the [set
 command](#set-memc_key-memc_flags-memc_exptime-memc_value).
 
-[Back to TOC](#table-of-contents)
 
 ## replace $memc\_key $memc\_flags $memc\_exptime $memc\_value
 
 Similar to the [set
 command](#set-memc_key-memc_flags-memc_exptime-memc_value).
 
-[Back to TOC](#table-of-contents)
 
 ## append $memc\_key $memc\_flags $memc\_exptime $memc\_value
 
@@ -309,14 +316,12 @@ Note that at least memcached version 1.2.2 does not support the "append"
 and "prepend" commands. At least 1.2.4 and later versions seem to
 supports these two commands.
 
-[Back to TOC](#table-of-contents)
 
 ## prepend $memc\_key $memc\_flags $memc\_exptime $memc\_value
 
 Similar to the [append
 command](#append-memc_key-memc_flags-memc_exptime-memc_value).
 
-[Back to TOC](#table-of-contents)
 
 ## delete $memc\_key
 
@@ -338,7 +343,6 @@ Returns `200 OK` if deleted successfully, `404 Not Found` for
 The original memcached responses are returned as the response body
 except for `404 NOT FOUND`.
 
-[Back to TOC](#table-of-contents)
 
 ## delete $memc\_key $memc\_exptime
 
@@ -349,7 +353,6 @@ variable.
 This command is no longer available in the latest memcached version
 1.4.4.
 
-[Back to TOC](#table-of-contents)
 
 ## incr $memc\_key $memc\_value
 
@@ -374,13 +377,11 @@ response body if successful, or `404 Not Found` if the key is not found.
 
 It returns `502` for `ERROR`, `CLIENT_ERROR`, or `SERVER_ERROR`.
 
-[Back to TOC](#table-of-contents)
 
 ## decr $memc\_key $memc\_value
 
 Similar to [incr $memc\_key $memc\_value](#incr-memc_key-memc_value).
 
-[Back to TOC](#table-of-contents)
 
 ## flush\_all
 
@@ -394,14 +395,12 @@ Mark all the keys on the memcached server as expired:
    }
 ```
 
-[Back to TOC](#table-of-contents)
 
 ## flush\_all $memc\_exptime
 
 Just like [flush\_all](#flush_all) but also accepts an expiration time
 specified by the `$memc_exptime` variable.
 
-[Back to TOC](#table-of-contents)
 
 ## stats
 
@@ -422,7 +421,6 @@ Returns `200 OK` if the request succeeds, or 502 for `ERROR`,
 The raw `stats` command output from the upstream memcached server will
 be put into the response body.
 
-[Back to TOC](#table-of-contents)
 
 ## version
 
@@ -442,7 +440,6 @@ Returns `200 OK` if the request succeeds, or 502 for `ERROR`,
 The raw `version` command output from the upstream memcached server will
 be put into the response body.
 
-[Back to TOC](#table-of-contents)
 
 # Directives
 
@@ -455,7 +452,6 @@ directive is spelled `memc_pass`.
 Here we only document the most important two directives (the latter is a
 new directive introduced by this module).
 
-[Back to TOC](#table-of-contents)
 
 ## memc\_pass
 
@@ -477,7 +473,6 @@ port\>*
 
 Specify the memcached server backend.
 
-[Back to TOC](#table-of-contents)
 
 ## memc\_cmds\_allowed
 
@@ -504,7 +499,6 @@ is
     }
 ```
 
-[Back to TOC](#table-of-contents)
 
 ## memc\_flags\_to\_last\_modified
 
@@ -518,7 +512,6 @@ Read the memcached flags as epoch seconds and set it as the value of the
 `Last-Modified` header. For conditional GET, it will signal nginx to
 return `304 Not Modified` response to save bandwidth.
 
-[Back to TOC](#table-of-contents)
 
 ## memc\_connect\_timeout
 
@@ -537,7 +530,6 @@ Time units supported are "s"(seconds), "ms"(milliseconds), "y"(years),
 
 This time must be less than 597 hours.
 
-[Back to TOC](#table-of-contents)
 
 ## memc\_send\_timeout
 
@@ -557,7 +549,6 @@ confusion. Time units supported are "s"(seconds), "ms"(milliseconds),
 
 This time must be less than 597 hours.
 
-[Back to TOC](#table-of-contents)
 
 ## memc\_read\_timeout
 
@@ -576,7 +567,6 @@ Time units supported are "s"(seconds), "ms"(milliseconds), "y"(years),
 
 This time must be less than 597 hours.
 
-[Back to TOC](#table-of-contents)
 
 ## memc\_buffer\_size
 
@@ -594,7 +584,6 @@ This buffer size is used for the memory buffer to hold
 
 This default size is the page size, may be `4k` or `8k`.
 
-[Back to TOC](#table-of-contents)
 
 ## memc\_ignore\_client\_abort
 
@@ -609,60 +598,21 @@ closed when a client closes a connection without waiting for a response.
 
 This directive was first added in the `v0.14` release.
 
-[Back to TOC](#table-of-contents)
-
-# Compatibility
-
-The following versions of Nginx should work with this module:
-
-  - **1.13.x** (last tested: 1.13.6)
-  - **1.12.x**
-  - **1.11.x** (last tested: 1.11.2)
-  - **1.10.x**
-  - **1.9.x** (last tested: 1.9.15)
-  - **1.8.x**
-  - **1.7.x** (last tested: 1.7.10)
-  - **1.6.x**
-  - **1.5.x** (last tested: 1.5.12)
-  - **1.4.x** (last tested: 1.4.4)
-  - **1.2.x** (last tested: 1.2.9)
-  - **1.1.x** (last tested: 1.1.5)
-  - **1.0.x** (last tested: 1.0.10)
-  - **0.9.x** (last tested: 0.9.4)
-  - **0.8.x** (last tested: 0.8.54)
-  - **0.7.x \>= 0.7.46** (last tested: 0.7.68)
-
-It's worth mentioning that some 0.7.x versions older than 0.7.46 might
-also work, but I can't easily test them because the test suite makes
-extensive use of the [echo
-module](http://github.com/openresty/echo-nginx-module)'s [echo\_location
-directive](http://github.com/openresty/echo-nginx-module#echo_location),
-which requires at least nginx 0.7.46 :)
-
-Earlier versions of Nginx like 0.6.x and 0.5.x will *not* work.
-
-If you find that any particular version of Nginx above 0.7.46 does not
-work with this module, please consider [reporting a bug](#report-bugs).
-
-[Back to TOC](#table-of-contents)
 
 # Community
 
-[Back to TOC](#table-of-contents)
 
 ## English Mailing List
 
 The [openresty-en](https://groups.google.com/group/openresty-en) mailing
 list is for English speakers.
 
-[Back to TOC](#table-of-contents)
 
 ## Chinese Mailing List
 
 The [openresty](https://groups.google.com/group/openresty) mailing list
 is for Chinese speakers.
 
-[Back to TOC](#table-of-contents)
 
 # Report Bugs
 
@@ -676,14 +626,12 @@ whenever you are bitten by any quirks, please don't hesitate to
 2.  or send a bug report or even patches to the [nginx mailing
     list](http://mailman.nginx.org/mailman/listinfo/nginx).
 
-[Back to TOC](#table-of-contents)
 
 # Source Repository
 
 Available on github at
 [openresty/memc-nginx-module](http://github.com/openresty/memc-nginx-module).
 
-[Back to TOC](#table-of-contents)
 
 # Changes
 
@@ -692,7 +640,6 @@ OpenResty bundle's change logs:
 
 <http://openresty.org/#Changes>
 
-[Back to TOC](#table-of-contents)
 
 # Test Suite
 
@@ -731,7 +678,6 @@ Some parts of the test suite requires modules
 and [echo](http://github.com/openresty/echo-nginx-module) to be enabled
 as well when building Nginx.
 
-[Back to TOC](#table-of-contents)
 
 # TODO
 
@@ -739,7 +685,6 @@ as well when building Nginx.
     $memc_value`.
   - add support for the `noreply` option.
 
-[Back to TOC](#table-of-contents)
 
 # Getting involved
 
@@ -747,7 +692,6 @@ You'll be very welcomed to submit patches to the [author](#author) or
 just ask for a commit bit to the [source repository](#source-repository)
 on GitHub.
 
-[Back to TOC](#table-of-contents)
 
 # Author
 
@@ -756,7 +700,6 @@ Yichun "agentzh" Zhang (章亦春) *\<<agentzh@gmail.com>\>*, OpenResty Inc.
 This wiki page is also maintained by the author himself, and everybody
 is encouraged to improve this page as well.
 
-[Back to TOC](#table-of-contents)
 
 # Copyright & License
 
@@ -792,7 +735,6 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-[Back to TOC](#table-of-contents)
 
 # See Also
 
@@ -823,3 +765,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     module and the 3rd-parth
     [headers-more](http://github.com/openresty/headers-more-nginx-module)
     module.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-memc](https://github.com/openresty/memc-nginx-module).

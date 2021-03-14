@@ -1,7 +1,21 @@
-# nginx-http-flv-module
+# _flv_: Media streaming server based on nginx-module-rtmp
 
-[![Build
-Status](https://travis-ci.org/winshining/nginx-http-flv-module.svg?branch=master)](https://travis-ci.org/winshining/nginx-http-flv-module)
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-flv
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_flv_live_module.so;
+
+<hr />
+
 
 Media streaming server based on
 [nginx-rtmp-module](https://github.com/arut/nginx-rtmp-module).
@@ -44,11 +58,6 @@ you\!
 |  Timer for access log   |           √           |         x         |                                                |
 |     JSON style stat     |           √           |         x         |                                                |
 |   Stat for recordings   |           √           |         x         |                                                |
-
-## Compatibility
-
-The [NGINX](http://nginx.org) version **SHOULD** be equal to or greater
-than 1.2.6, the compatibility with other versions is unknown.
 
 ## Systems supported
 
@@ -443,3 +452,8 @@ problem.
             }
         }
     }
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-flv](https://github.com/dvershinin/nginx-http-flv-module).

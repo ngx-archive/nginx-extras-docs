@@ -1,4 +1,20 @@
-# ngx\_dynamic\_limit\_req\_module
+# _dynamic-limit-req_: NGINX module to dynamically lock IP and release it periodically
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-dynamic-limit-req
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_dynamic_limit_req_module.so;
+
+<hr />
 
 ## Introduction
 
@@ -72,3 +88,8 @@ root@debian:~# redis-cli
 This module is compatible with following nginx releases:
 
 Author Gandalf <zhibu1991@gmail.com>
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-dynamic-limit-req](https://github.com/limithit/ngx_dynamic_limit_req_module).

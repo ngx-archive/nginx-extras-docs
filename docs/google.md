@@ -1,7 +1,21 @@
-# Nginx Module for Google
+# _google_: NGINX Module for Google Mirror creation
 
-[![Build
-Status](https://travis-ci.org/cuber/ngx_http_google_filter_module.svg?branch=dev)](https://travis-ci.org/cuber/ngx_http_google_filter_module)
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-google
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_google_filter_module.so;
+
+<hr />
+
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/cuber/ngx_http_google_filter_module?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 #### Description
@@ -261,3 +275,8 @@ server {
 All codes are under the same [LICENCE](http://nginx.org/LICENSE) with
 [Nginx](http://nginx.org)  
 Copyright (C) 2014 by Cube.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-google](https://github.com/GetPageSpeed/ngx_http_google_filter_module).

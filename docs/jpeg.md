@@ -1,4 +1,20 @@
-# modjpeg-nginx
+# _jpeg_: NGINX JPEG filter module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-jpeg
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_jpeg_filter_module.so;
+
+<hr />
 
 Nginx filter module for adding overlays on JPEGs on-the-fly with
 [libmodjpeg](https://github.com/ioppermann/libmodjpeg).
@@ -156,17 +172,6 @@ module in the beginning of the config
 load_module modules/ngx_http_jpeg_filter_module.so;
 ...
 ```
-
-## Compatibility
-
-This module has been tested with the following versions of nginx:
-
-  - 1.15.3
-  - 1.14.0
-  - 1.13.10
-  - 1.12.2
-  - 1.10.3
-  - 1.8.1 (only as static module)
 
 ## Synopsis
 
@@ -577,3 +582,8 @@ insights from ["Emiller’s Guide To Nginx Module
 Development"](https://www.evanmiller.org/nginx-modules-guide.html) and
 the [nginx development
 guide](https://nginx.org/en/docs/dev/development_guide.html).
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-jpeg](https://github.com/ioppermann/modjpeg-nginx).

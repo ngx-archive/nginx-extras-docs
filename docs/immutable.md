@@ -1,7 +1,21 @@
-# ngx\_immutable
+# _immutable_: NGINX module for setting immutable caching on static assets
 
-[![Build
-Status](https://travis-ci.org/GetPageSpeed/ngx_immutable.svg?branch=master)](https://travis-ci.org/GetPageSpeed/ngx_immutable)
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-immutable
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_immutable_module.so;
+
+<hr />
+
 [![Coverity
 Scan](https://img.shields.io/coverity/scan/GetPageSpeed-ngx_immutable)](https://scan.coverity.com/projects/GetPageSpeed-ngx_immutable)
 
@@ -83,3 +97,8 @@ it can be simplified further:
             immutable off;
         }
     }
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-immutable](https://github.com/GetPageSpeed/ngx_immutable).

@@ -1,4 +1,20 @@
-# Nginx sysguard module
+# _sysguard_: NGINX sysguard module
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-sysguard
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_sysguard_module.so;
+
+<hr />
 
 [![License](http://img.shields.io/badge/license-BSD-brightgreen.svg)](https://github.com/vozlt/nginx-module-sysguard/blob/master/LICENSE)
 
@@ -236,3 +252,8 @@ sysguard.
 
   - Copyright (C) 2010-2015 Alibaba Group Holding Limited
   - Copyright (C) 2017, YoungJoo.Kim \<<vozltx@gmail.com>\>
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-sysguard](https://github.com/dvershinin/nginx-module-sysguard).

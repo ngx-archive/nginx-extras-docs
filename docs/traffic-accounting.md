@@ -1,4 +1,20 @@
-# traffic-accounting-nginx-module
+# _traffic-accounting_: Monitor the incoming and outgoing traffic metrics in realtime for NGINX
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-traffic-accounting
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_accounting_module.so;
+
+<hr />
 
 Monitor the incoming and outgoing traffic metrics in realtime for
 `NGINX`.
@@ -11,7 +27,6 @@ Useful for traffic accounting based on NGINX config logic (by location /
 server / user-defined-variables).
 
 [![FOSSA
-Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FLax%2Ftraffic-accounting-nginx-module.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FLax%2Ftraffic-accounting-nginx-module?ref=badge_shield)
 
 ## Why?
 
@@ -257,4 +272,8 @@ Liu Lantao
 [BSD-2-Clause](LICENSE)
 
 [![FOSSA
-Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FLax%2Ftraffic-accounting-nginx-module.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FLax%2Ftraffic-accounting-nginx-module?ref=badge_large)
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-traffic-accounting](https://github.com/Lax/traffic-accounting-nginx-module).

@@ -1,7 +1,22 @@
+# _security_: ModSecurity v3 Nginx Connector
+
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-security
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+    load_module modules/ngx_http_modsecurity_module.so;
+
+<hr />
 <img src="https://github.com/SpiderLabs/ModSecurity/raw/v3/master/others/modsec.png" width="50%">
 
-[![Build
-Status](https://travis-ci.org/SpiderLabs/ModSecurity-nginx.svg?branch=master)](https://travis-ci.org/SpiderLabs/ModSecurity-nginx)
 [![](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.com)
 
 The ModSecurity-nginx connector is the connection point between nginx
@@ -256,3 +271,8 @@ existing feature request for the desired functionality.
 Having our packages in distros on time is something we highly desire.
 Let us know if there is anything we can do to facilitate your work as a
 packager.
+
+## GitHub
+
+You may find additional configuration tips and documentation in the [GitHub repository for 
+nginx-module-security](https://github.com/SpiderLabs/ModSecurity-nginx).
