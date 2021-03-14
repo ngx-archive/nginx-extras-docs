@@ -70,7 +70,7 @@ Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 
 
 # only support GitHub flavored markdown
-# so we preprocess files with pandoc docs/upsync.md -o docs/upsync.md -t gfm
+# so we preprocess files with pandoc docs/modulesupsync.md -o docs/modulesupsync.md -t gfm
 def remove_md_sections(md, titles):
     out = []
     # marks that we are "within" target section
@@ -157,7 +157,8 @@ def process_modules_glob(g):
                 'requirements',
                 'building',
                 'compatibility',
-                'toc'
+                'toc',
+                'dependencies'
             ])
             readme_contents = enrich_with_yml_info(readme_contents, module_config)
 
@@ -170,9 +171,9 @@ nginx-module-{handle}](https://github.com/{module_config['repo']}).
 """
 
             # print(readme_contents)
-            with open(f"docs/{handle}.md", "w") as module_md_f:
+            with open(f"docs/modules/{handle}.md", "w") as module_md_f:
                 module_md_f.write(readme_contents)
-            table.append([f'[nginx-module-{handle}]({handle}.md)', module_config['summary']])
+            table.append([f'[nginx-module-{handle}](modules/{handle}.md)', module_config['summary']])
         # break
 
 
@@ -188,7 +189,7 @@ all_modules.sort()
 print(all_modules)
 final_all_modules = []
 for m in all_modules:
-    final_all_modules.append({m: f"{m}.md"})
+    final_all_modules.append({m: f"modules/{m}.md"})
 # write nav:
 with open("mkdocs.yml") as mkdocs_f:
     mkdocs_config = yaml.load(mkdocs_f)

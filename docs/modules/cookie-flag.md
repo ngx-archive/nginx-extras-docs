@@ -20,10 +20,6 @@ Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 
 The Nginx module for adding cookie flag
 
-## Dependencies
-
-  - [nginx](http://nginx.org)
-
 ## Synopsis
 
 ``` Nginx

@@ -15,74 +15,74 @@ markdown_extensions:
 nav:
 - Overview: index.md
 - Modules:
-  - accept-language: accept-language.md
-  - ajp: ajp.md
-  - auth-ldap: auth-ldap.md
-  - auth-pam: auth-pam.md
-  - aws-auth: aws-auth.md
-  - bot-verifier: bot-verifier.md
-  - cache-purge: cache-purge.md
-  - captcha: captcha.md
-  - concat: concat.md
-  - cookie-flag: cookie-flag.md
-  - cookie-limit: cookie-limit.md
-  - coolkit: coolkit.md
-  - doh: doh.md
-  - dynamic-etag: dynamic-etag.md
-  - dynamic-limit-req: dynamic-limit-req.md
-  - echo: echo.md
-  - execute: execute.md
-  - f4fhds: f4fhds.md
-  - fancyindex: fancyindex.md
-  - fips-check: fips-check.md
-  - flv: flv.md
-  - geoip2: geoip2.md
-  - google: google.md
-  - graphite: graphite.md
-  - headers-more: headers-more.md
-  - hmac-secure-link: hmac-secure-link.md
-  - html-sanitize: html-sanitize.md
-  - immutable: immutable.md
-  - ipscrub: ipscrub.md
-  - jpeg: jpeg.md
-  - jwt: jwt.md
-  - length-hiding: length-hiding.md
-  - lua: lua.md
-  - memc: memc.md
-  - naxsi: naxsi.md
-  - nbr: nbr.md
-  - nchan: nchan.md
-  - ndk: ndk.md
-  - pagespeed: pagespeed.md
-  - passenger: passenger.md
-  - phantom-token: phantom-token.md
-  - postgres: postgres.md
-  - push-stream: push-stream.md
-  - rdns: rdns.md
-  - redis2: redis2.md
-  - rtmp: rtmp.md
-  - secure-token: secure-token.md
-  - security: security.md
-  - security-headers: security-headers.md
-  - shibboleth: shibboleth.md
-  - slowfs: slowfs.md
-  - small-light: small-light.md
-  - srcache: srcache.md
-  - statsd: statsd.md
-  - sticky: sticky.md
-  - stream-upsync: stream-upsync.md
-  - substitutions: substitutions.md
-  - sysguard: sysguard.md
-  - testcookie: testcookie.md
-  - traffic-accounting: traffic-accounting.md
-  - ts: ts.md
-  - untar: untar.md
-  - upload: upload.md
-  - upstream-fair: upstream-fair.md
-  - upsync: upsync.md
-  - vts: vts.md
-  - webp: webp.md
-  - zip: zip.md
+  - accept-language: modules/accept-language.md
+  - ajp: modules/ajp.md
+  - auth-ldap: modules/auth-ldap.md
+  - auth-pam: modules/auth-pam.md
+  - aws-auth: modules/aws-auth.md
+  - bot-verifier: modules/bot-verifier.md
+  - cache-purge: modules/cache-purge.md
+  - captcha: modules/captcha.md
+  - concat: modules/concat.md
+  - cookie-flag: modules/cookie-flag.md
+  - cookie-limit: modules/cookie-limit.md
+  - coolkit: modules/coolkit.md
+  - doh: modules/doh.md
+  - dynamic-etag: modules/dynamic-etag.md
+  - dynamic-limit-req: modules/dynamic-limit-req.md
+  - echo: modules/echo.md
+  - execute: modules/execute.md
+  - f4fhds: modules/f4fhds.md
+  - fancyindex: modules/fancyindex.md
+  - fips-check: modules/fips-check.md
+  - flv: modules/flv.md
+  - geoip2: modules/geoip2.md
+  - google: modules/google.md
+  - graphite: modules/graphite.md
+  - headers-more: modules/headers-more.md
+  - hmac-secure-link: modules/hmac-secure-link.md
+  - html-sanitize: modules/html-sanitize.md
+  - immutable: modules/immutable.md
+  - ipscrub: modules/ipscrub.md
+  - jpeg: modules/jpeg.md
+  - jwt: modules/jwt.md
+  - length-hiding: modules/length-hiding.md
+  - lua: modules/lua.md
+  - memc: modules/memc.md
+  - naxsi: modules/naxsi.md
+  - nbr: modules/nbr.md
+  - nchan: modules/nchan.md
+  - ndk: modules/ndk.md
+  - pagespeed: modules/pagespeed.md
+  - passenger: modules/passenger.md
+  - phantom-token: modules/phantom-token.md
+  - postgres: modules/postgres.md
+  - push-stream: modules/push-stream.md
+  - rdns: modules/rdns.md
+  - redis2: modules/redis2.md
+  - rtmp: modules/rtmp.md
+  - secure-token: modules/secure-token.md
+  - security: modules/security.md
+  - security-headers: modules/security-headers.md
+  - shibboleth: modules/shibboleth.md
+  - slowfs: modules/slowfs.md
+  - small-light: modules/small-light.md
+  - srcache: modules/srcache.md
+  - statsd: modules/statsd.md
+  - sticky: modules/sticky.md
+  - stream-upsync: modules/stream-upsync.md
+  - substitutions: modules/substitutions.md
+  - sysguard: modules/sysguard.md
+  - testcookie: modules/testcookie.md
+  - traffic-accounting: modules/traffic-accounting.md
+  - ts: modules/ts.md
+  - untar: modules/untar.md
+  - upload: modules/upload.md
+  - upstream-fair: modules/upstream-fair.md
+  - upsync: modules/upsync.md
+  - vts: modules/vts.md
+  - webp: modules/webp.md
+  - zip: modules/zip.md
 - RPM Repository: https://www.getpagespeed.com/redhat
 plugins:
 - search
@@ -100,10 +100,12 @@ site_description: Automatic documentation from sources, for NGINX Extras.
 site_name: NGINX Extras docs
 site_url: https://www.getpagespeed.com/nginx-extras
 theme:
+  custom_dir: overrides
   features:
   - navigation.expand
+  logo: assets/nginx-logo.png
   name: material
   palette:
     accent: purple
-    primary: blue
+    primary: teal
     scheme: default

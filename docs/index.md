@@ -15,7 +15,35 @@ Due to extensive nature of our collection, it's easy to get lost in all the good
 This documentation mini-site brings you each module's installations instructions and added directives
 in a single place. 
 
-## How to use it
+## Getting started
+
+### Install repository configuration
+
+    sudo yum -y install https://extras.getpagespeed.com/release-latest.rpm
+
+Once the repository configuration is installed, <a href="https://www.getpagespeed.com/repo-subscribe">activate your subscription to the GetPageSpeed repository</a>.
+
+Subscribed? Proceed with installing the modules to build your ultimate high-performance web stack.
+
+### Install NGINX modules
+
+Thanks to the nature of dynamic modules, you can install *just the modules* you want instead of using bloatware NGINX installation. 
+
+For example, to install NGINX and the PageSpeed module for it, run:
+
+    sudo yum -y install nginx nginx-module-pagespeed
+
+To list available modules for installation, run:
+
+    sudo yum list available | grep nginx-module
+
+To install the recommended group of modules for performance and security, you may want to run:
+
+    sudo yum -y groupinstall "nginx extras recommended"
+
+This installs NGINX, and modules: PageSpeed, Brotli, Dynamic ETag, Immutable (performance); ModSecurity, Security Headers (security).
+
+## How to use this documentation
 
 * Use search at the top rightmost. It's good for locating whether a feature you are after is available
  via a module
