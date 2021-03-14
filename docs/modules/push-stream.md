@@ -12,8 +12,14 @@ yum -y install nginx-module-push-stream
 
 Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 
-    load_module modules/ngx_http_push_stream_module.so;
+```nginx
+load_module modules/ngx_http_push_stream_module.so;
+```
 
+
+This document describes nginx-module-push-stream [v0.5.4](https://github.com/wandenberg/nginx-push-stream-module/releases/tag/0.5.4){target=_blank} 
+released on Sep 14 2017.
+    
 <hr />
 
 A pure stream http push technology for your Nginx setup.
@@ -28,22 +34,22 @@ installation instructions](installation._)
 
 Available on github at [nginx\_push\_stream\_module](repository)
 
-# Changelog
+## Changelog
 
 Always take a look at [CHANGELOG.textile](changelog) to see what’s new.
 
-# Contribute
+## Contribute
 
 After you try this module and like it, feel free to [give something
 back](donate), and help in the maintenance of the project
 ;)  
 ![](https://www.paypalobjects.com/WEBSCR-640-20110429-1/en_US/i/btn/btn_donate_LG.gif):donate
 
-# Status
+## Status
 
 This module is considered production ready.
 
-# Basic Configuration
+## Basic Configuration
 
 ``` 
     # add the push_stream_shared_memory_size to your http context
@@ -79,7 +85,7 @@ This module is considered production ready.
     }
 ```
 
-# Basic Usage
+## Basic Usage
 
 You can feel the flavor right now at the command line. Try using more
 than  
@@ -115,7 +121,7 @@ one terminal and start playing http pubsub:
     curl -s -v -X DELETE 'http://localhost/pub?id=my_channel_1'
 ```
 
-# Some Examples <a name="examples" href="#"> </a>
+## Some Examples <a name="examples" href="#"> </a>
 
   - [Curl examples](curl)
   - [Forever (hidden) iFrame](forever_iframe)
@@ -126,11 +132,11 @@ one terminal and start playing http pubsub:
   - [M-JPEG](m-jpeg)
   - [Other examples](wiki)
 
-# FAQ <a names="faq" href="#"> </a>
+## FAQ <a names="faq" href="#"> </a>
 
 Doubts?\! Check the [FAQ](wiki).
 
-# Bug report <a name="bug_report" href="#"> </a>
+## Bug report <a name="bug_report" href="#"> </a>
 
 To report a bug, please provide the following information when
 applicable
@@ -143,16 +149,16 @@ applicable
     [here](nginx_debugging) how to produce one.
 6.  Step by step description to reproduce the error.
 
-# Who is using the module? <a names="faq" href="#"> </a>
+## Who is using the module? <a names="faq" href="#"> </a>
 
 Do you use this module? Put your name on the [list](wiki).
 
-# Javascript Client <a name="javascript_client" href="#"> </a>
+## Javascript Client <a name="javascript_client" href="#"> </a>
 
 There is a javascript client implementation [here](javascript_client),
 which is framework independent. Try and help improve it. ;)
 
-# Directives
+## Directives
 
 (1) Defining locations, (2) Main configuration, (3) Subscribers
 configuration, (4) Publishers configuration, (5) Channels Statistics
@@ -199,7 +205,7 @@ configuration
 | [push\_stream\_allowed\_origins](push_stream_allowed_origins)                                            | -   | -   | x   | -   | -   | -   |
 | [push\_stream\_allow\_connections\_to\_events\_channel](push_stream_allow_connections_to_events_channel) | -   | -   | x   | -   | -   | x   |
 
-# Installation <a name="installation" href="#"> </a>
+## Installation <a name="installation" href="#"> </a>
 
 ``` 
     # clone the project
@@ -231,7 +237,7 @@ configuration
     sudo /usr/local/nginx/sbin/nginx -c $NGINX_PUSH_STREAM_MODULE_PATH/misc/nginx.conf
 ```
 
-# Memory usage
+## Memory usage
 
 Just as information is listed below the minimum amount of memory used
 for each object:
@@ -242,17 +248,17 @@ for each object:
     **** on shared = 160 bytes  
     **** on system = 6550 bytes
 
-# Tests
+## Tests
 
 The server tests for this module are written in Ruby, and are acceptance
 tests, click [here](tests) for more details.
 
-# Discussion
+## Discussion
 
 Nginx Push Stream Module [Discussion
 Group](discussion)
 
-# Contributors
+## Contributors
 
 [People](contributors)
 
@@ -317,4 +323,4 @@ Group](discussion)
 ## GitHub
 
 You may find additional configuration tips and documentation in the [GitHub repository for 
-nginx-module-push-stream](https://github.com/wandenberg/nginx-push-stream-module).
+nginx-module-push-stream](https://github.com/wandenberg/nginx-push-stream-module){target=_blank}.

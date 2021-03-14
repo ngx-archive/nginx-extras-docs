@@ -12,62 +12,44 @@ yum -y install nginx-module-dynamic-limit-req
 
 Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 
-    load_module modules/ngx_http_dynamic_limit_req_module.so;
+```nginx
+load_module modules/ngx_http_dynamic_limit_req_module.so;
+```
 
+
+This document describes nginx-module-dynamic-limit-req [v1.9.3](https://github.com/limithit/ngx_dynamic_limit_req_module/releases/tag/1.9.3){target=_blank} 
+released on Jan 29 2021.
+    
 <hr />
-
+﻿# ngx_dynamic_limit_req_module
+ 
 ## Introduction
 
-The *ngx\_dynamic\_limit\_req\_module* module is used to dynamically
-lock IP and release it periodically.
+The *ngx_dynamic_limit_req_module* module is used to dynamically lock IP and release it periodically.
 
 ## principle
-
-The ngx\_dynamic\_limit\_req\_module module is used to limit the request
-processing rate per a defined key, in particular, the processing rate of
-requests coming from a single IP address. The limitation is done using
-the “leaky bucket” method.
+The ngx_dynamic_limit_req_module module is used to limit the request processing rate per a defined key, in particular, the processing rate of requests coming from a single IP address. The limitation is done using the “leaky bucket” method.
 
 ## About
-
-This module is an extension based on
-[ngx\_http\_limit\_req\_module](http://nginx.org/en/docs/http/ngx_http_limit_req_module.html).
+This module is an extension based on [ngx_http_limit_req_module](http://nginx.org/en/docs/http/ngx_http_limit_req_module.html).
 
 ## Donate
+The developers work tirelessly to improve and develop ngx_dynamic_limit_req_module. Many hours have been put in to provide the software as it is today, but this is an extremely time-consuming process with no financial reward. If you enjoy using the software, please consider donating to the devs, so they can spend more time implementing improvements.
 
-The developers work tirelessly to improve and develop
-ngx\_dynamic\_limit\_req\_module. Many hours have been put in to provide
-the software as it is today, but this is an extremely time-consuming
-process with no financial reward. If you enjoy using the software,
-please consider donating to the devs, so they can spend more time
-implementing improvements.
-
-### Alipay:
-
+ ### Alipay:
 ![Alipay](https://github.com/limithit/shellcode/blob/master/alipay.png)
 
 ## Extend
-
-This module can be works with
-[RedisPushIptables](https://github.com/limithit/RedisPushIptables), the
-application layer matches then the network layer to intercept. Although
-network layer interception will save resources, there are also
-deficiencies. Assuming that only one specific interface is filtered and
-no other interfaces are filtered, those that do not need to be filtered
-will also be inaccessible. Although precise control is not possible at
-the network layer or the transport layer, it can be precisely controlled
-at the application layer. Users need to weigh which solution is more
-suitable for the event at the
-time.
+This module can be works with [RedisPushIptables](https://github.com/limithit/RedisPushIptables),  the application layer matches then the network layer to intercept. Although network layer interception will save resources, there are also deficiencies. Assuming that only one specific interface is filtered and no other interfaces are filtered, those that do not need to be filtered will also be inaccessible. Although precise control is not possible at the network layer or the transport layer, it can be precisely controlled at the application layer. Users need to weigh which solution is more suitable for the event at the time.
 
 ## Api-count
+### If you want to use the api counting function, please use [limithit-API_alerts](https://github.com/limithit/ngx_dynamic_limit_req_module/tree/limithit-API_alerts). Because not everyone needs this feature, so it doesn't merge into the trunk. Users who do not need this feature can skip this paragraph description.
 
-### If you want to use the api counting function, please use [limithit-API\_alerts](https://github.com/limithit/ngx_dynamic_limit_req_module/tree/limithit-API_alerts). Because not everyone needs this feature, so it doesn't merge into the trunk. Users who do not need this feature can skip this paragraph description.
-
-    git clone https://github.com/limithit/ngx_dynamic_limit_req_module.git
-    cd ngx_dynamic_limit_req_module
-    git checkout limithit-API_alerts
-
+``` 
+git clone https://github.com/limithit/ngx_dynamic_limit_req_module.git
+cd ngx_dynamic_limit_req_module
+git checkout limithit-API_alerts
+```
 ``` 
 root@debian:~# redis-cli 
 127.0.0.1:6379> SELECT 3
@@ -87,9 +69,10 @@ root@debian:~# redis-cli
 
 This module is compatible with following nginx releases:
 
-Author Gandalf <zhibu1991@gmail.com>
+Author
+Gandalf zhibu1991@gmail.com
 
 ## GitHub
 
 You may find additional configuration tips and documentation in the [GitHub repository for 
-nginx-module-dynamic-limit-req](https://github.com/limithit/ngx_dynamic_limit_req_module).
+nginx-module-dynamic-limit-req](https://github.com/limithit/ngx_dynamic_limit_req_module){target=_blank}.

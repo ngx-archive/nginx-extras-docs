@@ -12,32 +12,38 @@ yum -y install nginx-module-webp
 
 Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 
-    load_module modules/ngx_http_webp_module.so;
+```nginx
+load_module modules/ngx_http_webp_module.so;
+```
 
+
+This document describes nginx-module-webp [v0.1.1.5](https://github.com/dvershinin/ngx_webp/releases/tag/0.1.1.5){target=_blank} 
+released on Dec 30 2019.
+    
 <hr />
 
-Webp is new (and smaller) image format. This module will convert jpg/png
-image on fly and send webp response.
+Webp is new (and smaller) image format. This module will convert jpg/png image on fly and send webp response.
 
 ## Status
 
-Under development. To be
-    continued.
+Under development. To be continued.
 
 ## Configuration directives
 
 ### `webp`
 
-  - **syntax**: `webp`
-  - **context**: `location`
+- **syntax**: `webp`
+- **context**: `location`
 
 Enables or disables module.
 
 ### Example
 
-location ~ ".jpg" { webp; }
+location ~ "\.jpg" {
+webp;
+}
 
-$ curl -SLIXGET -H "accept:image/webp" <http://127.0.0.1/1.jpg>
+$ curl -SLIXGET -H "accept:image/webp" http://127.0.0.1/1.jpg
 
 HTTP/1.1 200 OK
 
@@ -53,7 +59,9 @@ Connection: keep-alive
 
 Content-Type: image/webp
 
-$ curl -SLIXGET -H "accept:image/\*" <http://127.0.0.1/1.jpg>
+
+
+$ curl -SLIXGET -H "accept:image/*" http://127.0.0.1/1.jpg
 
 HTTP/1.1 200 OK
 
@@ -70,11 +78,9 @@ Connection: keep-alive
 Content-Type: image/jpeg
 
 ### Notice
-
-As webp convertion takes some CPU usage I recommend to use some kind of
-caching of nginx responses, like Varnish.
+As webp convertion takes some CPU usage I recommend to use some kind of caching of nginx responses, like Varnish.
 
 ## GitHub
 
 You may find additional configuration tips and documentation in the [GitHub repository for 
-nginx-module-webp](https://github.com/dvershinin/ngx_webp).
+nginx-module-webp](https://github.com/dvershinin/ngx_webp){target=_blank}.

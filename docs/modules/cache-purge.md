@@ -12,122 +12,118 @@ yum -y install nginx-module-cache-purge
 
 Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 
-    load_module modules/ngx_http_cache_purge_module.so;
+```nginx
+load_module modules/ngx_http_cache_purge_module.so;
+```
 
+
+This document describes nginx-module-cache-purge [v2.5.1](https://github.com/nginx-modules/ngx_cache_purge/releases/tag/2.5.1){target=_blank} 
+released on Jun 27 2020.
+    
 <hr />
+`ngx_cache_purge` is `nginx` module which adds ability to purge content from
+`FastCGI`, `proxy`, `SCGI` and `uWSGI` caches. A purge operation removes the 
+content with the same cache key as the purge request has.
 
-`ngx_cache_purge` is `nginx` module which adds ability to purge content
-from `FastCGI`, `proxy`, `SCGI` and `uWSGI` caches. A purge operation
-removes the content with the same cache key as the purge request has.
 
-# Sponsors
-
+## Sponsors
 Work on the original patch was fully funded by [yo.se](http://yo.se).
 
-# Status
 
+## Status
 This module is production-ready.
 
-# Configuration directives (same location syntax)
 
-## fastcgi\_cache\_purge
-
-  - **syntax**: `fastcgi_cache_purge on|off|<method> [purge_all] [from
-    all|<ip> [.. <ip>]]`
-  - **default**: `none`
-  - **context**: `http`, `server`, `location`
+## Configuration directives (same location syntax)
+## fastcgi_cache_purge
+* **syntax**: `fastcgi_cache_purge on|off|<method> [purge_all] [from all|<ip> [.. <ip>]]`
+* **default**: `none`
+* **context**: `http`, `server`, `location`
 
 Allow purging of selected pages from `FastCGI`'s cache.
 
-## proxy\_cache\_purge
 
-  - **syntax**: `proxy_cache_purge on|off|<method> [purge_all] [from
-    all|<ip> [.. <ip>]]`
-  - **default**: `none`
-  - **context**: `http`, `server`, `location`
+## proxy_cache_purge
+* **syntax**: `proxy_cache_purge on|off|<method> [purge_all] [from all|<ip> [.. <ip>]]`
+* **default**: `none`
+* **context**: `http`, `server`, `location`
 
 Allow purging of selected pages from `proxy`'s cache.
 
-## scgi\_cache\_purge
 
-  - **syntax**: `scgi_cache_purge on|off|<method> [purge_all] [from
-    all|<ip> [.. <ip>]]`
-  - **default**: `none`
-  - **context**: `http`, `server`, `location`
+## scgi_cache_purge
+* **syntax**: `scgi_cache_purge on|off|<method> [purge_all] [from all|<ip> [.. <ip>]]`
+* **default**: `none`
+* **context**: `http`, `server`, `location`
 
 Allow purging of selected pages from `SCGI`'s cache.
 
-## uwsgi\_cache\_purge
 
-  - **syntax**: `uwsgi_cache_purge on|off|<method> [purge_all] [from
-    all|<ip> [.. <ip>]]`
-  - **default**: `none`
-  - **context**: `http`, `server`, `location`
+## uwsgi_cache_purge
+* **syntax**: `uwsgi_cache_purge on|off|<method> [purge_all] [from all|<ip> [.. <ip>]]`
+* **default**: `none`
+* **context**: `http`, `server`, `location`
 
 Allow purging of selected pages from `uWSGI`'s cache.
 
-# Configuration directives (separate location syntax)
 
-## fastcgi\_cache\_purge
+## Configuration directives (separate location syntax)
+## fastcgi_cache_purge
+* **syntax**: `fastcgi_cache_purge zone_name key`
+* **default**: `none`
+* **context**: `location`
 
-  - **syntax**: `fastcgi_cache_purge zone_name key`
-  - **default**: `none`
-  - **context**: `location`
+Sets area and key used for purging selected pages from `FastCGI`'s cache.
 
-Sets area and key used for purging selected pages from `FastCGI`'s
-cache.
 
-## proxy\_cache\_purge
-
-  - **syntax**: `proxy_cache_purge zone_name key`
-  - **default**: `none`
-  - **context**: `location`
+## proxy_cache_purge
+* **syntax**: `proxy_cache_purge zone_name key`
+* **default**: `none`
+* **context**: `location`
 
 Sets area and key used for purging selected pages from `proxy`'s cache.
 
-## scgi\_cache\_purge
 
-  - **syntax**: `scgi_cache_purge zone_name key`
-  - **default**: `none`
-  - **context**: `location`
+## scgi_cache_purge
+* **syntax**: `scgi_cache_purge zone_name key`
+* **default**: `none`
+* **context**: `location`
 
 Sets area and key used for purging selected pages from `SCGI`'s cache.
 
-## uwsgi\_cache\_purge
 
-  - **syntax**: `uwsgi_cache_purge zone_name key`
-  - **default**: `none`
-  - **context**: `location`
+## uwsgi_cache_purge
+* **syntax**: `uwsgi_cache_purge zone_name key`
+* **default**: `none`
+* **context**: `location`
 
 Sets area and key used for purging selected pages from `uWSGI`'s cache.
 
-# Configuration directives (Optional)
+## Configuration directives (Optional)
 
-## cache\_purge\_response\_type
-
-  - **syntax**: `cache_purge_response_type html|json|xml|text`
-  - **default**: `html`
-  - **context**: `http`, `server`, `location`
+## cache_purge_response_type
+* **syntax**: `cache_purge_response_type html|json|xml|text`
+* **default**: `html`
+* **context**: `http`, `server`, `location`
 
 Sets a response type of purging result.
 
-# Partial Keys
 
-Sometimes it's not possible to pass the exact key cache to purge a page.
-For example; when the content of a cookie or the params are part of the
-key. You can specify a partial key adding an asterisk at the end of the
-URL.
+
+## Partial Keys
+Sometimes it's not possible to pass the exact key cache to purge a page. For example; when the content of a cookie or the params are part of the key.
+You can specify a partial key adding an asterisk at the end of the URL.
 
     curl -X PURGE /page*
 
-The asterisk must be the last character of the key, so you **must** put
-the $uri variable at the end.
+The asterisk must be the last character of the key, so you **must** put the $uri variable at the end.
 
-# Sample configuration (same location syntax)
 
+
+## Sample configuration (same location syntax)
     http {
         proxy_cache_path  /tmp/cache  keys_zone=tmpcache:10m;
-    
+
         server {
             location / {
                 proxy_pass         http://127.0.0.1:8000;
@@ -138,11 +134,11 @@ the $uri variable at the end.
         }
     }
 
-# Sample configuration (same location syntax - purge all cached files)
 
+## Sample configuration (same location syntax - purge all cached files)
     http {
         proxy_cache_path  /tmp/cache  keys_zone=tmpcache:10m;
-    
+
         server {
             location / {
                 proxy_pass         http://127.0.0.1:8000;
@@ -153,18 +149,18 @@ the $uri variable at the end.
         }
     }
 
-# Sample configuration (separate location syntax)
 
+## Sample configuration (separate location syntax)
     http {
         proxy_cache_path  /tmp/cache  keys_zone=tmpcache:10m;
-    
+
         server {
             location / {
                 proxy_pass         http://127.0.0.1:8000;
                 proxy_cache        tmpcache;
                 proxy_cache_key    $uri$is_args$args;
             }
-    
+
             location ~ /purge(/.*) {
                 allow              127.0.0.1;
                 deny               all;
@@ -173,51 +169,50 @@ the $uri variable at the end.
         }
     }
 
-# Sample configuration (Optional)
-
+## Sample configuration (Optional)
     http {
         proxy_cache_path  /tmp/cache  keys_zone=tmpcache:10m;
-    
+
         cache_purge_response_type text;
-    
+
         server {
-    
+
             cache_purge_response_type json;
-    
+
             location / { #json
                 proxy_pass         http://127.0.0.1:8000;
                 proxy_cache        tmpcache;
                 proxy_cache_key    $uri$is_args$args;
             }
-    
+
             location ~ /purge(/.*) { #xml
                 allow              127.0.0.1;
                 deny               all;
                 proxy_cache_purge  tmpcache $1$is_args$args;
                 cache_purge_response_type xml;
             }
-    
+
             location ~ /purge2(/.*) { # json
                 allow              127.0.0.1;
                 deny               all;
                 proxy_cache_purge  tmpcache $1$is_args$args;
             }
         }
-    
+
         server {
-    
+
             location / { #text
                 proxy_pass         http://127.0.0.1:8000;
                 proxy_cache        tmpcache;
                 proxy_cache_key    $uri$is_args$args;
             }
-    
+
             location ~ /purge(/.*) { #text
                 allow              127.0.0.1;
                 deny               all;
                 proxy_cache_purge  tmpcache $1$is_args$args;
             }
-    
+
             location ~ /purge2(/.*) { #html
                 allow              127.0.0.1;
                 deny               all;
@@ -227,31 +222,27 @@ the $uri variable at the end.
         }
     }
 
-# Solve problems
 
-  - Enabling [`gzip_vary`](https://nginx.org/r/gzip_vary) can lead to
-    different results when clearing, when enabling it, you may have
-    problems clearing the cache. For reliable operation, you can disable
-    [`gzip_vary`](https://nginx.org/r/gzip_vary) inside the location
-    [\#20](https://github.com/nginx-modules/ngx_cache_purge/issues/20).
 
-# Testing
+## Solve problems
+* Enabling [`gzip_vary`](https://nginx.org/r/gzip_vary) can lead to different results when clearing, when enabling it, you may have problems clearing the cache. For reliable operation, you can disable [`gzip_vary`](https://nginx.org/r/gzip_vary) inside the location [#20](https://github.com/nginx-modules/ngx_cache_purge/issues/20).
 
-`ngx_cache_purge` comes with complete test suite based on
-[Test::Nginx](http://github.com/agentzh/test-nginx).
+
+## Testing
+`ngx_cache_purge` comes with complete test suite based on [Test::Nginx](http://github.com/agentzh/test-nginx).
 
 You can test it by running:
 
 `$ prove`
 
-# License
 
+## License
     Copyright (c) 2009-2014, FRiCKLE <info@frickle.com>
     Copyright (c) 2009-2014, Piotr Sikora <piotr.sikora@frickle.com>
     All rights reserved.
-    
+
     This project was fully funded by yo.se.
-    
+
     Redistribution and use in source and binary forms, with or without
     modification, are permitted provided that the following conditions
     are met:
@@ -260,7 +251,7 @@ You can test it by running:
     2. Redistributions in binary form must reproduce the above copyright
        notice, this list of conditions and the following disclaimer in the
        documentation and/or other materials provided with the distribution.
-    
+
     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
     "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
     LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -273,11 +264,11 @@ You can test it by running:
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# See also
 
-  - [ngx\_slowfs\_cache](http://github.com/FRiCKLE/ngx_slowfs_cache).
+## See also
+- [ngx_slowfs_cache](http://github.com/FRiCKLE/ngx_slowfs_cache).
 
 ## GitHub
 
 You may find additional configuration tips and documentation in the [GitHub repository for 
-nginx-module-cache-purge](https://github.com/nginx-modules/ngx_cache_purge).
+nginx-module-cache-purge](https://github.com/nginx-modules/ngx_cache_purge){target=_blank}.

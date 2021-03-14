@@ -1,5 +1,10 @@
 extra:
   generator: false
+  social:
+  - icon: fontawesome/brands/twitter
+    link: https://twitter.com/GetPageSpeed
+  - icon: fontawesome/brands/github
+    link: https://github.com/GetPageSpeed
 markdown_extensions:
 - admonition
 - markdown_include.include
@@ -8,10 +13,9 @@ markdown_extensions:
 - pymdownx.superfences
 - pymdownx.tabbed
 - pymdownx.tasklist
+- attr_list
 - pymdownx.snippets:
     check_paths: true
-- toc:
-    permalink: "\xA4"
 nav:
 - Overview: index.md
 - Modules:
@@ -103,6 +107,8 @@ theme:
   custom_dir: overrides
   features:
   - navigation.expand
+  - navigation.top
+  - search.suggest
   logo: assets/nginx-logo.png
   name: material
   palette:

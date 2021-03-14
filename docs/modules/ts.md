@@ -12,8 +12,14 @@ yum -y install nginx-module-ts
 
 Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 
-    load_module modules/ngx_http_ts_module.so;
+```nginx
+load_module modules/ngx_http_ts_module.so;
+```
 
+
+This document describes nginx-module-ts [v0.1.1](https://github.com/arut/nginx-ts-module/releases/tag/v0.1.1){target=_blank} 
+released on Jul 14 2017.
+    
 <hr />
 
 <div class="contents">
@@ -28,10 +34,10 @@ Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
   - produces and manages live
     [MPEG-DASH](https://en.wikipedia.org/wiki/Dynamic_Adaptive_Streaming_over_HTTP)
 
-# static module
+## static module
 $ ./configure --add-module=/path/to/nginx-ts-module
 
-# dynamic module
+## dynamic module
 $ ./configure --add-dynamic-module=/path/to/nginx-ts-module
 ```
 
@@ -236,4 +242,4 @@ $ ffmpeg -re -i ~/Movies/sintel.mp4 -bsf:v h264_mp4toannexb
 ## GitHub
 
 You may find additional configuration tips and documentation in the [GitHub repository for 
-nginx-module-ts](https://github.com/arut/nginx-ts-module).
+nginx-module-ts](https://github.com/arut/nginx-ts-module){target=_blank}.

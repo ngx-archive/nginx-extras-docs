@@ -12,8 +12,14 @@ yum -y install nginx-module-shibboleth
 
 Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 
-    load_module modules/ngx_http_shibboleth_module.so;
+```nginx
+load_module modules/ngx_http_shibboleth_module.so;
+```
 
+
+This document describes nginx-module-shibboleth [v2.0.1](https://github.com/nginx-shib/nginx-http-shibboleth/releases/tag/v2.0.1){target=_blank} 
+released on Apr 06 2017.
+    
 <hr />
 
 [![image](https://travis-ci.org/nginx-shib/nginx-http-shibboleth.svg?branch=master)](https://travis-ci.org/nginx-shib/nginx-http-shibboleth)
@@ -353,4 +359,4 @@ individual tags.
 ## GitHub
 
 You may find additional configuration tips and documentation in the [GitHub repository for 
-nginx-module-shibboleth](https://github.com/nginx-shib/nginx-http-shibboleth).
+nginx-module-shibboleth](https://github.com/nginx-shib/nginx-http-shibboleth){target=_blank}.

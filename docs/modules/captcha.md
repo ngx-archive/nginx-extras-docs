@@ -12,13 +12,18 @@ yum -y install nginx-module-captcha
 
 Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 
-    load_module modules/ngx_http_captcha_module.so;
+```nginx
+load_module modules/ngx_http_captcha_module.so;
+```
 
+
+This document describes nginx-module-captcha [v0](https://github.com/dvershinin/ngx_http_captcha_module/releases/tag/0){target=_blank} 
+released on Aug 23 2020.
+    
 <hr />
 
 ### Example Configuration:
-
-``` nginx
+```nginx
 location =/captcha {
     captcha;
 }
@@ -33,76 +38,75 @@ location =/login {
     }
 }
 ```
-
 ### Directives:
 
-    Syntax:  captcha;
+    Syntax:	 captcha;
     Default: ——
     Context: location
 
 Enables generation of captcha image.<hr>
 
-    Syntax:  captcha_case on | off;
+    Syntax:	 captcha_case on | off;
     Default: off
     Context: http, server, location
 
 Enables/disables ignoring captcha case.<hr>
 
-    Syntax:  captcha_expire seconds;
+    Syntax:	 captcha_expire seconds;
     Default: 3600
     Context: http, server, location
 
 Sets seconds before expiring captcha.<hr>
 
-    Syntax:  captcha_height pixels;
+    Syntax:	 captcha_height pixels;
     Default: 30
     Context: http, server, location
 
 Sets height of captcha image.<hr>
 
-    Syntax:  captcha_length characters;
+    Syntax:	 captcha_length characters;
     Default: 4
     Context: http, server, location
 
 Sets length of captcha text.<hr>
 
-    Syntax:  captcha_size pixels;
+    Syntax:	 captcha_size pixels;
     Default: 20
     Context: http, server, location
 
 Sets size of captcha font.<hr>
 
-    Syntax:  captcha_width pixels;
+    Syntax:	 captcha_width pixels;
     Default: 130
     Context: http, server, location
 
 Sets width of captcha image.<hr>
 
-    Syntax:  captcha_charset string;
+    Syntax:	 captcha_charset string;
     Default: abcdefghkmnprstuvwxyzABCDEFGHKMNPRSTUVWXYZ23456789
     Context: http, server, location
 
 Sets characters used in captcha text.<hr>
 
-    Syntax:  captcha_csrf string;
+    Syntax:	 captcha_csrf string;
     Default: csrf
     Context: http, server, location
 
 Sets name of csrf var of captcha.<hr>
 
-    Syntax:  captcha_font string;
+    Syntax:	 captcha_font string;
     Default: /usr/share/fonts/ttf-liberation/LiberationSans-Regular.ttf
     Context: http, server, location
 
 Sets font of captcha text.<hr>
 
-    Syntax:  captcha_name string;
+    Syntax:	 captcha_name string;
     Default: Captcha
     Context: http, server, location
 
 Sets name of captcha cookie.<hr>
 
-    Syntax:  captcha_secret string;
+    Syntax:	 captcha_secret string;
     Default: secret
     Context: http, server, location
 
@@ -111,4 +115,4 @@ Sets secret of captcha.
 ## GitHub
 
 You may find additional configuration tips and documentation in the [GitHub repository for 
-nginx-module-captcha](https://github.com/dvershinin/ngx_http_captcha_module).
+nginx-module-captcha](https://github.com/dvershinin/ngx_http_captcha_module){target=_blank}.

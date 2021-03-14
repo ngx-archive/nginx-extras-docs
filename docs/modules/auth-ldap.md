@@ -12,18 +12,21 @@ yum -y install nginx-module-auth-ldap
 
 Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 
-    load_module modules/ngx_http_auth_ldap_module.so;
+```nginx
+load_module modules/ngx_http_auth_ldap_module.so;
+```
 
+
+This document describes nginx-module-auth-ldap [v0.3](https://github.com/dvershinin/nginx-auth-ldap/releases/tag/v0.3){target=_blank} 
+released on May 28 2020.
+    
 <hr />
+LDAP module for nginx which supports authentication against multiple LDAP servers.
 
-LDAP module for nginx which supports authentication against multiple
-LDAP servers.
-
-# Example configuration
-
+## Example configuration
 Define list of your LDAP servers with required user/group requirements:
 
-``` bash
+```bash
     http {
       ldap_server test1 {
         url ldap://192.168.0.1:3268/DC=test,DC=local?sAMAccountName?sub?(objectClass=person);
@@ -45,17 +48,15 @@ Define list of your LDAP servers with required user/group requirements:
     }
 ```
 
-And add required servers in correct order into your location/server
-directive:
-
-``` bash
+And add required servers in correct order into your location/server directive:
+```bash
     server {
         listen       8000;
         server_name  localhost;
 
         auth_ldap "Forbidden";
         auth_ldap_servers test1;
-        auth_ldap_servers test2;
+		auth_ldap_servers test2;
 
         location / {
             root   html;
@@ -65,94 +66,78 @@ directive:
     }
 ```
 
-# Available config parameters
+## Available config parameters
 
 ## url
-
 expected value: string
 
 Available URL schemes: ldap://, ldaps://
 
 ## binddn
-
 expected value: string
 
-## binddn\_passwd
-
+## binddn_passwd
 expected value: string
 
-## group\_attribute
-
+## group_attribute
 expected value: string
 
-## group\_attribute\_is\_dn
-
+## group_attribute_is_dn
 expected value: on or off, default off
 
 ## require
-
-expected value: valid\_user, user, group
+expected value: valid_user, user, group
 
 ## satisfy
-
 expected value: all, any
 
-## max\_down\_retries
-
+## max_down_retries
 expected value: a number, default 0
 
-Retry count for attempting to reconnect to an LDAP server if it is
-considered "DOWN". This may happen if a KEEP-ALIVE connection to an LDAP
-server times out or is terminated by the server end after some amount of
-time.
+Retry count for attempting to reconnect to an LDAP server if it is considered
+"DOWN".  This may happen if a KEEP-ALIVE connection to an LDAP server times 
+out or is terminated by the server end after some amount of time.  
 
 This can usually help with the following error:
 
-    http_auth_ldap: ldap_result() failed (-1: Can't contact LDAP server)
+```
+http_auth_ldap: ldap_result() failed (-1: Can't contact LDAP server)
+```
 
 ## connections
-
 expected value: a number greater than 0
 
-## ssl\_check\_cert
-
+## ssl_check_cert
 expected value: on or off, default off
 
-Verify the remote certificate for LDAPs connections. If disabled, any
-remote certificate will be accepted which exposes you to possible
-man-in-the-middle attacks. Note that the server's certificate will need
-to be signed by a proper CA trusted by your system if this is enabled.
+Verify the remote certificate for LDAPs connections. If disabled, any remote certificate will be
+accepted which exposes you to possible man-in-the-middle attacks. Note that the server's
+certificate will need to be signed by a proper CA trusted by your system if this is enabled.
 See below how to trust CAs without installing them system-wide.
 
-This options needs OpenSSL \>= 1.0.2; it is unavailable if compiled with
-older versions.
+This options needs OpenSSL >= 1.0.2; it is unavailable if compiled with older versions.
 
-## ssl\_ca\_file
-
+## ssl_ca_file
 expected value: file path
 
-Trust the CA certificate in this file (see ssl\_check\_cert above).
+Trust the CA certificate in this file (see ssl_check_cert above).
 
-## ssl\_ca\_dir
-
+## ssl_ca_dir
 expected value: directory path
 
-Trust all CA certificates in this directory (see ssl\_check\_cert
-above).
+Trust all CA certificates in this directory (see ssl_check_cert above).
 
-Note that you need to provide hash-based symlinks in the directory for
-this to work; you'll basically need to run OpenSSL's c\_rehash command
-in this directory.
+Note that you need to provide hash-based symlinks in the directory for this to work;
+you'll basically need to run OpenSSL's c_rehash command in this directory.
 
 ## referral
-
 expected value: on, off
 
-LDAP library default is on. This option disables usage of referral
-messages from LDAP server. Usefull for authenticating against read only
-AD server without access to read write.
+LDAP library default is on. This option disables usage of referral messages from
+LDAP server. Usefull for authenticating against read only AD server without access
+to read write.
 
 ## GitHub
 
 You may find additional configuration tips and documentation in the [GitHub repository for 
-nginx-module-auth-ldap](https://github.com/dvershinin/nginx-auth-ldap).
+nginx-module-auth-ldap](https://github.com/dvershinin/nginx-auth-ldap){target=_blank}.

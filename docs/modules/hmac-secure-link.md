@@ -12,41 +12,37 @@ yum -y install nginx-module-hmac-secure-link
 
 Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 
-    load_module modules/ngx_http_hmac_secure_link_module.so;
+```nginx
+load_module modules/ngx_http_hmac_secure_link_module.so;
+```
 
+
+This document describes nginx-module-hmac-secure-link [v0.3](https://github.com/nginx-modules/ngx_http_hmac_secure_link_module/releases/tag/0.3){target=_blank} 
+released on Mar 06 2019.
+    
 <hr />
 
-# Description:
+## Description:
 
-The Nginx HMAC secure link module enhances the security and
-functionality of the standard secure link module.  
-Secure token is created using secure HMAC construction with an arbitrary
-hash algorithm supported by OpenSSL, e.g.: `blake2b512`, `blake2s256`,
-`gost`, `md4`, `md5`, `rmd160`, `sha1`, `sha224`, `sha256`, `sha3-224`,
-`sha3-256`, `sha3-384`, `sha3-512`, `sha384`, `sha512`, `sha512-224`,
-`sha512-256`, `shake128`, `shake256`, `sm3`.
+The Nginx HMAC secure link module enhances the security and functionality of the standard secure link module.  
+Secure token is created using secure HMAC construction with an arbitrary hash algorithm supported by OpenSSL, e.g.:
+`blake2b512`, `blake2s256`, `gost`, `md4`, `md5`, `rmd160`, `sha1`, `sha224`, `sha256`,
+`sha3-224`, `sha3-256`, `sha3-384`, `sha3-512`, `sha384`, `sha512`, `sha512-224`, `sha512-256`, `shake128`, `shake256`, `sm3`.
 
 Furthermore, secure token is created as described in RFC2104, that is,
-`H(secret_key XOR opad,H(secret_key XOR ipad, message))` instead of a
-simple `MD5(secret_key,message, expire)`.
+`H(secret_key XOR opad,H(secret_key XOR ipad, message))` instead of a simple `MD5(secret_key,message, expire)`.
 
-# Usage:
+## Usage:
 
-Message to be hashed is defined by `secure_link_hmac_message`,
-`secret_key` is given by `secure_link_hmac_secret`, and hashing
-algorithm H is defined by `secure_link_hmac_algorithm`.
+Message to be hashed is defined by `secure_link_hmac_message`, `secret_key` is given by `secure_link_hmac_secret`, and hashing algorithm H is defined by `secure_link_hmac_algorithm`.
 
-For improved security the timestamp in ISO 8601 the format
-`2017-12-08T07:54:59+00:00` (one possibility according to ISO 8601) or
-as `Unix Timestamp` should be appended to the message to be hashed.
+For improved security the timestamp in ISO 8601 the format `2017-12-08T07:54:59+00:00` (one possibility according to ISO 8601) or as `Unix Timestamp` should be appended to the message to be hashed.
 
-It is possible to create links with limited lifetime. This is defined by
-an optional parameter. If the expiration period is zero or it is not
-specified, a link has the unlimited lifetime.
+It is possible to create links with limited lifetime. This is defined by an optional parameter. If the expiration period is zero or it is not specified, a link has the unlimited lifetime.
 
 Configuration example for server side.
 
-``` nginx
+```nginx
 location ^~ /files/ {
     # Variable to be passed are secure token, timestamp, expiration period (optional)
     secure_link_hmac  $arg_st,$arg_ts,$arg_e;
@@ -74,13 +70,11 @@ location ^~ /files/ {
 }
 ```
 
-Application side should use a standard hash\_hmac function to generate
-hash, which then needs to be base64url encoded. Example in Perl
-below.
+Application side should use a standard hash_hmac function to generate hash, which then needs to be base64url encoded. Example in Perl below.
 
 #### Variable $data contains secure token, timestamp in ISO 8601 format, and expiration period in seconds
 
-``` nginx
+```nginx
 perl_set $secure_token '
     sub {
         use Digest::SHA qw(hmac_sha256_base64);
@@ -104,7 +98,7 @@ perl_set $secure_token '
 
 A similar function in PHP
 
-``` php
+```php
 $secret = 'my_very_secret_key';
 $expire = 60;
 $algo = 'sha256';
@@ -119,7 +113,7 @@ $loc = "https://{$host}/files/top_secret.pdf?st={$hashmac}&ts={$timestamp}&e={$e
 
 Using Unix timestamp in Node.js
 
-``` javascript
+```javascript
 const crypto = require("crypto");
 const secret = 'my_very_secret_key';
 const expire = 60;
@@ -132,14 +126,11 @@ const hashmac = crypto.createHmac('sha256', secret).update(stringToSign).digest(
 const loc = `https://host/files/top_secret.pdf?st=${hashmac}&ts=${unixTimestamp}&e=${expire}`;
 ```
 
-It is also possible to use this module with a Nginx acting as proxy
-server.
+It is also possible to use this module with a Nginx acting as proxy server.
 
-The string to be signed is defined in `secure_link_hmac_message`, the
-`secure_link_hmac_token` variable contains then a secure token to be
-passed to backend server.
+The string to be signed is defined in `secure_link_hmac_message`, the `secure_link_hmac_token` variable contains then a secure token to be passed to backend server.
 
-``` nginx
+```nginx
 location ^~ /backend_location/ {
     set $expire 60;
 
@@ -151,22 +142,20 @@ location ^~ /backend_location/ {
 }
 ```
 
-# Embedded Variables
 
-  - `$secure_link_hmac` -
-  - `$secure_link_hmac_token` -
-  - `$secure_link_hmac_expires` - The lifetime of a link passed in a
-    request.
+## Embedded Variables
+* `$secure_link_hmac` - 
+* `$secure_link_hmac_token` - 
+* `$secure_link_hmac_expires` - The lifetime of a link passed in a request.
 
-# Contributing:
 
-Git source repositories:
-<http://github.com/nginx-modules/ngx_http_hmac_secure_link_module/tree/master>
+## Contributing:
 
-Please feel free to fork the project at GitHub and submit pull requests
-or patches.
+Git source repositories: http://github.com/nginx-modules/ngx_http_hmac_secure_link_module/tree/master
+
+Please feel free to fork the project at GitHub and submit pull requests or patches.
 
 ## GitHub
 
 You may find additional configuration tips and documentation in the [GitHub repository for 
-nginx-module-hmac-secure-link](https://github.com/nginx-modules/ngx_http_hmac_secure_link_module).
+nginx-module-hmac-secure-link](https://github.com/nginx-modules/ngx_http_hmac_secure_link_module){target=_blank}.

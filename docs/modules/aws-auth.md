@@ -12,44 +12,46 @@ yum -y install nginx-module-aws-auth
 
 Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 
-    load_module modules/ngx_http_aws_auth_module.so;
+```nginx
+load_module modules/ngx_http_aws_auth_module.so;
+```
 
+
+This document describes nginx-module-aws-auth [v2.1.1](https://github.com/anomalizer/ngx_aws_auth/releases/tag/2.1.1){target=_blank} 
+released on Mar 06 2017.
+    
 <hr />
 
-[![Gitter
-chat](https://badges.gitter.im/anomalizer/ngx_aws_auth.png)](https://gitter.im/ngx_aws_auth/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
+ [![Gitter chat](https://badges.gitter.im/anomalizer/ngx_aws_auth.png)](https://gitter.im/ngx_aws_auth/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 
-This nginx module can proxy requests to authenticated S3 backends using
-Amazon's V4 authentication API. The first version of this module was
-written for the V2 authentication protocol and can be found in the
-*AuthV2* branch.
+This nginx module can proxy requests to authenticated S3 backends using Amazon's
+V4 authentication API. The first version of this module was written for the V2
+authentication protocol and can be found in the *AuthV2* branch.
 
 ## License
-
-This project uses the same license as ngnix does i.e. the 2 clause BSD /
-simplified BSD / FreeBSD license
+This project uses the same license as ngnix does i.e. the 2 clause BSD / simplified BSD / FreeBSD license
 
 ## Usage example
 
 Implements proxying of authenticated requests to S3.
 
-``` nginx
+```nginx
   server {
     listen     8000;
 
     aws_access_key your_aws_access_key; # Example AKIDEXAMPLE
     aws_key_scope scope_of_generated_signing_key; #Example 20150830/us-east-1/service/aws4_request
     aws_signing_key signing_key_generated_using_script; #Example L4vRLWAO92X5L3Sqk5QydUSdB0nC9+1wfqLMOKLbRp4=
-    aws_s3_bucket your_s3_bucket;
+	aws_s3_bucket your_s3_bucket;
 
     location / {
-      aws_sign;
+	  aws_sign;
       proxy_pass http://your_s3_bucket.s3.amazonaws.com;
     }
 
     # This is an example that does not use the server root for the proxy root
-    location /myfiles {
-    
+	location /myfiles {
+	
       rewrite /myfiles/(.*) /$1 break;
       proxy_pass http://your_s3_bucket.s3.amazonaws.com/$1;
 
@@ -60,8 +62,8 @@ Implements proxying of authenticated requests to S3.
     }
 
     # This is an example that use specific s3 endpoint, default endpoint is s3.amazonaws.com
-    location /s3_beijing {
-    
+	location /s3_beijing {
+	
       rewrite /s3_beijing/(.*) /$1 break;
       proxy_pass http://your_s3_bucket.s3.cn-north-1.amazonaws.com.cn/$1;
 
@@ -75,24 +77,20 @@ Implements proxying of authenticated requests to S3.
 ```
 
 ## Security considerations
+The V4 protocol does not need access to the actual secret keys that one obtains 
+from the IAM service. The correct way to use the IAM key is to actually generate
+a scoped signing key and use this signing key to access S3. This nginx module
+requires the signing key and not the actual secret key. It is an insecure practise
+to let the secret key reside on your nginx server.
 
-The V4 protocol does not need access to the actual secret keys that one
-obtains from the IAM service. The correct way to use the IAM key is to
-actually generate a scoped signing key and use this signing key to
-access S3. This nginx module requires the signing key and not the actual
-secret key. It is an insecure practise to let the secret key reside on
-your nginx server.
-
-Note that signing keys have a validity of just one week. Hence, they
-need to be refreshed constantly. Please useyour favourite configuration
-management system such as saltstack, puppet, chef, etc. etc. to
-distribute the signing keys to your nginx clusters. Do not forget to HUP
-the server after placing the new signing key as nginx reads the
-configuration only at startup time.
+Note that signing keys have a validity of just one week. Hence, they need to
+be refreshed constantly. Please useyour favourite configuration management
+system such as saltstack, puppet, chef, etc. etc. to distribute the signing
+keys to your nginx clusters. Do not forget to HUP the server after placing the new
+signing key as nginx reads the configuration only at startup time.
 
 A standalone python script has been provided to generate the signing key
-
-``` 
+```
 ./generate_signing_key -h
 usage: generate_signing_key [-h] -k ACCESS_KEY -r REGION [-s SERVICE]
                             [-d DATE] [--no-base64] [-v]
@@ -124,20 +122,17 @@ L4vRLWAO92X5L3Sqk5QydUSdB0nC9+1wfqLMOKLbRp4=
 ```
 
 ## Known limitations
+The 2.x version of the module currently only has support for GET and HEAD calls. This is because
+signing request body is complex and has not yet been implemented.
 
-The 2.x version of the module currently only has support for GET and
-HEAD calls. This is because signing request body is complex and has not
-yet been implemented.
+
 
 ## Credits
-
-Original idea based on
-<http://nginx.org/pipermail/nginx/2010-February/018583.html> and
-suggestion of moving to variables rather than patching the proxy module.
+Original idea based on http://nginx.org/pipermail/nginx/2010-February/018583.html and suggestion of moving to variables rather than patching the proxy module.
 
 Subsequent contributions can be found in the commit logs of the project.
 
 ## GitHub
 
 You may find additional configuration tips and documentation in the [GitHub repository for 
-nginx-module-aws-auth](https://github.com/anomalizer/ngx_aws_auth).
+nginx-module-aws-auth](https://github.com/anomalizer/ngx_aws_auth){target=_blank}.

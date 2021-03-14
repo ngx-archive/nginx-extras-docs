@@ -12,8 +12,14 @@ yum -y install nginx-module-fancyindex
 
 Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 
-    load_module modules/ngx_http_fancyindex_module.so;
+```nginx
+load_module modules/ngx_http_fancyindex_module.so;
+```
 
+
+This document describes nginx-module-fancyindex [v0.5.1](https://github.com/aperezdc/ngx-fancyindex/releases/tag/v0.5.1){target=_blank} 
+released on Oct 26 2020.
+    
 <hr />
 
 
@@ -380,4 +386,4 @@ fancyindex\_hide\_parent\_dir off :Context: http, server, location
 ## GitHub
 
 You may find additional configuration tips and documentation in the [GitHub repository for 
-nginx-module-fancyindex](https://github.com/aperezdc/ngx-fancyindex).
+nginx-module-fancyindex](https://github.com/aperezdc/ngx-fancyindex){target=_blank}.

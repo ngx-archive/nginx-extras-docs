@@ -19,8 +19,9 @@ import lastversion
 print(lastversion.__file__)
 
 
-def enrich_with_yml_info(md, module_config):
+def enrich_with_yml_info(md, module_config, release):
     handle = module_config['handle']
+    repo = module_config['repo']
     new_title = f"# _{handle}_: {module_config['summary']}"
     upstream_name = module_config['repo'].split('/')[-1]
     sonames = module_config['soname']
@@ -28,7 +29,34 @@ def enrich_with_yml_info(md, module_config):
     first_line = lines[0]
     if first_line.startswith('#'):
         lines.pop(0)
-    intro = f"""
+    if 'ref' in module_config:
+        intro = f"""
+## Installation
+
+CentOS/RHEL 6, 7, 8 and Amazon Linux 2 are supported.
+
+### OS-specific complete installation and configuration guides available:
+
+"""
+        if 'el7' in module_config['ref']:
+            intro += f"*   [CentOS/RHEL 7]({module_config['ref']['el7']})\n"
+        if 'el8' in module_config['ref']:
+            intro += f"*   [CentOS/RHEL 8]({module_config['ref']['el8']})\n"
+        if 'amzn2' in module_config['ref']:
+            intro += f"*   [Amazon Linux 2]({module_config['ref']['amzn2']})\n"
+
+        intro += f"""
+### Other supported operating systems        
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install nginx-module-{handle}
+```
+
+Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
+
+"""
+    else:
+        intro = f"""
 
 ## Installation
 
@@ -48,19 +76,25 @@ Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
         sonames = [sonames]
     print(sonames)
     for s in sonames:
-        intro += f"    load_module modules/{s}.so;\n"
+        intro += f"```nginx\nload_module modules/{s}.so;\n```\n"
+    intro += f"""
+
+This document describes nginx-module-{handle} [v{release['version']}](https://github.com/{repo}/releases/tag/{release['tag_name']}){{target=_blank}} 
+released on {release['tag_date'].strftime("%b %d %Y")}.
+    """
     intro += "\n<hr />\n"
 
-    # if 'ref' in module_config
 
-    out = [ new_title ] + intro.splitlines()
+
+    out = [new_title] + intro.splitlines()
     bad_lines = (
         '[back to toc](#table-of-contents)',
         'this module is not distributed',
         'installation instructions](#installation).',
         '[![build',
         'status]',
-        '[![travisci build'
+        '[![travisci build',
+        '![ngx\_pagespeed]'
     )
     for l in lines:
         check_l = l.strip().lower().lstrip('*_')
@@ -75,7 +109,10 @@ def remove_md_sections(md, titles):
     out = []
     # marks that we are "within" target section
     section_level = None
+
     for line in md.splitlines():
+        # remove that stuff:
+        line = line.lstrip('\u200c')
         if not line.startswith('#'):
             # if not in target section, proceed adding stuff
             if not section_level:
@@ -109,9 +146,65 @@ def remove_md_sections(md, titles):
     return "\n".join(out)
 
 
+def ensure_one_h1(md):
+    # It is crucial for there to be only one heading or else TOC is not properly generated
+    out = []
+    seen_h1 = False
+    lines = md.splitlines()
+    for line in lines:
+        if line.startswith('# '):
+            if not seen_h1:
+                seen_h1 = True
+            else:
+                line = "## " + line.lstrip('# ')
+        out.append(line)
+    return "\n".join(out)
+
+
 all_modules = []
 table = []
 headers = ["Package Name", "Description"]
+
+
+def normalize_md_headings(readme_contents):
+    out = []
+    lines = readme_contents.splitlines()
+    total = len(lines)
+    skip_next = False
+    for i in range(total):
+        line = lines[i]
+        if line.strip() == "```" and i < (total - 1) and lines[i+1].strip().startswith(('http ', 'location ', 'server ', 'map ')):
+            line = '```nginx'
+        if skip_next is True:
+            skip_next = False
+            continue
+
+        # check if next line is heading, then normalize current, and skip +1
+        if i + 1 == total:
+            out.append(line)
+        else:
+            if lines[i + 1].startswith('====') and '|' not in lines[i + 1]:
+                out.append(f"# {line}")
+                skip_next = True
+            elif lines[i + 1].startswith('----') and '|' not in lines[i + 1]:
+                out.append(f"## {line}")
+                skip_next = True
+            else:
+                out.append(line)
+    return "\n".join(out)
+
+
+def normalize_to_md(readme_contents, file_name):
+    # normalize to Github flavored markdown
+    doc = pandoc.Document()
+    if file_name.endswith('.rst'):
+        doc.rst = readme_contents.encode('utf-8')
+    elif file_name.endswith('.textile'):
+        doc.textile = readme_contents.encode('utf-8')
+    else:
+        # doc.gfm = readme_contents.encode('utf-8')
+        return normalize_md_headings(readme_contents)
+    return doc.gfm.decode("utf-8")
 
 
 def process_modules_glob(g):
@@ -129,15 +222,7 @@ def process_modules_glob(g):
             if 'readme' not in release:
                 continue
             readme_contents = base64.b64decode(release['readme']['content']).decode("utf-8")
-            # normalize to Github flavored markdown
-            doc = pandoc.Document()
-            if release['readme']['name'].endswith('.rst'):
-                doc.rst = readme_contents.encode('utf-8')
-            elif release['readme']['name'].endswith('.textile'):
-                doc.textile = readme_contents.encode('utf-8')
-            else:
-                doc.gfm = readme_contents.encode('utf-8')
-            readme_contents = doc.gfm.decode("utf-8")
+            readme_contents = normalize_to_md(readme_contents, release['readme']['name'])
             readme_contents = remove_md_sections(readme_contents, [
                 'installation',
                 'install',
@@ -158,22 +243,26 @@ def process_modules_glob(g):
                 'building',
                 'compatibility',
                 'toc',
-                'dependencies'
+                'dependencies',
+                'installation for stable nginx',
+                'version'
             ])
-            readme_contents = enrich_with_yml_info(readme_contents, module_config)
+
+            readme_contents = enrich_with_yml_info(readme_contents, module_config, release)
 
             readme_contents = readme_contents + f"""
 
 ## GitHub
 
 You may find additional configuration tips and documentation in the [GitHub repository for 
-nginx-module-{handle}](https://github.com/{module_config['repo']}).
+nginx-module-{handle}](https://github.com/{module_config['repo']}){{target=_blank}}.
 """
-
+            readme_contents = ensure_one_h1(readme_contents)
             # print(readme_contents)
             with open(f"docs/modules/{handle}.md", "w") as module_md_f:
                 module_md_f.write(readme_contents)
-            table.append([f'[nginx-module-{handle}](modules/{handle}.md)', module_config['summary']])
+            table.append(
+                [f'[nginx-module-{handle}](modules/{handle}.md)', module_config['summary']])
         # break
 
 
