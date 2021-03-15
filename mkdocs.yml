@@ -101,7 +101,7 @@ plugins:
     watch:
     - lastversion
 site_description: Automatic documentation from sources, for NGINX Extras.
-site_name: NGINX Extras docs
+site_name: NGINX Extras Documentation
 site_url: https://www.getpagespeed.com/nginx-extras
 theme:
   custom_dir: overrides
