@@ -230,5 +230,5 @@ The default value is one second, which means sysguard updates the server status 
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-sysguard](https://github.com/dvershinin/nginx-module-sysguard){target=_blank}.

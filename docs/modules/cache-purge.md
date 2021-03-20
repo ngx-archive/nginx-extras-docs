@@ -270,5 +270,5 @@ You can test it by running:
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-cache-purge](https://github.com/nginx-modules/ngx_cache_purge){target=_blank}.

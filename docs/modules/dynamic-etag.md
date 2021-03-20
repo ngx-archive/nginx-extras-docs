@@ -138,5 +138,5 @@ Thanks to http://github.com/kkung/nginx-static-etags/ for... inspiration.
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-dynamic-etag](https://github.com/dvershinin/ngx_dynamic_etag){target=_blank}.

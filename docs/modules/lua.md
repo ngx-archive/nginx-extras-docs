@@ -8486,5 +8486,5 @@ as "PUC-Rio Lua") is not supported anymore.
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-lua](https://github.com/openresty/lua-nginx-module){target=_blank}.

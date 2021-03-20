@@ -444,5 +444,5 @@ SUCH DAMAGE.
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-testcookie](https://github.com/dvershinin/testcookie-nginx-module){target=_blank}.

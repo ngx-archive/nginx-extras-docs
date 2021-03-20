@@ -150,5 +150,5 @@ Defines MIME types, for which `X-Content-Type-Options: nosniff` is sent.
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-security-headers](https://github.com/GetPageSpeed/ngx_security_headers){target=_blank}.

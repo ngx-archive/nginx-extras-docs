@@ -385,5 +385,5 @@ fancyindex\_hide\_parent\_dir off :Context: http, server, location
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-fancyindex](https://github.com/aperezdc/ngx-fancyindex){target=_blank}.

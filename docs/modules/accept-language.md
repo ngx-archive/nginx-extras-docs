@@ -80,5 +80,5 @@ Thanks to Evan Miller for his [guide on writing nginx modules](http://emiller.in
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-accept-language](https://github.com/dvershinin/nginx_accept_language_module){target=_blank}.

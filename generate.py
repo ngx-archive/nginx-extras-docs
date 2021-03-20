@@ -84,8 +84,6 @@ released on {release['tag_date'].strftime("%b %d %Y")}.
     """
     intro += "\n<hr />\n"
 
-
-
     out = [new_title] + intro.splitlines()
     bad_lines = (
         '[back to toc](#table-of-contents)',
@@ -100,6 +98,88 @@ released on {release['tag_date'].strftime("%b %d %Y")}.
         check_l = l.strip().lower().lstrip('*_')
         if check_l not in bad_lines and not check_l.startswith(bad_lines):
             out.append(l)
+    return "\n".join(out)
+
+
+def enrich_lib_with_yml_info(md, module_config, release):
+    handle = module_config['handle']
+    repo = module_config['repo']
+    new_title = f"# _{handle}_: {module_config['summary']}"
+    upstream_name = module_config['repo'].split('/')[-1]
+    lines = md.splitlines()
+    # readme may be empty at the release tag (rarely, but does happen)
+    if lines:
+        first_line = lines[0]
+        if first_line.startswith('#'):
+            lines.pop(0)
+    if 'ref' in module_config:
+        intro = f"""
+## Installation
+
+CentOS/RHEL 6, 7, 8 and Amazon Linux 2 are supported.
+
+### OS-specific complete installation and configuration guides available:
+
+"""
+        if 'el7' in module_config['ref']:
+            intro += f"*   [CentOS/RHEL 7]({module_config['ref']['el7']})\n"
+        if 'el8' in module_config['ref']:
+            intro += f"*   [CentOS/RHEL 8]({module_config['ref']['el8']})\n"
+        if 'amzn2' in module_config['ref']:
+            intro += f"*   [Amazon Linux 2]({module_config['ref']['amzn2']})\n"
+
+        intro += f"""
+### Other supported operating systems        
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install lua-resty-{handle}
+```
+"""
+    else:
+        intro = f"""
+
+## Installation
+
+### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+
+```bash
+yum -y install https://extras.getpagespeed.com/release-latest.rpm
+yum -y install lua-resty-{handle}
+```
+
+"""
+    intro += f"""
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+
+This document describes lua-resty-{handle} [v{release['version']}](https://github.com/{repo}/releases/tag/{release['tag_name']}){{target=_blank}} 
+released on {release['tag_date'].strftime("%b %d %Y")}.
+    """
+    intro += "\n<hr />\n"
+    out = [new_title] + intro.splitlines()
+    bad_lines = (
+        '[back to toc](#table-of-contents)',
+        'this module is not distributed',
+        'installation instructions](#installation).',
+        '[![build',
+        'status]',
+        '[![travisci build',
+        '![ngx\_pagespeed]',
+        'lua_package_path'
+    )
+
+    prev_skipped = False
+    for line in lines:
+        check_l = line.strip().lower().lstrip('*_')
+        if check_l not in bad_lines and not check_l.startswith(bad_lines):
+            if prev_skipped and not check_l:
+                # if previously skipped now is empty line, skip that
+                pass
+            else:
+                out.append(line)
+            prev_skipped = False
+        else:
+            # a bad line
+            prev_skipped = True
     return "\n".join(out)
 
 
@@ -165,6 +245,9 @@ all_modules = []
 table = []
 headers = ["Package Name", "Description"]
 
+all_libs = []
+libs_table = []
+
 
 def normalize_md_headings(readme_contents):
     out = []
@@ -173,7 +256,8 @@ def normalize_md_headings(readme_contents):
     skip_next = False
     for i in range(total):
         line = lines[i]
-        if line.strip() == "```" and i < (total - 1) and lines[i+1].strip().startswith(('http ', 'location ', 'server ', 'map ')):
+        if line.strip() == "```" and i < (total - 1) and lines[i + 1].strip().startswith(
+                ('http ', 'location ', 'server ', 'map ')):
             line = '```nginx'
         if skip_next is True:
             skip_next = False
@@ -254,7 +338,7 @@ def process_modules_glob(g):
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-{handle}](https://github.com/{module_config['repo']}){{target=_blank}}.
 """
             readme_contents = ensure_one_h1(readme_contents)
@@ -266,6 +350,65 @@ nginx-module-{handle}](https://github.com/{module_config['repo']}){{target=_blan
         # break
 
 
+def process_lua_glob(g):
+    for lua_lib_file_name in glob.glob(g):
+        print(f"Processing {lua_lib_file_name}")
+        handle = Path(lua_lib_file_name).stem
+        with open(lua_lib_file_name) as f:
+            all_libs.append(handle)
+            # The FullLoader parameter handles the conversion from YAML
+            # scalar values to Python the dictionary format
+            lib_config = yaml.load(f)
+            lib_config['handle'] = handle
+            print(f"Fetching release for {lib_config['repo']}")
+            release = lastversion.latest(lib_config['repo'], output_format='dict')
+            if 'readme' not in release:
+                continue
+            readme_contents = base64.b64decode(release['readme']['content']).decode("utf-8")
+            readme_contents = normalize_to_md(readme_contents, release['readme']['name'])
+            readme_contents = remove_md_sections(readme_contents, [
+                'installation',
+                'install',
+                'installing',
+                'build',
+                'how to install',
+                'how to build',
+                'building as a dynamic module',
+                'installation:',
+                'compilation',
+                'how to install',
+                'patch to collect ssl_cache_usage, ssl_handshake_time content_time, gzip_time, '
+                'upstream_time, upstream_connect_time, upstream_header_time graphs (optional)',
+                'table of contents',
+                'install in centos 7',
+                'c macro configurations',
+                'requirements',
+                'building',
+                'compatibility',
+                'toc',
+                'dependencies',
+                'installation for stable nginx',
+                'version'
+            ])
+
+            readme_contents = enrich_lib_with_yml_info(readme_contents, lib_config, release)
+
+            readme_contents = readme_contents + f"""
+
+## GitHub
+
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
+nginx-module-{handle}](https://github.com/{lib_config['repo']}){{target=_blank}}.
+"""
+            readme_contents = ensure_one_h1(readme_contents)
+            # print(readme_contents)
+            with open(f"docs/lua/{handle}.md", "w") as lib_md_f:
+                lib_md_f.write(readme_contents)
+            libs_table.append(
+                [f'[lua-resty-{handle}](lua/{handle}.md)', lib_config['summary']])
+
+
+process_lua_glob("../nginx-lua-extras/resty/*.yml")
 process_modules_glob("../nginx-extras/modules/*.yml")
 process_modules_glob("../nginx-extras/modules/others/*.yml")
 
@@ -274,17 +417,30 @@ with open(f"docs/modules.md", "w") as index_md_f:
         tabulate(table, headers, tablefmt="github")
     )
 
+with open(f"docs/lua.md", "w") as libs_index_md_f:
+    libs_index_md_f.write(
+        tabulate(libs_table, headers, tablefmt="github")
+    )
+
+
 all_modules.sort()
 print(all_modules)
 final_all_modules = []
 for m in all_modules:
     final_all_modules.append({m: f"modules/{m}.md"})
+
+all_libs.sort()
+final_all_libs = []
+for l in all_libs:
+    final_all_libs.append({l: f"lua/{l}.md"})
+
 # write nav:
 with open("mkdocs.yml") as mkdocs_f:
     mkdocs_config = yaml.load(mkdocs_f)
     nav = [
         {'Overview': 'index.md'},
         {'Modules': final_all_modules},
+        {'Lua Scripting': 'lua-scripting.md'},
         {'RPM Repository': 'https://www.getpagespeed.com/redhat'}
     ]
     mkdocs_config['nav'] = nav

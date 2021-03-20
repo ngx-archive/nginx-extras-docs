@@ -337,5 +337,5 @@ Please read the [COPYING](https://github.com/cubicdaiya/ngx_small_light/blob/mas
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-small-light](https://github.com/dvershinin/ngx_small_light){target=_blank}.

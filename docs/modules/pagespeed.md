@@ -63,5 +63,5 @@ the progress of the project:
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-pagespeed](https://github.com/apache/incubator-pagespeed-ngx){target=_blank}.

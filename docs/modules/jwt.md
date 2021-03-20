@@ -117,5 +117,5 @@ docker run --rm --name my-test-container -p 8000:8000 jwt-nginx-test
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-jwt](https://github.com/max-lt/nginx-jwt-module){target=_blank}.

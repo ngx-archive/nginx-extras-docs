@@ -322,5 +322,5 @@ Group](discussion)
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-push-stream](https://github.com/wandenberg/nginx-push-stream-module){target=_blank}.

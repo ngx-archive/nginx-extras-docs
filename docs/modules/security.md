@@ -263,5 +263,5 @@ there is anything we can do to facilitate your work as a packager.
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-security](https://github.com/SpiderLabs/ModSecurity-nginx){target=_blank}.

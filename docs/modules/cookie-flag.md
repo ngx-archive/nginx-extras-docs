@@ -59,5 +59,5 @@ Anton Saraykin [<Airisenator@gmail.com>]
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-cookie-flag](https://github.com/AirisX/nginx_cookie_flag_module){target=_blank}.

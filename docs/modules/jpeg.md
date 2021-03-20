@@ -532,5 +532,5 @@ and the
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-jpeg](https://github.com/ioppermann/modjpeg-nginx){target=_blank}.

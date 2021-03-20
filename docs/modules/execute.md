@@ -67,5 +67,5 @@ The commands which require user interaction or constantly update their output (e
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-execute](https://github.com/limithit/NginxExecute){target=_blank}.

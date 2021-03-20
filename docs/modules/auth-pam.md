@@ -104,5 +104,5 @@ variables to pam_exec.
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-auth-pam](https://github.com/sto/ngx_http_auth_pam_module){target=_blank}.

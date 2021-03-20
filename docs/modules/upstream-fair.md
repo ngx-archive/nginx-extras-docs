@@ -78,5 +78,5 @@ Please feel free to fork the project at GitHub and submit pull requests or patch
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-upstream-fair](https://github.com/itoffshore/nginx-upstream-fair){target=_blank}.

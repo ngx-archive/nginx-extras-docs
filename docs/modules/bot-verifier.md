@@ -197,5 +197,5 @@ Once the libraries are installed just run `make` and the suite will run. If you 
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-bot-verifier](https://github.com/repsheet/ngx_bot_verifier){target=_blank}.

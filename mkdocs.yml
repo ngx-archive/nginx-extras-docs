@@ -87,6 +87,7 @@ nav:
   - vts: modules/vts.md
   - webp: modules/webp.md
   - zip: modules/zip.md
+- Lua Scripting: lua-scripting.md
 - RPM Repository: https://www.getpagespeed.com/redhat
 plugins:
 - search
@@ -115,3 +116,6 @@ theme:
     accent: purple
     primary: teal
     scheme: default
+google_analytics:
+  - UA-XXXXXXXX-X
+  - auto

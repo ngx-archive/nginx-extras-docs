@@ -43,5 +43,5 @@ For more information on using NGINX in FIPS mode, see the [NGINX Plus FIPS docum
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-fips-check](https://github.com/ogarrett/nginx-fips-check-module){target=_blank}.

@@ -336,5 +336,5 @@ rtmp_auto_push directive.
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-rtmp](https://github.com/dvershinin/nginx-rtmp-module){target=_blank}.

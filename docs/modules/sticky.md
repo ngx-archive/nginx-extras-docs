@@ -186,5 +186,5 @@ see Todo.md
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-sticky](https://github.com/dvershinin/nginx-sticky-module-ng){target=_blank}.

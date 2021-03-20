@@ -315,5 +315,5 @@ Liu Lantao [Github@Lax](https://github.com/Lax)
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-traffic-accounting](https://github.com/Lax/traffic-accounting-nginx-module){target=_blank}.

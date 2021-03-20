@@ -103,5 +103,5 @@ If you would like to use `ipscrub` without attribution in your privacy policy, o
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-ipscrub](https://github.com/masonicboom/ipscrub){target=_blank}.

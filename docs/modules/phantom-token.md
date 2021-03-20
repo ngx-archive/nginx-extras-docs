@@ -330,5 +330,5 @@ This software is copyright (C) 2017 Curity AB. It is open source software that i
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-phantom-token](https://github.com/curityio/nginx_phantom_token_module){target=_blank}.

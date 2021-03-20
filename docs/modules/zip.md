@@ -54,5 +54,5 @@ Questions/patches may be directed to Evan Miller, emmiller@gmail.com.
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-zip](https://github.com/evanmiller/mod_zip){target=_blank}.

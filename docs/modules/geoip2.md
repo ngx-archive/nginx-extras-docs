@@ -123,5 +123,5 @@ $country_name "default=United States" source=$remote_addr country names en
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-geoip2](https://github.com/leev/ngx_http_geoip2_module){target=_blank}.

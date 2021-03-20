@@ -187,5 +187,5 @@ Dmitry Stolyarov, written by Timofey Kirillov, CJSC Flant
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-rdns](https://github.com/dvershinin/nginx-http-rdns){target=_blank}.

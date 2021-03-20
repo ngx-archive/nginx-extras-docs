@@ -101,5 +101,5 @@ load_module modules/ngx_http_length_hiding_filter_module.so;
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-length-hiding](https://github.com/nulab/nginx-length-hiding-filter-module){target=_blank}.

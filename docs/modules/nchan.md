@@ -1458,5 +1458,5 @@ Please support this project with a donation to keep me warm through the winter. 
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-nchan](https://github.com/slact/nchan){target=_blank}.

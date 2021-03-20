@@ -68,5 +68,5 @@ Invokes untar of **untar_file** from **untar_archive**
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-untar](https://github.com/ajax16384/ngx_http_untar_module){target=_blank}.

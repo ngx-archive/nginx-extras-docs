@@ -202,5 +202,5 @@ nginx_substitutions_filter
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-substitutions](https://github.com/dvershinin/ngx_http_substitutions_filter_module){target=_blank}.

@@ -241,5 +241,5 @@ $ ffmpeg -re -i ~/Movies/sintel.mp4 -bsf:v h264_mp4toannexb
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-ts](https://github.com/arut/nginx-ts-module){target=_blank}.

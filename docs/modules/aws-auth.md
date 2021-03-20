@@ -134,5 +134,5 @@ Subsequent contributions can be found in the commit logs of the project.
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-aws-auth](https://github.com/anomalizer/ngx_aws_auth){target=_blank}.

@@ -212,5 +212,5 @@ this module.
 
 ## GitHub
 
-You may find additional configuration tips and documentation in the [GitHub repository for 
+You may find additional configuration tips and documentation for this module in the [GitHub repository for 
 nginx-module-ndk](https://github.com/vision5/ngx_devel_kit){target=_blank}.
