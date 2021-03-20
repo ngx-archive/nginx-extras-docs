@@ -117,5 +117,5 @@ theme:
     primary: teal
     scheme: default
 google_analytics:
-  - UA-XXXXXXXX-X
+  - UA-51252096-1
   - auto
