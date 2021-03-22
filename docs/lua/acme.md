@@ -1,4 +1,4 @@
-# _acme_: Automatic Let's Encrypt certificate serving and Lua implementation of ACMEv2 procotol
+# *acme*: Automatic Let's Encrypt certificate serving and Lua implementation of ACMEv2 procotol
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-acme
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-acme [v0.6.0](https://github.com/fffonion/lua-resty-acme/releases/tag/0.6.0){target=_blank} 
 released on Feb 19 2021.

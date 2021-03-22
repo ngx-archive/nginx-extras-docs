@@ -1,4 +1,4 @@
-# _aws-auth_: Lua resty module to calculate AWS signature v4 authorization header
+# *aws-auth*: Lua resty module to calculate AWS signature v4 authorization header
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-aws-auth
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-aws-auth [v0.12.post0](https://github.com/paragasu/lua-resty-aws-auth/releases/tag/v0.12-0){target=_blank} 
 released on Jan 13 2017.

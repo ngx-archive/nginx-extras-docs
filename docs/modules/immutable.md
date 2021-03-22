@@ -1,4 +1,4 @@
-# _immutable_: NGINX module for setting immutable caching on static assets
+# *immutable*: NGINX module for setting immutable caching on static assets
 
 
 ## Installation

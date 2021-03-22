@@ -1,4 +1,4 @@
-# _html-sanitize_: NGINX module to sanitize HTML 5 with whitelisted elements, attributes and CSS
+# *html-sanitize*: NGINX module to sanitize HTML 5 with whitelisted elements, attributes and CSS
 
 
 ## Installation

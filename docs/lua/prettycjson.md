@@ -1,4 +1,4 @@
-# _prettycjson_: Lua cJSON Pretty Formatter
+# *prettycjson*: Lua cJSON Pretty Formatter
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-prettycjson
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-prettycjson [v1.6](https://github.com/bungle/lua-resty-prettycjson/releases/tag/v1.6){target=_blank} 
 released on Sep 29 2016.

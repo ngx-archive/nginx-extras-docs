@@ -1,4 +1,4 @@
-# _ipscrub_: IP address anonymizer module for NGINX
+# *ipscrub*: IP address anonymizer module for NGINX
 
 
 ## Installation

@@ -1,4 +1,4 @@
-# _flv_: Media streaming server based on nginx-module-rtmp
+# *flv*: Media streaming server based on nginx-module-rtmp
 
 
 ## Installation

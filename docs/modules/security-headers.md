@@ -1,4 +1,4 @@
-# _security-headers_: NGINX module for sending security headers
+# *security-headers*: NGINX module for sending security headers
 
 
 ## Installation

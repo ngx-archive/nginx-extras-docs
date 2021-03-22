@@ -1,4 +1,4 @@
-# _upstream-healthcheck_: Health Checker for NGINX Upstream Servers in Pure Lua
+# *upstream-healthcheck*: Health Checker for NGINX Upstream Servers in Pure Lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-upstream-healthcheck
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-upstream-healthcheck [v0.6](https://github.com/openresty/lua-resty-upstream-healthcheck/releases/tag/v0.06){target=_blank} 
 released on Feb 28 2019.

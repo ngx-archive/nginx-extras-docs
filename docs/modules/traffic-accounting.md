@@ -1,4 +1,4 @@
-# _traffic-accounting_: Monitor the incoming and outgoing traffic metrics in realtime for NGINX
+# *traffic-accounting*: Monitor the incoming and outgoing traffic metrics in realtime for NGINX
 
 
 ## Installation

@@ -1,4 +1,4 @@
-# _statsd_: NGINX module for sending stats to statsd
+# *statsd*: NGINX module for sending stats to statsd
 
 
 ## Installation

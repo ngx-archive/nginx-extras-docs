@@ -1,4 +1,4 @@
-# _balancer_: A generic consistent hash implementation for nginx-module-lua
+# *balancer*: A generic consistent hash implementation for nginx-module-lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-balancer
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-balancer [v0.3](https://github.com/openresty/lua-resty-balancer/releases/tag/v0.03){target=_blank} 
 released on Jun 25 2019.
@@ -32,8 +33,6 @@ This Lua library can be used with `balancer_by_lua*`.
 ## Synopsis
 
 ```lua
-    lua_package_cpath "/path/to/lua-resty-chash/?.so;;";
-
     init_by_lua_block {
         local resty_chash = require "resty.chash"
         local resty_roundrobin = require "resty.roundrobin"

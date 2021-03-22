@@ -1,4 +1,4 @@
-# _rdns_: NGINX HTTP rDNS module
+# *rdns*: NGINX HTTP rDNS module
 
 
 ## Installation

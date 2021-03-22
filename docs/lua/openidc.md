@@ -11,6 +11,7 @@ yum -y install lua-resty-openidc
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-openidc [v1.7.4](https://github.com/zmartzone/lua-resty-openidc/releases/tag/v1.7.4){target=_blank} 
 released on Nov 17 2020.

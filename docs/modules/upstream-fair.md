@@ -1,4 +1,4 @@
-# _upstream-fair_: The fair load balancer module for NGINX
+# *upstream-fair*: The fair load balancer module for NGINX
 
 
 ## Installation

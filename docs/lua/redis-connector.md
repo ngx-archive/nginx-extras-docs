@@ -1,4 +1,4 @@
-# _redis-connector_: Connection utilities for lua-resty-redis
+# *redis-connector*: Connection utilities for lua-resty-redis
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-redis-connector
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-redis-connector [v0.10](https://github.com/ledgetech/lua-resty-redis-connector/releases/tag/v0.10){target=_blank} 
 released on Sep 10 2020.

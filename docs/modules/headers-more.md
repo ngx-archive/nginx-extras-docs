@@ -1,4 +1,4 @@
-# _headers-more_: NGINX Headers More dynamic module
+# *headers-more*: NGINX Headers More dynamic module
 
 
 ## Installation

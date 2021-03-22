@@ -1,4 +1,4 @@
-# _fancyindex_: NGINX Fancy Index module
+# *fancyindex*: NGINX Fancy Index module
 
 
 ## Installation

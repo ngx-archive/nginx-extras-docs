@@ -1,4 +1,4 @@
-# _redis2_: NGINX upstream module for the Redis 2.0 protocol
+# *redis2*: NGINX upstream module for the Redis 2.0 protocol
 
 
 ## Installation

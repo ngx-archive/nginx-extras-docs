@@ -1,4 +1,4 @@
-# _nettle_: LuaJIT FFI bindings for Nettle (a low-level cryptographic library)
+# *nettle*: LuaJIT FFI bindings for Nettle (a low-level cryptographic library)
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-nettle
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-nettle [v1.5](https://github.com/bungle/lua-resty-nettle/releases/tag/v1.5){target=_blank} 
 released on Apr 01 2020.

@@ -1,4 +1,4 @@
-# _counter_: Lock-free counter for nginx-module-lua
+# *counter*: Lock-free counter for nginx-module-lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-counter
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-counter [v0.2.1](https://github.com/Kong/lua-resty-counter/releases/tag/v0.2.1){target=_blank} 
 released on Apr 09 2020.

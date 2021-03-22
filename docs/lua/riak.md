@@ -1,4 +1,4 @@
-# _riak_: Lua riak protocol buffer client driver for nginx-module-lua based on the cosocket API
+# *riak*: Lua riak protocol buffer client driver for nginx-module-lua based on the cosocket API
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-riak
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-riak [v2.0.0](https://github.com/bakins/lua-resty-riak/releases/tag/v2.0.0){target=_blank} 
 released on Dec 05 2013.

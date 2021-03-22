@@ -1,4 +1,4 @@
-# _dynamic-etag_: NGINX module for adding ETag to dynamic content
+# *dynamic-etag*: NGINX module for adding ETag to dynamic content
 
 
 ## Installation

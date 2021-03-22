@@ -1,4 +1,4 @@
-# _socket_: Automatic LuaSocket/cosockets compatibility module
+# *socket*: Automatic LuaSocket/cosockets compatibility module
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-socket
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-socket [v1.0.0](https://github.com/thibaultcha/lua-resty-socket/releases/tag/1.0.0){target=_blank} 
 released on Jan 18 2019.

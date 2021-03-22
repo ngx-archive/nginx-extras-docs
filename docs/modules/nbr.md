@@ -1,4 +1,4 @@
-# _nbr_: NGINX Brotli dynamic modules
+# *nbr*: NGINX Brotli dynamic modules
 
 
 ## Installation

@@ -1,4 +1,4 @@
-# _sysguard_: NGINX sysguard module
+# *sysguard*: NGINX sysguard module
 
 
 ## Installation

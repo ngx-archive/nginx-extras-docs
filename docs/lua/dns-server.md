@@ -1,4 +1,4 @@
-# _dns-server_: Lua DNS server driver for nginx-module-lua
+# *dns-server*: Lua DNS server driver for nginx-module-lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-dns-server
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-dns-server [v0.2](https://github.com/vislee/lua-resty-dns-server/releases/tag/v0.02){target=_blank} 
 released on Jul 23 2019.

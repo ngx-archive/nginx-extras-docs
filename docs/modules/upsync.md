@@ -1,4 +1,4 @@
-# _upsync_: NGINX module for syncing upstreams from consul or etcd
+# *upsync*: NGINX module for syncing upstreams from consul or etcd
 
 
 ## Installation

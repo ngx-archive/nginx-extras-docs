@@ -1,4 +1,4 @@
-# _qless_: Lua binding to Qless (Queue / Pipeline management) for nginx-module-lua / Redis
+# *qless*: Lua binding to Qless (Queue / Pipeline management) for nginx-module-lua / Redis
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-qless
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-qless [v0.11](https://github.com/ledgetech/lua-resty-qless/releases/tag/v0.11){target=_blank} 
 released on Aug 16 2017.

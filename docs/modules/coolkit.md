@@ -1,4 +1,4 @@
-# _coolkit_: NGINX CoolKit Module
+# *coolkit*: NGINX CoolKit Module
 
 
 ## Installation

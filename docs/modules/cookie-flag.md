@@ -1,4 +1,4 @@
-# _cookie-flag_: NGINX cookie flag module
+# *cookie-flag*: NGINX cookie flag module
 
 
 ## Installation

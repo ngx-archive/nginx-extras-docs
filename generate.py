@@ -22,7 +22,7 @@ print(lastversion.__file__)
 def enrich_with_yml_info(md, module_config, release):
     handle = module_config['handle']
     repo = module_config['repo']
-    new_title = f"# _{handle}_: {module_config['summary']}"
+    new_title = f"# *{handle}*: {module_config['summary']}"
     upstream_name = module_config['repo'].split('/')[-1]
     sonames = module_config['soname']
     lines = md.splitlines()
@@ -104,7 +104,7 @@ released on {release['tag_date'].strftime("%b %d %Y")}.
 def enrich_lib_with_yml_info(md, module_config, release):
     handle = module_config['handle']
     repo = module_config['repo']
-    new_title = f"# _{handle}_: {module_config['summary']}"
+    new_title = f"# *{handle}*: {module_config['summary']}"
     upstream_name = module_config['repo'].split('/')[-1]
     lines = md.splitlines()
     # readme may be empty at the release tag (rarely, but does happen)
@@ -164,7 +164,8 @@ released on {release['tag_date'].strftime("%b %d %Y")}.
         'status]',
         '[![travisci build',
         '![ngx\_pagespeed]',
-        'lua_package_path'
+        'lua_package_path',
+        'lua_package_cpath'
     )
 
     prev_skipped = False

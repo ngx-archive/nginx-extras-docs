@@ -1,4 +1,4 @@
-# _ajp_: Support AJP protocol proxy with NGINX
+# *ajp*: Support AJP protocol proxy with NGINX
 
 
 ## Installation

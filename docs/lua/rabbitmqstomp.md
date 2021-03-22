@@ -1,4 +1,4 @@
-# _rabbitmqstomp_: Opinionated Lua RabbitMQ client library for nginx-module-lua apps based on the cosocket API
+# *rabbitmqstomp*: Opinionated Lua RabbitMQ client library for nginx-module-lua apps based on the cosocket API
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-rabbitmqstomp
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-rabbitmqstomp [v0.1](https://github.com/wingify/lua-resty-rabbitmqstomp/releases/tag/v0.1){target=_blank} 
 released on Jun 01 2013.

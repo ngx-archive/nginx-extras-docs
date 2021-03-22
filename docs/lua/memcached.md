@@ -1,4 +1,4 @@
-# _memcached_: Lua memcached client driver for nginx-module-lua based on the cosocket API
+# *memcached*: Lua memcached client driver for nginx-module-lua based on the cosocket API
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-memcached
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-memcached [v0.15](https://github.com/openresty/lua-resty-memcached/releases/tag/v0.15){target=_blank} 
 released on May 11 2020.

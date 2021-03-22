@@ -1,4 +1,4 @@
-# _srcache_: Transparent subrequest-based caching layout for arbitrary NGINX locations
+# *srcache*: Transparent subrequest-based caching layout for arbitrary NGINX locations
 
 
 ## Installation

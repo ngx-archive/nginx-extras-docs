@@ -1,4 +1,4 @@
-# _iputils_: Utility functions for working with IP addresses in nginx-module-lua
+# *iputils*: Utility functions for working with IP addresses in nginx-module-lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-iputils
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-iputils [v0.3.0](https://github.com/hamishforbes/lua-resty-iputils/releases/tag/v0.3.0){target=_blank} 
 released on Mar 28 2017.

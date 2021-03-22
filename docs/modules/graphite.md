@@ -1,4 +1,4 @@
-# _graphite_: An nginx module for collecting stats into Graphite
+# *graphite*: An nginx module for collecting stats into Graphite
 
 
 ## Installation

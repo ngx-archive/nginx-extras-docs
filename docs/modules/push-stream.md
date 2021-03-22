@@ -1,4 +1,4 @@
-# _push-stream_: NGINX push stream module
+# *push-stream*: NGINX push stream module
 
 
 ## Installation

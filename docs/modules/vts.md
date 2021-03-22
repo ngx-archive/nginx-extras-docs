@@ -1,4 +1,4 @@
-# _vts_: NGINX virtual host traffic status module
+# *vts*: NGINX virtual host traffic status module
 
 
 ## Installation

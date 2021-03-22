@@ -1,4 +1,4 @@
-# _jsonrpc-batch_: JSONRPC batch protocol module for nginx-module-lua
+# *jsonrpc-batch*: JSONRPC batch protocol module for nginx-module-lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-jsonrpc-batch
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-jsonrpc-batch [v0.0.1](https://github.com/mosasiru/lua-resty-jsonrpc-batch/releases/tag/v0.0.1){target=_blank} 
 released on Jul 15 2015.

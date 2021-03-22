@@ -1,4 +1,4 @@
-# _webp_: NGINX WebP module
+# *webp*: NGINX WebP module
 
 
 ## Installation

@@ -1,4 +1,4 @@
-# _fips-check_: FIPS status check module for NGINX
+# *fips-check*: FIPS status check module for NGINX
 
 
 ## Installation

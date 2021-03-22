@@ -1,4 +1,4 @@
-# _rsa_: RSA encrypt/decrypt & sign/verify for nginx-module-luaJIT
+# *rsa*: RSA encrypt/decrypt & sign/verify for nginx-module-luaJIT
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-rsa
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-rsa [v1.1.0](https://github.com/spacewander/lua-resty-rsa/releases/tag/v1.1.0){target=_blank} 
 released on Aug 24 2020.

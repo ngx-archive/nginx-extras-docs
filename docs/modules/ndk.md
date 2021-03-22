@@ -1,4 +1,4 @@
-# _ndk_: Nginx Development Kit
+# *ndk*: Nginx Development Kit
 
 
 ## Installation

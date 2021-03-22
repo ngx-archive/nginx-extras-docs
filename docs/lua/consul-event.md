@@ -1,4 +1,4 @@
-# _consul-event_: Consul Events HTTP API Wrapper
+# *consul-event*: Consul Events HTTP API Wrapper
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-consul-event
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-consul-event [v0.3.0](https://github.com/Kong/lua-resty-consul-event/releases/tag/0.3.0){target=_blank} 
 released on Jun 17 2019.

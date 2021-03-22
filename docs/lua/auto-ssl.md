@@ -1,4 +1,4 @@
-# _auto-ssl_: On the fly (and free) SSL registration and renewal inside nginx-module-lua/nginx with Let's Encrypt
+# *auto-ssl*: On the fly (and free) SSL registration and renewal inside nginx-module-lua/nginx with Let's Encrypt
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-auto-ssl
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-auto-ssl [v0.13.1](https://github.com/auto-ssl/lua-resty-auto-ssl/releases/tag/v0.13.1){target=_blank} 
 released on Oct 01 2019.

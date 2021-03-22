@@ -1,4 +1,4 @@
-# _sniproxy_: SNI Proxy based on stream-lua-nginx-module
+# *sniproxy*: SNI Proxy based on stream-lua-nginx-module
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-sniproxy
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-sniproxy [v0.22](https://github.com/fffonion/lua-resty-sniproxy/releases/tag/0.22){target=_blank} 
 released on Aug 31 2020.

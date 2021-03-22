@@ -1,4 +1,4 @@
-# _aws-auth_: NGINX module to proxy to authenticated AWS services
+# *aws-auth*: NGINX module to proxy to authenticated AWS services
 
 
 ## Installation

@@ -1,4 +1,4 @@
-# _cors_: It's the implement of CORS on nginx-module-lua
+# *cors*: It's the implement of CORS on nginx-module-lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-cors
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-cors [v0.2.1](https://github.com/detailyang/lua-resty-cors/releases/tag/0.2.1){target=_blank} 
 released on Oct 17 2016.

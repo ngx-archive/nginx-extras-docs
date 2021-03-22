@@ -1,4 +1,4 @@
-# _upload_: NGINX module for handling file uploads
+# *upload*: NGINX module for handling file uploads
 
 
 ## Installation

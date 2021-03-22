@@ -1,4 +1,4 @@
-# _security_: ModSecurity v3 Nginx Connector
+# *security*: ModSecurity v3 Nginx Connector
 
 ## Installation
 

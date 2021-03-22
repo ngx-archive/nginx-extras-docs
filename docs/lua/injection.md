@@ -1,4 +1,4 @@
-# _injection_: LuaJIT FFI bindings to libinjection (https://github.com/client9/libinjection)
+# *injection*: LuaJIT FFI bindings to libinjection (https://github.com/client9/libinjection)
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-injection
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-injection [v1.0](https://github.com/bungle/lua-resty-injection/releases/tag/v1.0){target=_blank} 
 released on Sep 15 2016.

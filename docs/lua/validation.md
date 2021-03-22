@@ -1,4 +1,4 @@
-# _validation_: Validation Library (Input Validation and Filtering) for Lua and nginx-module-lua
+# *validation*: Validation Library (Input Validation and Filtering) for Lua and nginx-module-lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-validation
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-validation [v2.7](https://github.com/bungle/lua-resty-validation/releases/tag/v2.7){target=_blank} 
 released on Aug 25 2017.

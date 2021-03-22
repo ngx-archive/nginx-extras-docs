@@ -1,4 +1,4 @@
-# _passenger_: Passenger module
+# *passenger*: Passenger module
 
 
 ## Installation

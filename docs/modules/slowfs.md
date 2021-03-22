@@ -1,4 +1,4 @@
-# _slowfs_: NGINX SlowFS Cache Module
+# *slowfs*: NGINX SlowFS Cache Module
 
 
 ## Installation

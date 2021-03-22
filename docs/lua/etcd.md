@@ -1,4 +1,4 @@
-# _etcd_: Nonblocking Lua etcd driver library for nginx-module-lua
+# *etcd*: Nonblocking Lua etcd driver library for nginx-module-lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-etcd
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-etcd [v1.4.4](https://github.com/api7/lua-resty-etcd/releases/tag/v1.4.4){target=_blank} 
 released on Feb 03 2021.

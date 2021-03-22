@@ -1,4 +1,4 @@
-# _hoedown_: LuaJIT FFI bindings to Hoedown, a standards compliant, fast, secure markdown processing library in C
+# *hoedown*: LuaJIT FFI bindings to Hoedown, a standards compliant, fast, secure markdown processing library in C
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-hoedown
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-hoedown [v0.91](https://github.com/bungle/lua-resty-hoedown/releases/tag/v0.91){target=_blank} 
 released on Oct 09 2014.

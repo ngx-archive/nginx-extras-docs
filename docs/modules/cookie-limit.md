@@ -1,4 +1,4 @@
-# _cookie-limit_: NGINX module to limit the number of malicious ip forged cookies
+# *cookie-limit*: NGINX module to limit the number of malicious ip forged cookies
 
 
 ## Installation

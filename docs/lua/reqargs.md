@@ -1,4 +1,4 @@
-# _reqargs_: Read application/x-www-form-urlencoded, multipart/form-data, and application/json request args
+# *reqargs*: Read application/x-www-form-urlencoded, multipart/form-data, and application/json request args
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-reqargs
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-reqargs [v1.4](https://github.com/bungle/lua-resty-reqargs/releases/tag/v1.4){target=_blank} 
 released on Jan 17 2017.

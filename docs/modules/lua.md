@@ -1,4 +1,4 @@
-# _lua_: Lua scripting support for NGINX
+# *lua*: Lua scripting support for NGINX
 
 
 ## Installation

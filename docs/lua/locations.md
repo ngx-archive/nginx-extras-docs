@@ -1,4 +1,4 @@
-# _locations_: Lua library implementing nginx style location uri matching
+# *locations*: Lua library implementing nginx style location uri matching
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-locations
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-locations [v0.2](https://github.com/hamishforbes/lua-resty-locations/releases/tag/v0.2){target=_blank} 
 released on Aug 31 2017.

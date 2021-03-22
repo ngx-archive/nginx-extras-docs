@@ -1,4 +1,4 @@
-# _jpeg_: NGINX JPEG filter module
+# *jpeg*: NGINX JPEG filter module
 
 
 ## Installation

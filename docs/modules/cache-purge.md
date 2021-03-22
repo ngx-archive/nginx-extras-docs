@@ -1,4 +1,4 @@
-# _cache-purge_: NGINX Cache Purge module
+# *cache-purge*: NGINX Cache Purge module
 
 
 ## Installation

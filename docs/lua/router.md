@@ -1,4 +1,4 @@
-# _router_: Lua http router for nginx-module-lua
+# *router*: Lua http router for nginx-module-lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-router
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-router [v0.1.0](https://github.com/git-hulk/lua-resty-router/releases/tag/v0.1.0){target=_blank} 
 released on Jun 26 2017.

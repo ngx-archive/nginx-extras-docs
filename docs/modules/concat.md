@@ -1,4 +1,4 @@
-# _concat_: HTTP Concatenation module for NGINX
+# *concat*: HTTP Concatenation module for NGINX
 
 
 ## Installation

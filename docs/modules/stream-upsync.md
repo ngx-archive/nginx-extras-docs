@@ -1,4 +1,4 @@
-# _stream-upsync_: NGINX module for syncing stream backends from consul or etcd
+# *stream-upsync*: NGINX module for syncing stream backends from consul or etcd
 
 
 ## Installation

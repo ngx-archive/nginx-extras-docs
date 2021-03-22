@@ -1,4 +1,4 @@
-# _healthcheck_: Healthcheck library for nginx-module-lua to validate upstream service status
+# *healthcheck*: Healthcheck library for nginx-module-lua to validate upstream service status
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-healthcheck
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-healthcheck [v2.0.0](https://github.com/Kong/lua-resty-healthcheck/releases/tag/2.0.0){target=_blank} 
 released on Sep 22 2020.

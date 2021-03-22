@@ -1,4 +1,4 @@
-# _substitutions_: String substitutions module for nginx
+# *substitutions*: String substitutions module for nginx
 
 
 ## Installation

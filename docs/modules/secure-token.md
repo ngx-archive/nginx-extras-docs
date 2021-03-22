@@ -1,4 +1,4 @@
-# _secure-token_: Secure token module for NGINX
+# *secure-token*: Secure token module for NGINX
 
 
 ## Installation

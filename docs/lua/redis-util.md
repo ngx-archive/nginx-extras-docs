@@ -1,4 +1,4 @@
-# _redis-util_: Nginx-module-lua-resty-redis 封装工具类
+# *redis-util*: Nginx-module-lua-resty-redis 封装工具类
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-redis-util
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-redis-util [v0.0.5](https://github.com/anjia0532/lua-resty-redis-util/releases/tag/v0.0.5){target=_blank} 
 released on Jan 28 2019.

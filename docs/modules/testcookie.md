@@ -1,4 +1,4 @@
-# _testcookie_: NGINX testcookie robot mitigation module
+# *testcookie*: NGINX testcookie robot mitigation module
 
 
 ## Installation

@@ -1,4 +1,4 @@
-# _naxsi_: NGINX Anti XSS & SQL Injection module
+# *naxsi*: NGINX Anti XSS & SQL Injection module
 
 
 ## Installation

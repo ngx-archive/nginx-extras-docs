@@ -1,4 +1,4 @@
-# _mysql_: Nonblocking Lua MySQL driver library for nginx-module-lua
+# *mysql*: Nonblocking Lua MySQL driver library for nginx-module-lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-mysql
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-mysql [v0.23](https://github.com/openresty/lua-resty-mysql/releases/tag/v0.23){target=_blank} 
 released on Nov 02 2020.

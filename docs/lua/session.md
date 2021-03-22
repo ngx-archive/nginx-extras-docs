@@ -1,4 +1,4 @@
-# _session_: Session library for nginx-module-lua – flexible and secure
+# *session*: Session library for nginx-module-lua – flexible and secure
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-session
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-session [v3.8](https://github.com/bungle/lua-resty-session/releases/tag/v3.8){target=_blank} 
 released on Jan 04 2021.

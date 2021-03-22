@@ -1,4 +1,4 @@
-# _bot-verifier_: A search index bot verification module for NGINX
+# *bot-verifier*: A search index bot verification module for NGINX
 
 
 ## Installation

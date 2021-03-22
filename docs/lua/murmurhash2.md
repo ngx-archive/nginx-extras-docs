@@ -1,4 +1,4 @@
-# _murmurhash2_: LuaJIT MurmurHash 2 bindings to NGINX / nginx-module-lua murmurhash2 implementation
+# *murmurhash2*: LuaJIT MurmurHash 2 bindings to NGINX / nginx-module-lua murmurhash2 implementation
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-murmurhash2
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-murmurhash2 [v1.0](https://github.com/bungle/lua-resty-murmurhash2/releases/tag/v1.0){target=_blank} 
 released on Sep 29 2014.

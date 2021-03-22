@@ -1,4 +1,4 @@
-# _snappy_: LuaJIT FFI bindings for Snappy, a fast compressor/decompressor (https://code.google.com/p/snappy/)
+# *snappy*: LuaJIT FFI bindings for Snappy, a fast compressor/decompressor (https://code.google.com/p/snappy/)
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-snappy
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-snappy [v1.0](https://github.com/bungle/lua-resty-snappy/releases/tag/v1.0){target=_blank} 
 released on Oct 01 2014.

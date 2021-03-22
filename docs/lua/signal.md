@@ -1,4 +1,4 @@
-# _signal_: Lua library for killing or sending signals to UNIX processes
+# *signal*: Lua library for killing or sending signals to UNIX processes
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-signal
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-signal [v0.2](https://github.com/openresty/lua-resty-signal/releases/tag/v0.02){target=_blank} 
 released on Feb 03 2019.

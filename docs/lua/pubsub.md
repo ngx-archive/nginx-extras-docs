@@ -1,4 +1,4 @@
-# _pubsub_: Lua Pubsub client driver for nginx-module-lua based on the cosocket API
+# *pubsub*: Lua Pubsub client driver for nginx-module-lua based on the cosocket API
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-pubsub
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-pubsub [v1.3](https://github.com/wingify/lua-resty-pubsub/releases/tag/v1.3){target=_blank} 
 released on Oct 15 2020.

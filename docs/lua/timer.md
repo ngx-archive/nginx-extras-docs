@@ -1,4 +1,4 @@
-# _timer_: Extended timers for nginx-module-lua
+# *timer*: Extended timers for nginx-module-lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-timer
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-timer [v1.1.0](https://github.com/Kong/lua-resty-timer/releases/tag/1.1.0){target=_blank} 
 released on Nov 06 2020.

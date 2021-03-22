@@ -1,4 +1,4 @@
-# _memc_: Extended version of the standard NGINX memcached module
+# *memc*: Extended version of the standard NGINX memcached module
 
 
 ## Installation

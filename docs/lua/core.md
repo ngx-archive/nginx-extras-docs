@@ -1,4 +1,4 @@
-# _core_: New FFI-based API for lua-nginx-module
+# *core*: New FFI-based API for lua-nginx-module
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-core
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-core [v0.1.21](https://github.com/openresty/lua-resty-core/releases/tag/v0.1.21){target=_blank} 
 released on Nov 03 2020.

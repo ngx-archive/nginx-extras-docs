@@ -1,4 +1,4 @@
-# _http_: Lua HTTP client cosocket driver for nginx-module-lua
+# *http*: Lua HTTP client cosocket driver for nginx-module-lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-http
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-http [v0.15](https://github.com/ledgetech/lua-resty-http/releases/tag/v0.15){target=_blank} 
 released on Aug 13 2019.

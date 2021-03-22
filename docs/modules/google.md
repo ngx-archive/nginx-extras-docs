@@ -1,4 +1,4 @@
-# _google_: NGINX Module for Google Mirror creation
+# *google*: NGINX Module for Google Mirror creation
 
 
 ## Installation

@@ -1,4 +1,4 @@
-# _rtmp_: NGINX RTMP module
+# *rtmp*: NGINX RTMP module
 
 
 ## Installation

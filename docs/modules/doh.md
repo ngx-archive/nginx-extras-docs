@@ -1,4 +1,4 @@
-# _doh_: NGINX module for serving DNS-over-HTTPS (DOH) requests
+# *doh*: NGINX module for serving DNS-over-HTTPS (DOH) requests
 
 
 ## Installation

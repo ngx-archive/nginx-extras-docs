@@ -1,4 +1,4 @@
-# _small-light_: Dynamic image transformation module For NGINX
+# *small-light*: Dynamic image transformation module For NGINX
 
 
 ## Installation

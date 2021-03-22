@@ -1,4 +1,4 @@
-# _cache_: Http cache to redis, can server stale response, and using "lua-resty-lock" only allow one request to populate a new cache
+# *cache*: Http cache to redis, can server stale response, and using "lua-resty-lock" only allow one request to populate a new cache
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-cache
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-cache [v1.0.0](https://github.com/lloydzhou/lua-resty-cache/releases/tag/v1.0.0){target=_blank} 
 released on Aug 07 2015.

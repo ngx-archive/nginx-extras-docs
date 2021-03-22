@@ -1,4 +1,4 @@
-# _dynamic-limit-req_: NGINX module to dynamically lock IP and release it periodically
+# *dynamic-limit-req*: NGINX module to dynamically lock IP and release it periodically
 
 
 ## Installation

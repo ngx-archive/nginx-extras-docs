@@ -1,4 +1,4 @@
-# _qless-web_: Port of Qless' web interface to nginx-module-lua environment
+# *qless-web*: Port of Qless' web interface to nginx-module-lua environment
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-qless-web
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-qless-web [v0.5](https://github.com/hamishforbes/lua-resty-qless-web/releases/tag/v0.05){target=_blank} 
 released on Sep 20 2016.

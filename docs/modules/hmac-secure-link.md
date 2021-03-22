@@ -1,4 +1,4 @@
-# _hmac-secure-link_: Alternative NGINX HMAC Secure Link module with support for OpenSSL hashes
+# *hmac-secure-link*: Alternative NGINX HMAC Secure Link module with support for OpenSSL hashes
 
 
 ## Installation

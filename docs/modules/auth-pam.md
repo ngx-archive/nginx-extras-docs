@@ -1,4 +1,4 @@
-# _auth-pam_: PAM authentication dynamic module for NGINX
+# *auth-pam*: PAM authentication dynamic module for NGINX
 
 
 ## Installation

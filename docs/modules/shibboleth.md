@@ -1,4 +1,4 @@
-# _shibboleth_: Shibboleth Auth Request module for NGINX
+# *shibboleth*: Shibboleth Auth Request module for NGINX
 
 
 ## Installation

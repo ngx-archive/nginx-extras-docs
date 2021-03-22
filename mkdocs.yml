@@ -5,6 +5,9 @@ extra:
     link: https://twitter.com/GetPageSpeed
   - icon: fontawesome/brands/github
     link: https://github.com/GetPageSpeed
+google_analytics:
+- UA-51252096-1
+- auto
 markdown_extensions:
 - admonition
 - markdown_include.include
@@ -116,6 +119,3 @@ theme:
     accent: purple
     primary: teal
     scheme: default
-google_analytics:
-  - UA-51252096-1
-  - auto

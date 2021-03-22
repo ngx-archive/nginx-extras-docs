@@ -1,4 +1,4 @@
-# _accept-language_: NGINX Accept-Language module
+# *accept-language*: NGINX Accept-Language module
 
 
 ## Installation

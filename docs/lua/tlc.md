@@ -1,4 +1,4 @@
-# _tlc_: General two level cache (lrucache + shared dict)
+# *tlc*: General two level cache (lrucache + shared dict)
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-tlc
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-tlc [v0.2](https://github.com/hamishforbes/lua-resty-tlc/releases/tag/v0.02){target=_blank} 
 released on Oct 03 2016.

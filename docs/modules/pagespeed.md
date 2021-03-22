@@ -1,4 +1,4 @@
-# _pagespeed_: PageSpeed dynamic module for NGINX
+# *pagespeed*: PageSpeed dynamic module for NGINX
 
 ## Installation
 

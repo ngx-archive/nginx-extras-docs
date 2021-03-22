@@ -1,4 +1,4 @@
-# _tags_: A small DSL for building HTML documents
+# *tags*: A small DSL for building HTML documents
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-tags
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-tags [v1.0](https://github.com/bungle/lua-resty-tags/releases/tag/v1.0){target=_blank} 
 released on Jul 06 2016.

@@ -1,4 +1,4 @@
-# _ts_: NGINX MPEG-TS Live Module
+# *ts*: NGINX MPEG-TS Live Module
 
 
 ## Installation

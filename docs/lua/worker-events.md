@@ -1,4 +1,4 @@
-# _worker-events_: Cross Worker Events for NGINX in Pure Lua
+# *worker-events*: Cross Worker Events for NGINX in Pure Lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-worker-events
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-worker-events [v2.0.0](https://github.com/Kong/lua-resty-worker-events/releases/tag/2.0.0){target=_blank} 
 released on Sep 17 2020.

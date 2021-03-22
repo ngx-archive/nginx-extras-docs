@@ -1,4 +1,4 @@
-# _dns_: DNS resolver for nginx-module-lua
+# *dns*: DNS resolver for nginx-module-lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-dns
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-dns [v0.21](https://github.com/openresty/lua-resty-dns/releases/tag/v0.21){target=_blank} 
 released on Apr 19 2018.

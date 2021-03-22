@@ -1,4 +1,4 @@
-# _hmac_: HMAC functions for nginx-module-lua and LuaJIT
+# *hmac*: HMAC functions for nginx-module-lua and LuaJIT
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-hmac
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-hmac [v0.5](https://github.com/jkeys089/lua-resty-hmac/releases/tag/v0.05){target=_blank} 
 released on Sep 19 2020.

@@ -1,4 +1,4 @@
-# _openssl_: FFI-based OpenSSL binding for nginx-module-lua
+# *openssl*: FFI-based OpenSSL binding for nginx-module-lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-openssl
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-openssl [v0.7.1](https://github.com/fffonion/lua-resty-openssl/releases/tag/0.7.1){target=_blank} 
 released on Mar 17 2021.

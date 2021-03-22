@@ -1,4 +1,4 @@
-# _consul_: Library to interface with the consul HTTP API from nginx-module-lua
+# *consul*: Library to interface with the consul HTTP API from nginx-module-lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-consul
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-consul [v0.3.2](https://github.com/hamishforbes/lua-resty-consul/releases/tag/v0.3.2){target=_blank} 
 released on Feb 21 2019.

@@ -1,4 +1,4 @@
-# _captcha_: NGINX Captcha Module
+# *captcha*: NGINX Captcha Module
 
 
 ## Installation

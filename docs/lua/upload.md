@@ -1,4 +1,4 @@
-# _upload_: Streaming reader and parser for http file uploading based on nginx-module-lua cosocket
+# *upload*: Streaming reader and parser for http file uploading based on nginx-module-lua cosocket
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-upload
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-upload [v0.10](https://github.com/openresty/lua-resty-upload/releases/tag/v0.10){target=_blank} 
 released on Nov 04 2016.

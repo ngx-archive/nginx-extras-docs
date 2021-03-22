@@ -1,4 +1,4 @@
-# _echo_: nginx Echo module
+# *echo*: nginx Echo module
 
 
 ## Installation

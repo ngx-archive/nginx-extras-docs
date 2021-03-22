@@ -1,4 +1,4 @@
-# _checkups_: Manage NGINX upstreams in pure Lua
+# *checkups*: Manage NGINX upstreams in pure Lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-checkups
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-checkups [v0.1](https://github.com/upyun/lua-resty-checkups/releases/tag/v0.1){target=_blank} 
 released on Feb 01 2019.

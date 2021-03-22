@@ -1,4 +1,4 @@
-# _length-hiding_: NGINX Length Hiding Filter Module
+# *length-hiding*: NGINX Length Hiding Filter Module
 
 
 ## Installation

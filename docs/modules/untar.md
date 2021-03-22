@@ -1,4 +1,4 @@
-# _untar_: NGINX HTTP Untar Module
+# *untar*: NGINX HTTP Untar Module
 
 
 ## Installation

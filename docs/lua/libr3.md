@@ -1,4 +1,4 @@
-# _libr3_: High-performance path dispatching library base on libr3 for nginx-module-lua
+# *libr3*: High-performance path dispatching library base on libr3 for nginx-module-lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-libr3
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-libr3 [v1.2](https://github.com/iresty/lua-resty-libr3/releases/tag/v1.2){target=_blank} 
 released on Sep 30 2019.

@@ -1,4 +1,4 @@
-# _ini_: Ini parser for nginx-module-lua
+# *ini*: Ini parser for nginx-module-lua
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-ini
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-ini [v0.1](https://github.com/doujiang24/lua-resty-ini/releases/tag/v0.01){target=_blank} 
 released on May 31 2016.

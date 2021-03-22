@@ -1,4 +1,4 @@
-# _jwt_: NGINX JWT Module
+# *jwt*: NGINX JWT Module
 
 
 ## Installation

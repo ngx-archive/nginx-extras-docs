@@ -1,4 +1,4 @@
-# _sticky_: NGINX sticky cookie module
+# *sticky*: NGINX sticky cookie module
 
 
 ## Installation

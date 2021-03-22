@@ -1,4 +1,4 @@
-# _phantom-token_: Phantom Token NGINX Module
+# *phantom-token*: Phantom Token NGINX Module
 
 
 ## Installation

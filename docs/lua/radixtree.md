@@ -1,4 +1,4 @@
-# _radixtree_: Adaptive Radix Trees implemented in Lua / LuaJIT
+# *radixtree*: Adaptive Radix Trees implemented in Lua / LuaJIT
 
 
 ## Installation
@@ -11,6 +11,7 @@ yum -y install lua-resty-radixtree
 ```
 
 
+To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
 This document describes lua-resty-radixtree [v2.7.0](https://github.com/api7/lua-resty-radixtree/releases/tag/v2.7.0){target=_blank} 
 released on Mar 10 2021.

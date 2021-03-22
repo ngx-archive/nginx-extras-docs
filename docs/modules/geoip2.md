@@ -1,4 +1,4 @@
-# _geoip2_: NGINX GeoIP2 module
+# *geoip2*: NGINX GeoIP2 module
 
 
 ## Installation

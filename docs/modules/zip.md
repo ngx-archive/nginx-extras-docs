@@ -1,4 +1,4 @@
-# _zip_: Streaming ZIP archiver for NGINX
+# *zip*: Streaming ZIP archiver for NGINX
 
 
 ## Installation

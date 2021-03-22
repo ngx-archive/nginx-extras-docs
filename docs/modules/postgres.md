@@ -1,4 +1,4 @@
-# _postgres_: PostgreSQL module for NGINX
+# *postgres*: PostgreSQL module for NGINX
 
 
 ## Installation

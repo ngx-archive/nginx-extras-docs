@@ -1,4 +1,4 @@
-# _f4fhds_: NGINX module for Adobe f4f format
+# *f4fhds*: NGINX module for Adobe f4f format
 
 
 ## Installation

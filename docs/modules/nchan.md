@@ -1,4 +1,4 @@
-# _nchan_: Scalable, flexible pub/sub server for the modern web
+# *nchan*: Scalable, flexible pub/sub server for the modern web
 
 
 ## Installation
