@@ -21,7 +21,6 @@ This document describes nginx-module-cookie-limit [v1.1](https://github.com/limi
 released on Feb 25 2020.
     
 <hr />
-﻿# ngx_cookie_limit_req_module
  
 ## Introduction
 

@@ -4,6 +4,7 @@
 | [nginx-module-graphite](modules/graphite.md)                     | An nginx module for collecting stats into Graphite                            |
 | [nginx-module-memc](modules/memc.md)                             | Extended version of the standard NGINX memcached module                       |
 | [nginx-module-captcha](modules/captcha.md)                       | NGINX Captcha Module                                                          |
+| [nginx-module-js-challenge](modules/js-challenge.md)             | NGINX Javascript challenge module                                             |
 | [nginx-module-echo](modules/echo.md)                             | nginx Echo module                                                             |
 | [nginx-module-geoip2](modules/geoip2.md)                         | NGINX GeoIP2 module                                                           |
 | [nginx-module-vts](modules/vts.md)                               | NGINX virtual host traffic status module                                      |

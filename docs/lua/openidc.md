@@ -1,4 +1,4 @@
-# _openidc_: OpenID Connect Relying Party and OAuth 2.0 Resource Server implementation in Lua for NGINX / nginx-module-lua
+# *openidc*: OpenID Connect Relying Party and OAuth 2.0 Resource Server implementation in Lua for NGINX / nginx-module-lua
 
 
 ## Installation

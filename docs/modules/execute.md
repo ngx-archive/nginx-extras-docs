@@ -21,7 +21,6 @@ This document describes nginx-module-execute [v1.6.1](https://github.com/limithi
 released on May 21 2018.
     
 <hr />
-﻿# NginxExecute
 
 ## Introduction
 

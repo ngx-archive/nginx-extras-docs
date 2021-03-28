@@ -52,6 +52,7 @@ nav:
   - immutable: modules/immutable.md
   - ipscrub: modules/ipscrub.md
   - jpeg: modules/jpeg.md
+  - js-challenge: modules/js-challenge.md
   - jwt: modules/jwt.md
   - length-hiding: modules/length-hiding.md
   - lua: modules/lua.md

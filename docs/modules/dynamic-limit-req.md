@@ -21,7 +21,6 @@ This document describes nginx-module-dynamic-limit-req [v1.9.3](https://github.c
 released on Jan 29 2021.
     
 <hr />
-﻿# ngx_dynamic_limit_req_module
  
 ## Introduction
 

@@ -22,7 +22,10 @@ print(lastversion.__file__)
 def enrich_with_yml_info(md, module_config, release):
     handle = module_config['handle']
     repo = module_config['repo']
-    new_title = f"# *{handle}*: {module_config['summary']}"
+    if str(release['version']) == "0":
+        new_title = f"# *[BETA!] {handle}*: {module_config['summary']}"
+    else:
+        new_title = f"# *{handle}*: {module_config['summary']}"
     upstream_name = module_config['repo'].split('/')[-1]
     sonames = module_config['soname']
     lines = md.splitlines()
@@ -82,6 +85,10 @@ Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
 This document describes nginx-module-{handle} [v{release['version']}](https://github.com/{repo}/releases/tag/{release['tag_name']}){{target=_blank}} 
 released on {release['tag_date'].strftime("%b %d %Y")}.
     """
+    if str(release['version']) == "0":
+        intro += "\nProduction stability is *not guaranteed*."
+    if 'release_ticket' in module_config:
+        intro += f"\nA request for stable release exists. Vote up [here]({module_config['release_ticket']})."
     intro += "\n<hr />\n"
 
     out = [new_title] + intro.splitlines()
@@ -193,7 +200,9 @@ def remove_md_sections(md, titles):
 
     for line in md.splitlines():
         # remove that stuff:
-        line = line.lstrip('\u200c')
+        # https://stackoverflow.com/questions/46154561/remove-zero-width-space-unicode-character-from-python-string/55400921
+        line = line.replace('\u200c', '')
+        line = line.replace('\ufeff', '')
         if not line.startswith('#'):
             # if not in target section, proceed adding stuff
             if not section_level:
@@ -300,7 +309,7 @@ def process_modules_glob(g):
             all_modules.append(handle)
             # The FullLoader parameter handles the conversion from YAML
             # scalar values to Python the dictionary format
-            module_config = yaml.load(f)
+            module_config = yaml.load(f, Loader=yaml.FullLoader)
             module_config['handle'] = handle
             print(f"Fetching release for {module_config['repo']}")
             release = lastversion.latest(module_config['repo'], output_format='dict')
@@ -313,6 +322,7 @@ def process_modules_glob(g):
                 'install',
                 'installing',
                 'build',
+                'build from source',
                 'how to install',
                 'how to build',
                 'building as a dynamic module',
@@ -359,7 +369,7 @@ def process_lua_glob(g):
             all_libs.append(handle)
             # The FullLoader parameter handles the conversion from YAML
             # scalar values to Python the dictionary format
-            lib_config = yaml.load(f)
+            lib_config = yaml.load(f, Loader=yaml.FullLoader)
             lib_config['handle'] = handle
             print(f"Fetching release for {lib_config['repo']}")
             release = lastversion.latest(lib_config['repo'], output_format='dict')
@@ -437,7 +447,7 @@ for l in all_libs:
 
 # write nav:
 with open("mkdocs.yml") as mkdocs_f:
-    mkdocs_config = yaml.load(mkdocs_f)
+    mkdocs_config = yaml.load(mkdocs_f, Loader=yaml.FullLoader)
     nav = [
         {'Overview': 'index.md'},
         {'Modules': final_all_modules},

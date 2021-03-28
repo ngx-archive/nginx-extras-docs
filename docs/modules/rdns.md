@@ -1,4 +1,4 @@
-# *rdns*: NGINX HTTP rDNS module
+# *[BETA!] rdns*: NGINX HTTP rDNS module
 
 
 ## Installation
@@ -20,6 +20,7 @@ load_module modules/ngx_http_rdns_module.so;
 This document describes nginx-module-rdns [v0](https://github.com/dvershinin/nginx-http-rdns/releases/tag/v0){target=_blank} 
 released on Jun 08 2020.
     
+Production stability is *not guaranteed*.
 <hr />
 
 ## Summary

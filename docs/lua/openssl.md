@@ -13,8 +13,8 @@ yum -y install lua-resty-openssl
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
-This document describes lua-resty-openssl [v0.7.1](https://github.com/fffonion/lua-resty-openssl/releases/tag/0.7.1){target=_blank} 
-released on Mar 17 2021.
+This document describes lua-resty-openssl [v0.7.2](https://github.com/fffonion/lua-resty-openssl/releases/tag/0.7.2){target=_blank} 
+released on Mar 24 2021.
     
 <hr />
 
@@ -2067,9 +2067,6 @@ Adds a name to altname stack, first argument is case-insensitive and can be one 
     URI
     DNSName
     DNS
-    IPAddress
-    IP
-    DirName
 
 This function can be called multiple times in a chained fashion.
 
@@ -2103,6 +2100,13 @@ with `-DLUAJIT_ENABLE_LUA52COMPAT` flag; otherwise use `all`, `each`, `index` an
 instead.
 
 See also [functions for stack-like objects](#functions-for-stack-like-objects).
+
+Only the following types are decoded, other types are decoded as `"TYPE:<unsupported>"`:
+
+    RFC822Name / Email
+    URI
+    DNS
+    DirName
 
 ## resty.openssl.x509.extension
 
@@ -2588,7 +2592,7 @@ Module to interact with SSL_CTX context.
 
 Wraps the `SSL_CTX*` instance from current downstream request.
 
-### ssl_ctx.from_request
+### ssl_ctx.from_socket
 
 **syntax**: *sess, err = ssl_ctx.from_socket(sock)*
 
