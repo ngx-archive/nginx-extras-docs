@@ -21,6 +21,8 @@ markdown_extensions:
     check_paths: true
 nav:
 - Overview: index.md
+- NGINX-MOD: nginx-mod.md
+- Tengine: tengine.md
 - Modules:
   - accept-language: modules/accept-language.md
   - ajp: modules/ajp.md
