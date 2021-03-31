@@ -21,7 +21,7 @@ NGINX Extras provide you with production-grade, SELinux compatible packages for 
 
     ```bash
     sudo dnf -y install https://extras.getpagespeed.com/release-latest.rpm
-    sudo dnf install dnf-plugins-core
+    sudo dnf -y install dnf-plugins-core
     sudo dnf config-manager --enable getpagespeed-extras-tengine
     sudo dnf -y install tengine
     ```
