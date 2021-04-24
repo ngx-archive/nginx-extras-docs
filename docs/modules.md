@@ -51,6 +51,7 @@
 | [nginx-module-google](modules/google.md)                         | NGINX Module for Google Mirror creation                                       |
 | [nginx-module-rdns](modules/rdns.md)                             | NGINX HTTP rDNS module                                                        |
 | [nginx-module-f4fhds](modules/f4fhds.md)                         | NGINX module for Adobe f4f format                                             |
+| [nginx-module-combined-upstreams](modules/combined-upstreams.md) | NGINX Combined Upstreams module                                               |
 | [nginx-module-dynamic-etag](modules/dynamic-etag.md)             | NGINX module for adding ETag to dynamic content                               |
 | [nginx-module-jpeg](modules/jpeg.md)                             | NGINX JPEG filter module                                                      |
 | [nginx-module-upsync](modules/upsync.md)                         | NGINX module for syncing upstreams from consul or etcd                        |
@@ -61,6 +62,7 @@
 | [nginx-module-auth-ldap](modules/auth-ldap.md)                   | LDAP Authentication module for nginx                                          |
 | [nginx-module-coolkit](modules/coolkit.md)                       | NGINX CoolKit Module                                                          |
 | [nginx-module-flv](modules/flv.md)                               | Media streaming server based on nginx-module-rtmp                             |
+| [nginx-module-pta](modules/pta.md)                               | Period of Time Authentication module for NGINX                                |
 | [nginx-module-auth-pam](modules/auth-pam.md)                     | PAM authentication dynamic module for NGINX                                   |
 | [nginx-module-fancyindex](modules/fancyindex.md)                 | NGINX Fancy Index module                                                      |
 | [nginx-module-security-headers](modules/security-headers.md)     | NGINX module for sending security headers                                     |
@@ -68,4 +70,5 @@
 | [nginx-module-nbr](modules/nbr.md)                               | NGINX Brotli dynamic modules                                                  |
 | [nginx-module-pagespeed](modules/pagespeed.md)                   | PageSpeed dynamic module for NGINX                                            |
 | [nginx-module-security](modules/security.md)                     | ModSecurity v3 Nginx Connector                                                |
+| [nginx-module-stream-lua](modules/stream-lua.md)                 | Lua scripting support for NGINX streams                                       |
 | [nginx-module-lua](modules/lua.md)                               | Lua scripting support for NGINX                                               |

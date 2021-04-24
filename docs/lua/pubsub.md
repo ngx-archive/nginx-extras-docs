@@ -13,15 +13,15 @@ yum -y install lua-resty-pubsub
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
-This document describes lua-resty-pubsub [v1.3](https://github.com/wingify/lua-resty-pubsub/releases/tag/v1.3){target=_blank} 
-released on Oct 15 2020.
+This document describes lua-resty-pubsub [v1.4](https://github.com/wingify/lua-resty-pubsub/releases/tag/v1.4){target=_blank} 
+released on Apr 17 2021.
     
 <hr />
 
 Lua Pubsub client driver for the `ngx_lua` based on the cosocket API.
 
 [![lua module](https://img.shields.io/badge/lua-module-blue?style=for-the-badge&logo=lua)](https://luarocks.org/modules/vwointegration/lua-resty-pubsub)
-[![lua module](https://img.shields.io/badge/lua%20rocks-1.3-orange?style=for-the-badge&logo=lua)](https://luarocks.org/modules/vwointegration/lua-resty-pubsub)
+[![lua module](https://img.shields.io/badge/lua%20rocks-1.4-orange?style=for-the-badge&logo=lua)](https://luarocks.org/modules/vwointegration/lua-resty-pubsub)
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge&logo=)](https://opensource.org/licenses/MIT)
 
 ## Description

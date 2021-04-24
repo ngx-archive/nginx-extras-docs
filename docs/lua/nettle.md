@@ -13,8 +13,8 @@ yum -y install lua-resty-nettle
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
-This document describes lua-resty-nettle [v1.5](https://github.com/bungle/lua-resty-nettle/releases/tag/v1.5){target=_blank} 
-released on Apr 01 2020.
+This document describes lua-resty-nettle [v2.1](https://github.com/bungle/lua-resty-nettle/releases/tag/v2.1){target=_blank} 
+released on Apr 07 2021.
     
 <hr />
 
@@ -1381,7 +1381,7 @@ The changes of every release of this module is recorded in [Changes.md](https://
 `lua-resty-nettle` uses two clause BSD license.
 
 ```
-Copyright (c) 2014 – 2020, Aapo Talvensaari
+Copyright (c) 2014 – 2021, Aapo Talvensaari
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,

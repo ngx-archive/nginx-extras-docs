@@ -17,8 +17,8 @@ load_module modules/ngx_nchan_module.so;
 ```
 
 
-This document describes nginx-module-nchan [v1.2.7](https://github.com/slact/nchan/releases/tag/v1.2.7){target=_blank} 
-released on Mar 17 2020.
+This document describes nginx-module-nchan [v1.2.8](https://github.com/slact/nchan/releases/tag/v1.2.8){target=_blank} 
+released on Apr 13 2021.
     
 <hr />
 <img class="logo" alt="NCHAN" src="https://nchan.io/github-logo.png" />
@@ -45,7 +45,7 @@ In a web browser, you can use Websocket or EventSource natively, or the [NchanSu
 
 ## Status and History
 
-The latest Nchan release is 1.2.7 (March 17, 2020) ([changelog](https://nchan.io/changelog)).
+The latest Nchan release is 1.2.8 (April 12, 2021) ([changelog](https://nchan.io/changelog)).
 
 The first iteration of Nchan was written in 2009-2010 as the [Nginx HTTP Push Module](https://pushmodule.slact.net), and was vastly refactored into its present state in 2014-2016.
 
@@ -1003,16 +1003,25 @@ Nchan makes several variables usabled in the config file:
 - `$nchan_subscriber_type`  
   For subscriber locations, this variable is set to the subscriber type (websocket, longpoll, etc.).
 
+- `$nchan_channel_subscriber_last_seen`  
+  For publisher locations, this variable is set to the timestamp for the last connected subscriber.
+  
+- `$nchan_channel_subscriber_count`  
+  For publisher locations, this variable is set to the number of subscribers in the published channel.
+  
+- `$nchan_channel_message_count`  
+  For publisher locations, this variable is set to the number of messages buffered in the published channel.
+  
 - `$nchan_publisher_type`  
   For publisher locations, this variable is set to the subscriber type (http or websocket).
   
-- `$nchan_prev_message_id`, `$nchan_message_id`
+- `$nchan_prev_message_id`, `$nchan_message_id`  
   The current and previous (if applicable) message id for publisher request or subscriber response.
 
-- `$nchan_channel_event`
+- `$nchan_channel_event`  
   For channel events, this is the event name. Useful when configuring `nchan_channel_event_string`.
 
-- `$nchan_version`
+- `$nchan_version`  
   Current Nchan version. Available since 1.1.5.
   
 Additionally, `nchan_stub_status` data is also exposed as variables. These are available only when `nchan_stub_status` is enabled on at least one location:
@@ -1181,6 +1190,17 @@ Additionally, `nchan_stub_status` data is also exposed as variables. These are a
   default: `\n`  
   context: server, location, if  
   > Message separator string for the http-raw-stream subscriber. Automatically terminated with a newline character.    
+
+- **nchan_subscriber_info**  
+  arguments: 0  
+  context: location  
+  > A subscriber location for debugging the state of subscribers on a given channel. The subscribers of the channel specified by `nchan_channel_id` evaluate `nchan_subscriber_info_string` and send it back to the requested on this location. This is useful to see where subscribers are in an Nchan cluster, as well as debugging subscriber connection issues.    
+
+- **nchan_subscriber_info_string**  
+  arguments: 1  
+  default: `$nchan_subscriber_type $remote_addr:$remote_port $http_user_agent $server_name $request_uri $pid`  
+  context: server, location  
+  > this string is evaluated by each subscriber on a given channel and sent to the requester of a `nchan_subscriber_info` location    
 
 - **nchan_subscriber_last_message_id**  
   arguments: 1 - 5  

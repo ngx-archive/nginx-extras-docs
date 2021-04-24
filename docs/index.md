@@ -10,6 +10,8 @@ An update is just a `yum update` that takes seconds and no downtime whatsoever.
 We currently support all major RPM-based distros, including CentOS/RHEL version 6 through 8 inclusive,
 as well as Amazon Linux 2.
 
+All RHEL derivatives like Oracle Linux, AlmaLinux and Rocky Linux are supported as well.
+
 Due to the extensive nature of our collection, it's easy to get lost in all the goodies and new NGINX directives.
 
 This documentation mini-site brings you each module's installation instructions and added directives

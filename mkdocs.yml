@@ -21,8 +21,6 @@ markdown_extensions:
     check_paths: true
 nav:
 - Overview: index.md
-- NGINX-MOD: nginx-mod.md
-- Tengine: tengine.md
 - Modules:
   - accept-language: modules/accept-language.md
   - ajp: modules/ajp.md
@@ -32,6 +30,7 @@ nav:
   - bot-verifier: modules/bot-verifier.md
   - cache-purge: modules/cache-purge.md
   - captcha: modules/captcha.md
+  - combined-upstreams: modules/combined-upstreams.md
   - concat: modules/concat.md
   - cookie-flag: modules/cookie-flag.md
   - cookie-limit: modules/cookie-limit.md
@@ -67,6 +66,7 @@ nav:
   - passenger: modules/passenger.md
   - phantom-token: modules/phantom-token.md
   - postgres: modules/postgres.md
+  - pta: modules/pta.md
   - push-stream: modules/push-stream.md
   - rdns: modules/rdns.md
   - redis2: modules/redis2.md
@@ -80,6 +80,7 @@ nav:
   - srcache: modules/srcache.md
   - statsd: modules/statsd.md
   - sticky: modules/sticky.md
+  - stream-lua: modules/stream-lua.md
   - stream-upsync: modules/stream-upsync.md
   - substitutions: modules/substitutions.md
   - sysguard: modules/sysguard.md
