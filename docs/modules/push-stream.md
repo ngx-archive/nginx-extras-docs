@@ -41,8 +41,7 @@ Always take a look at [CHANGELOG.textile](changelog) to see what’s new.
 ## Contribute
 
 After you try this module and like it, feel free to [give something
-back](donate), and help in the maintenance of the project
-;)  
+back](donate), and help in the maintenance of the project ;)  
 ![](https://www.paypalobjects.com/WEBSCR-640-20110429-1/en_US/i/btn/btn_donate_LG.gif):donate
 
 ## Status
@@ -162,8 +161,7 @@ which is framework independent. Try and help improve it. ;)
 
 (1) Defining locations, (2) Main configuration, (3) Subscribers
 configuration, (4) Publishers configuration, (5) Channels Statistics
-configuration, (6) WebSocket
-configuration
+configuration, (6) WebSocket configuration
 
 |                                                                                                          |     |     |     |     |     |     |
 | -------------------------------------------------------------------------------------------------------- | --- | --- | --- | --- | --- | --- |
@@ -255,8 +253,7 @@ tests, click [here](tests) for more details.
 
 ## Discussion
 
-Nginx Push Stream Module [Discussion
-Group](discussion)
+Nginx Push Stream Module [Discussion Group](discussion)
 
 ## Contributors
 

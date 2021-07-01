@@ -13,8 +13,8 @@ yum -y install lua-resty-lrucache
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
-This document describes lua-resty-lrucache [v0.10](https://github.com/openresty/lua-resty-lrucache/releases/tag/v0.10){target=_blank} 
-released on Jul 01 2020.
+This document describes lua-resty-lrucache [v0.11](https://github.com/openresty/lua-resty-lrucache/releases/tag/v0.11){target=_blank} 
+released on Apr 30 2021.
     
 <hr />
 

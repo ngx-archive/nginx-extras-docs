@@ -1,4 +1,4 @@
-# *nbr*: NGINX Brotli dynamic modules
+# *brotli*: NGINX Brotli dynamic modules
 
 
 ## Installation
@@ -7,7 +7,7 @@
 
 ```bash
 yum -y install https://extras.getpagespeed.com/release-latest.rpm
-yum -y install nginx-module-nbr
+yum -y install nginx-module-brotli
 ```
 
 Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
@@ -20,8 +20,8 @@ load_module modules/ngx_http_brotli_static_module.so;
 ```
 
 
-This document describes nginx-module-nbr [v0.1.3](https://github.com/GetPageSpeed/ngx_brotli/releases/tag/v0.1.3){target=_blank} 
-released on Jun 20 2020.
+This document describes nginx-module-brotli [v0.1.4](https://github.com/GetPageSpeed/ngx_brotli/releases/tag/v0.1.4){target=_blank} 
+released on Jul 01 2021.
     
 <hr />
 
@@ -161,4 +161,4 @@ See [Contributing](CONTRIBUTING.md).
 ## GitHub
 
 You may find additional configuration tips and documentation for this module in the [GitHub repository for 
-nginx-module-nbr](https://github.com/GetPageSpeed/ngx_brotli){target=_blank}.
+nginx-module-brotli](https://github.com/GetPageSpeed/ngx_brotli){target=_blank}.

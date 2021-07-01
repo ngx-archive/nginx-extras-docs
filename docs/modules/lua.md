@@ -17,8 +17,8 @@ load_module modules/ngx_http_lua_module.so;
 ```
 
 
-This document describes nginx-module-lua [v0.10.19](https://github.com/openresty/lua-nginx-module/releases/tag/v0.10.19){target=_blank} 
-released on Nov 03 2020.
+This document describes nginx-module-lua [v0.10.20](https://github.com/openresty/lua-nginx-module/releases/tag/v0.10.20){target=_blank} 
+released on May 07 2021.
     
 <hr />
 <!---
@@ -38,6 +38,31 @@ then you are essentially using OpenResty.
 ## Status
 
 Production ready.
+
+## Videos
+
+* YouTube video "[Hello World HTTP Example with OpenResty/Lua](https://youtu.be/eSfYLvVQMxw)"
+
+    [![Hello World HTTP Example with OpenResty/Lua](https://img.youtube.com/vi/eSfYLvVQMxw/0.jpg)](https://youtu.be/eSfYLvVQMxw)
+
+* YouTube video "[Write Your Own Lua Modules in OpenResty/Nginx Applications](https://youtu.be/vfYxOMl5LVY)"
+
+    [![Write Your Own Lua Modules in OpenResty/Nginx Applications](https://img.youtube.com/vi/vfYxOMl5LVY/0.jpg)](https://youtu.be/vfYxOMl5LVY)
+
+* YouTube video "[OpenResty's resty Command-Line Utility Demo](https://youtu.be/L1c7aw4mSOo)"
+
+    [![OpenResty's resty Command-Line Utility Demo](https://img.youtube.com/vi/L1c7aw4mSOo/0.jpg)](https://youtu.be/L1c7aw4mSOo)
+
+* YouTube video "[Measure Execution Time of Lua Code Correctly in OpenResty](https://youtu.be/VkRYW_qLoME)"
+
+    [![Measure Execution Time of Lua Code Correctly in OpenResty](https://img.youtube.com/vi/VkRYW_qLoME/0.jpg)](https://youtu.be/VkRYW_qLoME)
+
+* YouTube video "[Precompile Lua Modules into LuaJIT Bytecode to Speedup OpenResty Startup](https://youtu.be/EP7c0BM2yNo)"
+
+    [![Precompile Lua Modules into LuaJIT Bytecode to Speedup OpenResty Startup](https://img.youtube.com/vi/EP7c0BM2yNo/0.jpg)](https://youtu.be/EP7c0BM2yNo)
+
+You are welcome to subscribe to our [official YouTube channel, OpenResty](https://www.youtube.com/channel/UCXVmwF-UCScv2ftsGoMqxhw).
+
 
 ## Synopsis
 ```nginx
@@ -290,6 +315,10 @@ Please submit bug reports, wishlists, or patches by
 
 
 ## LuaJIT bytecode support
+
+Watch YouTube video "[Measure Execution Time of Lua Code Correctly in OpenResty](https://youtu.be/VkRYW_qLoME)"
+
+[![Precompile Lua Modules into LuaJIT Bytecode to Speedup OpenResty Startup](https://img.youtube.com/vi/EP7c0BM2yNo/0.jpg)](https://youtu.be/EP7c0BM2yNo)
 
 As from the `v0.5.0rc32` release, all `*_by_lua_file` configure directives (such as [content_by_lua_file](#content_by_lua_file)) support loading LuaJIT 2.0/2.1 raw bytecode files directly:
 
@@ -3503,7 +3532,7 @@ Then `GET /main` will give the output
 
 Here, modification of the `ngx.ctx.blah` entry in the subrequest does not affect the one in the parent request. This is because they have two separate versions of `ngx.ctx.blah`.
 
-Internal redirection will destroy the original request `ngx.ctx` data (if any) and the new request will have an empty `ngx.ctx` table. For instance,
+Internal redirects (triggered by nginx configuration directives like `error_page`, `try_files`, `index` and etc) will destroy the original request `ngx.ctx` data (if any) and the new request will have an empty `ngx.ctx` table. For instance,
 
 ```nginx
 
@@ -5414,6 +5443,23 @@ gives the output
 
     b r56 7
 
+
+Invalid escaping sequences are handled in a conventional way: `%`s are left unchanged. Also, characters that should not appear in escaped string are simply left unchanged.
+
+For example,
+
+```lua
+
+ ngx.say(ngx.unescape_uri("try %search%%20%again%"))
+```
+
+gives the output
+
+
+    try %search% %again%
+
+
+(Note that `%20` following `%` got unescaped, even it can be considered a part of invalid sequence.)
 
 [Back to TOC](#nginx-api-for-lua)
 
@@ -8073,7 +8119,14 @@ user "light threads" ([ngx.thread.*](#ngxthreadspawn)), [ngx.exit](#ngxexit), [n
 (like [ngx.say](#ngxsay), [ngx.print](#ngxprint), and [ngx.flush](#ngxflush)) are explicitly disabled in
 this context.
 
+You must notice that each timer will be based on a fake request (this fake request is also based on a fake connection). Because Nginx's memory release is based on the connection closure, if you run a lot of APIs that apply for memory resources in a timer, such as [tcpsock:connect](#tcpsockconnect), will cause the accumulation of memory resources. So it is recommended to create a new timer after running several times to release memory resources.
+
 You can pass most of the standard Lua values (nils, booleans, numbers, strings, tables, closures, file handles, and etc) into the timer callback, either explicitly as user arguments or implicitly as upvalues for the callback closure. There are several exceptions, however: you *cannot* pass any thread objects returned by [coroutine.create](#coroutinecreate) and [ngx.thread.spawn](#ngxthreadspawn) or any cosocket objects returned by [ngx.socket.tcp](#ngxsockettcp), [ngx.socket.udp](#ngxsocketudp), and [ngx.req.socket](#ngxreqsocket) because these objects' lifetime is bound to the request context creating them while the timer callback is detached from the creating request's context (by design) and runs in its own (fake) request context. If you try to share the thread or cosocket objects across the boundary of the creating request, then you will get the "no co ctx found" error (for threads) or "bad request" (for cosockets). It is fine, however, to create all these objects inside your timer callback.
+
+Please note that the timer Lua handler has its own copy of the `ngx.ctx` magic
+table. It won't share the same `ngx.ctx` with the Lua handler creating the timer.
+If you need to pass data from the timer creator to the timer handler, please
+use the extra parameters of `ngx.timer.at()`.
 
 This API was first introduced in the `v0.8.0` release.
 

@@ -13,8 +13,8 @@ yum -y install lua-resty-dns
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
-This document describes lua-resty-dns [v0.21](https://github.com/openresty/lua-resty-dns/releases/tag/v0.21){target=_blank} 
-released on Apr 19 2018.
+This document describes lua-resty-dns [v0.22](https://github.com/openresty/lua-resty-dns/releases/tag/v0.22){target=_blank} 
+released on Apr 30 2021.
     
 <hr />
 
@@ -52,6 +52,7 @@ server {
                 nameservers = {"8.8.8.8", {"8.8.4.4", 53} },
                 retrans = 5,  -- 5 retransmissions on receive timeout
                 timeout = 2000,  -- 2 sec
+                no_random = true, -- always start with first nameserver
             }
 
             if not r then
@@ -103,6 +104,9 @@ It accepts a `opts` table argument. The following options are supported:
 * `no_recurse`
 
 	a boolean flag controls whether to disable the "recursion desired" (RD) flag in the UDP request. Defaults to `false`.
+* `no_random`
+
+	a boolean flag controls whether to randomly pick the nameserver to query first, if `true` will always start with the first nameserver listed. Defaults to `false`.
 
 ## query
 `syntax: answers, err, tries? = r:query(name, options?, tries?)`
@@ -367,7 +371,7 @@ Yichun "agentzh" Zhang (章亦春) <agentzh@gmail.com>, OpenResty Inc.
 
 This module is licensed under the BSD license.
 
-Copyright (C) 2012-2018, by Yichun "agentzh" Zhang (章亦春) <agentzh@gmail.com>, OpenResty Inc.
+Copyright (C) 2012-2019, by Yichun "agentzh" Zhang (章亦春) <agentzh@gmail.com>, OpenResty Inc.
 
 All rights reserved.
 

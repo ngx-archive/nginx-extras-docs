@@ -13,8 +13,8 @@ yum -y install lua-resty-signal
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
-This document describes lua-resty-signal [v0.2](https://github.com/openresty/lua-resty-signal/releases/tag/v0.02){target=_blank} 
-released on Feb 03 2019.
+This document describes lua-resty-signal [v0.3](https://github.com/openresty/lua-resty-signal/releases/tag/v0.03){target=_blank} 
+released on May 07 2021.
     
 <hr />
 
@@ -62,7 +62,7 @@ signals is desired.
 Maps the signal name specified to the system-specific signal number. Returns
 `nil` if the signal name is not known.
 
-All the POSIX signal names are supported:
+All the POSIX and BSD signal names are supported:
 
 ```
 HUP
@@ -93,6 +93,10 @@ VTALRM
 PROF
 WINCH
 IO
+PWR
+EMT
+SYS
+INFO
 ```
 
 The special signal name `NONE` is also supported, which is mapped to zero (0).

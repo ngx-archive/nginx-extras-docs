@@ -276,8 +276,8 @@ using fancyindex\_header.
 
 </div>
 
-fancyindex\_show\_dotfiles ~~~~~~~~~~~~~~~~~~~~ :Syntax:
-*fancyindex\_show\_dotfiles* \[*on* | *off*\] :Default:
+fancyindex\_show\_dotfiles \~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~
+:Syntax: *fancyindex\_show\_dotfiles* \[*on* | *off*\] :Default:
 fancyindex\_show\_dotfiles off :Context: http, server, location
 :Description: Whether to list files that are proceeded with a dot.
 Normal convention is to hide these.
@@ -312,7 +312,8 @@ Normal convention is to hide these.
   - Description  
     When enabled, generated listings will not contain symbolic links.
 
-fancyindex\_hide\_parent\_dir ~~~~~~~~~~~~~~~~~~~~~~~~ :Syntax:
+fancyindex\_hide\_parent\_dir
+\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~ :Syntax:
 *fancyindex\_hide\_parent\_dir* \[*on* | *off*\] :Default:
 fancyindex\_hide\_parent\_dir off :Context: http, server, location
 :Description: When enabled, it will not show parent directory.

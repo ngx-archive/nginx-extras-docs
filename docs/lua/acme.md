@@ -13,8 +13,8 @@ yum -y install lua-resty-acme
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
-This document describes lua-resty-acme [v0.6.0](https://github.com/fffonion/lua-resty-acme/releases/tag/0.6.0){target=_blank} 
-released on Feb 19 2021.
+This document describes lua-resty-acme [v0.7.0](https://github.com/fffonion/lua-resty-acme/releases/tag/0.7.0){target=_blank} 
+released on Jun 25 2021.
     
 <hr />
 
@@ -150,7 +150,7 @@ domain_whitelist = { "domain1.com", "domain2.com", "domain3.com" },
 To match a pattern in your domain name, for example all subdomains under `example.com`, use:
 
 ```lua
-domain_whitelist_callback = function(domain)
+domain_whitelist_callback = function(domain, is_new_cert_needed)
     return ngx.re.match(domain, [[\.example\.com$]], "jo")
 end
 ```
@@ -160,7 +160,7 @@ It's possible to use cosocket API here. Do note that this will increase the SSL 
 latency.
 
 ```lua
-domain_whitelist_callback = function(domain)
+domain_whitelist_callback = function(domain, is_new_cert_needed)
     -- send HTTP request
     local http = require("resty.http")
     local res, err = httpc:request_uri("http://example.com")
@@ -171,6 +171,8 @@ domain_whitelist_callback = function(domain)
 end}),
 ```
 
+`domain_whitelist_callback` function is provided with a second argument,
+which indicates whether the certificate is about to be served on incoming HTTP request (false) or new certificate is about to be requested (true). This allows to use cached values on hot path (serving requests) while fetching fresh data from storage for new certificates. One may also implement different logic, e.g. do extra checks before requesting new cert.
 
 ## tls-alpn-01 challenge
 
@@ -302,7 +304,7 @@ All normal https traffic listens on `unix:/tmp/nginx-default.sock`.
 
 ```
                                                 [stream server unix:/tmp/nginx-tls-alpn.sock ssl]
-                                            Y / 
+                                            Y /
 [stream server 443] --- ALPN is acme-tls ?
                                             N \
                                                 [http server unix:/tmp/nginx-default.sock ssl]
@@ -370,7 +372,9 @@ where entropy is low.
 
 See also [Storage Adapters](#storage-adapters) below.
 
-To use a CA provider other than Let's Encrypt, pass `api_uri` in a table as second parameter:
+Pass config table directly to ACME client as second parameter. The following example
+demonstrates how to use a CA provider other than Let's Encrypt and also set
+the preferred chain.
 
 ```lua
 resty.acme.autossl.init({
@@ -378,6 +382,7 @@ resty.acme.autossl.init({
     account_email = "example@example.com",
   }, {
     api_uri = "https://acme.otherca.com/directory",
+    preferred_chain = "OtherCA PKI Root CA",
   }
 )
 ```
@@ -416,12 +421,16 @@ default_config = {
   eab_hmac_key = nil,
   -- external account registering handler
   eab_handler = nil,
+  -- storage for challenge
+  storage_adapter = "shm",
   -- the storage config passed to storage adapter
   storage_config = {
     shm_name = "acme"
   },
   -- the challenge types enabled, selection of `http-01` and `tls-alpn-01`
-  enabled_challenge_handlers = {"http-01"}
+  enabled_challenge_handlers = {"http-01"},
+    -- select preferred root CA issuer's Common Name if appliable
+  preferred_chain = nil,
 }
 ```
 
@@ -450,6 +459,11 @@ The following CA provider's EAB handler is supported by lua-resty-acme and user 
 need to implement their own `eab_handler`:
 
 - [ZeroSSL](https://zerossl.com/)
+
+`preferred_chain` is used to select a chain with matching Common Name in its root CA. For example,
+user can use use `"ISRG Root X1"` to force use the new default chain in Let's Encrypt. When no
+value is configured or the configured name is not found in any chain, the default chain will be
+used.
 
 See also [Storage Adapters](#storage-adapters) below.
 
@@ -543,8 +557,6 @@ storage_config = {
     port = 8200,
     -- secrets kv prefix path
     kv_path = "acme",
-    -- Vault token
-    token = nil,
     -- timeout in ms
     timeout = 2000,
     -- use HTTPS
@@ -553,8 +565,35 @@ storage_config = {
     tls_verify = true
     -- SNI used in request, default to host if omitted
     tls_server_name = nil,
+    -- Auth Method, default to token, can be "token" or "kubernetes"
+    auth_method = "token"
+    -- Vault token
+    token = nil,
+    -- Vault's authentication path to use
+    auth_path =  "kubernetes",
+    -- The role to try and assign
+    auth_role = nil,
+    -- The path to the JWT
+    jwt_path = "/var/run/secrets/kubernetes.io/serviceaccount/token",
 }
 ```
+
+#### Support for different auth method
+
+- Token: This is the default and allows to pass a literal "token" in the configuration
+- Kubernetes: Via this method, one can utilize vault's built-in auth method for kubernetes
+  What this basically this is take the service account token and validates it has been signed by Kubernetes CA.
+  The major benefit here, is that config files don't expose your token anymore.
+
+  The following configurations apply here:
+  ```lua
+    -- Vault's authentication path to use
+    auth_path =  "kubernetes",
+    -- The role to try and assign
+    auth_role = nil,
+    -- The path to the JWT
+    jwt_path = "/var/run/secrets/kubernetes.io/serviceaccount/token",
+   ```
 
 ### consul
 
@@ -600,6 +639,7 @@ It can be manually installed with `opm install api7/lua-resty-etcd` or `luarocks
 ## Credits
 
 - Improvements of `file` storage by [@dbalagansky](https://github.com/dbalagansky)
+- Addition of kubernetes auth in 'vault' storage by [@UXabre](https://github.com/UXabre/)
 
 
 ## Copyright and License

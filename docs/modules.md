@@ -67,8 +67,8 @@
 | [nginx-module-fancyindex](modules/fancyindex.md)                 | NGINX Fancy Index module                                                      |
 | [nginx-module-security-headers](modules/security-headers.md)     | NGINX module for sending security headers                                     |
 | [nginx-module-execute](modules/execute.md)                       | NGINX Execute module                                                          |
-| [nginx-module-nbr](modules/nbr.md)                               | NGINX Brotli dynamic modules                                                  |
 | [nginx-module-pagespeed](modules/pagespeed.md)                   | PageSpeed dynamic module for NGINX                                            |
 | [nginx-module-security](modules/security.md)                     | ModSecurity v3 Nginx Connector                                                |
 | [nginx-module-stream-lua](modules/stream-lua.md)                 | Lua scripting support for NGINX streams                                       |
 | [nginx-module-lua](modules/lua.md)                               | Lua scripting support for NGINX                                               |
+| [nginx-module-brotli](modules/brotli.md)                         | NGINX Brotli dynamic modules                                                  |

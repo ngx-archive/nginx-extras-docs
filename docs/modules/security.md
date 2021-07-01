@@ -22,8 +22,8 @@ load_module modules/ngx_http_modsecurity_module.so;
 ```
 
 
-This document describes nginx-module-security [v1.0.1](https://github.com/SpiderLabs/ModSecurity-nginx/releases/tag/v1.0.1){target=_blank} 
-released on Dec 16 2019.
+This document describes nginx-module-security [v1.0.2](https://github.com/SpiderLabs/ModSecurity-nginx/releases/tag/v1.0.2){target=_blank} 
+released on Jun 07 2021.
     
 <hr />
 
@@ -256,7 +256,7 @@ We would love to discuss any ideas that you may have for a new feature. Please k
 feel free to open GitHub issues requesting for new features. Before opening a new issue, please check if there is an existing feature request for the desired functionality.
 
 
-## Packing
+## Packaging
 
 Having our packages in distros on time is something we highly desire. Let us know if
 there is anything we can do to facilitate your work as a packager.

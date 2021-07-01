@@ -13,8 +13,8 @@ yum -y install lua-resty-worker-events
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
-This document describes lua-resty-worker-events [v2.0.0](https://github.com/Kong/lua-resty-worker-events/releases/tag/2.0.0){target=_blank} 
-released on Sep 17 2020.
+This document describes lua-resty-worker-events [v2.0.1](https://github.com/Kong/lua-resty-worker-events/releases/tag/2.0.1){target=_blank} 
+released on Jun 28 2021.
     
 <hr />
 ## lua-resty-worker-events
@@ -278,8 +278,7 @@ are available.
 
 The return value will be `"done"` when it handled all events, `"recursive"` if it was
 already in a polling-loop, or `nil + error` if something went wrong.
-The `"recursive"` result happens when the current running code was invoked by a callback, and
-tries to call `poll` again. The `"recursive"` result simply
+The `"recursive"` result simply
 means that the event was successfully posted, but not handled yet, due to other
 events ahead of it that need to be handled first.
 
@@ -383,6 +382,10 @@ All rights reserved.
 - push commit and tags
 - upload to luarocks
 
+### 2.0.1, 28-June-2021
+
+- fix: possible deadlock in the 'init phase
+
 ### 2.0.0, 16-September-2020
 
 - BREAKING: the `post` function does not call `poll` anymore, making all events
@@ -400,6 +403,11 @@ All rights reserved.
 - change: updated `shm_retries` default to 999
 - change: changed timer loop to a sleep-loop (performance)
 - fix: when re-configuring make sure callbacks table is initialized
+
+### 1.1.0, 23-Dec-2020 (maintenance release)
+
+- feature: the polling loop now runs forever, sleeping for 0.5 seconds between
+  runs, avoiding to create new timers on every step.
 
 ### 1.0.0, 18-July-2019
 

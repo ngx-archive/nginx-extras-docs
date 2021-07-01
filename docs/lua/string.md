@@ -13,8 +13,8 @@ yum -y install lua-resty-string
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
-This document describes lua-resty-string [v0.13](https://github.com/openresty/lua-resty-string/releases/tag/v0.13){target=_blank} 
-released on Jan 15 2021.
+This document describes lua-resty-string [v0.14](https://github.com/openresty/lua-resty-string/releases/tag/v0.14){target=_blank} 
+released on Apr 30 2021.
     
 <hr />
 

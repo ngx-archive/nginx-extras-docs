@@ -13,8 +13,8 @@ yum -y install lua-resty-core
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
-This document describes lua-resty-core [v0.1.21](https://github.com/openresty/lua-resty-core/releases/tag/v0.1.21){target=_blank} 
-released on Nov 03 2020.
+This document describes lua-resty-core [v0.1.22](https://github.com/openresty/lua-resty-core/releases/tag/v0.1.22){target=_blank} 
+released on May 07 2021.
     
 <hr />
 
@@ -77,8 +77,8 @@ of this library in the particular OpenResty release you are using. Otherwise you
 into serious compatibility issues.
 
 * LuaJIT 2.1 (for now, it is the v2.1 git branch in the official luajit-2.0 git repository: http://luajit.org/download.html )
-* [ngx_http_lua_module](https://github.com/openresty/lua-nginx-module) v0.10.19.
-* [ngx_stream_lua_module](https://github.com/openresty/stream-lua-nginx-module) v0.0.9.
+* [ngx_http_lua_module](https://github.com/openresty/lua-nginx-module) v0.10.20.
+* [ngx_stream_lua_module](https://github.com/openresty/stream-lua-nginx-module) v0.0.10.
 * [lua-resty-lrucache](https://github.com/openresty/lua-resty-lrucache)
 
 ## API Implemented
@@ -135,6 +135,19 @@ into serious compatibility issues.
 ## resty.core.ctx
 
 * [ngx.ctx](https://github.com/openresty/lua-nginx-module#ngxctx)
+
+## get_ctx_table
+
+**syntax:** *ctx = resty.core.ctx.get_ctx_table(ctx?)*
+
+Similar to [ngx.ctx](#restycorectx) but it accepts an optional `ctx` argument.
+It will use the `ctx` from caller instead of creating a new table
+when the `ctx` table does not exist.
+
+Notice: the `ctx` table will be used in the current request's whole life cycle.
+Please be very careful when you try to reuse the `ctx` table.
+You need to make sure there is no Lua code using or going to use the `ctx` table
+in the current request before you reusing the `ctx` table in some other place.
 
 ## resty.core.request
 

@@ -28,6 +28,7 @@ nav:
   - auth-pam: modules/auth-pam.md
   - aws-auth: modules/aws-auth.md
   - bot-verifier: modules/bot-verifier.md
+  - brotli: modules/brotli.md
   - cache-purge: modules/cache-purge.md
   - captcha: modules/captcha.md
   - combined-upstreams: modules/combined-upstreams.md
@@ -59,7 +60,6 @@ nav:
   - lua: modules/lua.md
   - memc: modules/memc.md
   - naxsi: modules/naxsi.md
-  - nbr: modules/nbr.md
   - nchan: modules/nchan.md
   - ndk: modules/ndk.md
   - pagespeed: modules/pagespeed.md

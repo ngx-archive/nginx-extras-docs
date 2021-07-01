@@ -13,8 +13,8 @@ yum -y install lua-resty-openssl
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
-This document describes lua-resty-openssl [v0.7.2](https://github.com/fffonion/lua-resty-openssl/releases/tag/0.7.2){target=_blank} 
-released on Mar 24 2021.
+This document describes lua-resty-openssl [v0.7.3](https://github.com/fffonion/lua-resty-openssl/releases/tag/0.7.3){target=_blank} 
+released on Jun 29 2021.
     
 <hr />
 
@@ -1758,7 +1758,7 @@ The first argument can be a choice of `PEM` or `DER`; when omitted, this functio
 
 Outputs CSR in PEM-formatted text.
 
-## resty.openssl.crl
+## resty.openssl.x509.crl
 
 Module to interact with X509_CRL(certificate revocation list).
 
@@ -2496,7 +2496,7 @@ certificates bundle. For example, the package in Debian/Ubuntu is called `ca-cer
 
 Adds a X.509 or a CRL object into store.
 The argument must be a [resty.openssl.x509](#restyopensslx509) instance or a
-[resty.openssl.x509.store](#restyopensslx509store) instance.
+[resty.openssl.x509.crl](#restyopensslx509crl) instance.
 
 ### store:load_file
 

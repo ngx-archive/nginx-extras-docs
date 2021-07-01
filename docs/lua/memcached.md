@@ -13,8 +13,8 @@ yum -y install lua-resty-memcached
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
 
-This document describes lua-resty-memcached [v0.15](https://github.com/openresty/lua-resty-memcached/releases/tag/v0.15){target=_blank} 
-released on May 11 2020.
+This document describes lua-resty-memcached [v0.16](https://github.com/openresty/lua-resty-memcached/releases/tag/v0.16){target=_blank} 
+released on Apr 30 2021.
     
 <hr />
 
@@ -162,9 +162,16 @@ The `exptime` parameter is optional and defaults to `0` (meaning never expires).
 The `flags` parameter is optional and defaults to `0`.
 
 ## set_timeout
-`syntax: ok, err = memc:set_timeout(time)`
+`syntax: ok, err = memc:set_timeout(timeout)`
 
 Sets the timeout (in ms) protection for subsequent operations, including the `connect` method.
+
+Returns 1 when successful and nil plus a string describing the error otherwise.
+
+## set_timeouts
+`syntax: ok, err = memc:set_timeouts(connect_timeout, send_timeout, read_timeout)`
+
+Sets the timeouts (in ms) for connect, send and read operations respectively.
 
 Returns 1 when successful and nil plus a string describing the error otherwise.
 
