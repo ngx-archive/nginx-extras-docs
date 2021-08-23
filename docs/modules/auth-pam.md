@@ -17,8 +17,8 @@ load_module modules/ngx_http_auth_pam_module.so;
 ```
 
 
-This document describes nginx-module-auth-pam [v1.5.2](https://github.com/sto/ngx_http_auth_pam_module/releases/tag/v1.5.2){target=_blank} 
-released on Jun 23 2020.
+This document describes nginx-module-auth-pam [v1.5.3](https://github.com/sto/ngx_http_auth_pam_module/releases/tag/v1.5.3){target=_blank} 
+released on Aug 23 2021.
     
 <hr />
 

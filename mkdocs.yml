@@ -1,13 +1,7 @@
 extra:
-  generator: false
-  social:
-  - icon: fontawesome/brands/twitter
-    link: https://twitter.com/GetPageSpeed
-  - icon: fontawesome/brands/github
-    link: https://github.com/GetPageSpeed
-google_analytics:
-- UA-51252096-1
-- auto
+  analytics:
+    property: UA-51252096-1
+    provider: google
 markdown_extensions:
 - admonition
 - markdown_include.include
@@ -106,16 +100,15 @@ plugins:
         setup_commands:
         - import sys
         - sys.path.append("docs")
-    watch:
-    - lastversion
 site_description: Automatic documentation from sources, for NGINX Extras.
 site_name: NGINX Extras Documentation
-site_url: https://www.getpagespeed.com/nginx-extras
+site_url: https://nginx-extras.getpagespeed.com/
 theme:
   custom_dir: overrides
   features:
   - navigation.expand
   - navigation.top
+  - navigation.tabs
   - search.suggest
   logo: assets/nginx-logo.png
   name: material
