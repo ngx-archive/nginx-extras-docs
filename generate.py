@@ -125,6 +125,8 @@ def enrich_lib_with_yml_info(md, module_config, release):
 
 CentOS/RHEL 6, 7, 8 and Amazon Linux 2 are supported.
 
+If you haven't set up RPM repository subscription, [sign up](https://www.getpagespeed.com/repo-subscribe). Then you can proceed with the following steps.
+
 ### OS-specific complete installation and configuration guides available:
 
 """
@@ -432,8 +434,7 @@ with open(f"docs/modules.md", "w") as index_md_f:
     )
 
 with open(f"docs/lua.md", "w") as libs_index_md_f:
-    from operator import itemgetter
-    libs_table = sorted(libs_table, key=itemgetter(1))
+    libs_table.sort()
     libs_index_md_f.write(
         tabulate(libs_table, headers, tablefmt="github")
     )
