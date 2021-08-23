@@ -11,7 +11,7 @@ yum -y install lua-resty-balancer
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-balancer [v0.3](https://github.com/openresty/lua-resty-balancer/releases/tag/v0.03){target=_blank} 
 released on Jun 25 2019.

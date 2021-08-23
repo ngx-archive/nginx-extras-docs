@@ -11,7 +11,7 @@ yum -y install lua-resty-upstream
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-upstream [v0.10](https://github.com/hamishforbes/lua-resty-upstream/releases/tag/v0.10){target=_blank} 
 released on Dec 19 2019.

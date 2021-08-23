@@ -11,7 +11,7 @@ yum -y install lua-resty-jump-consistent-hash
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-jump-consistent-hash [v0.1.4](https://github.com/ruoshan/lua-resty-jump-consistent-hash/releases/tag/v0.1.4){target=_blank} 
 released on May 09 2016.

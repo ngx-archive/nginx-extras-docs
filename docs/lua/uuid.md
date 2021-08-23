@@ -11,7 +11,7 @@ yum -y install lua-resty-uuid
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-uuid [v1.1](https://github.com/bungle/lua-resty-uuid/releases/tag/v1.1){target=_blank} 
 released on Apr 13 2016.

@@ -11,7 +11,7 @@ yum -y install lua-resty-woothee
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-woothee [v1.11.0.post1](https://github.com/woothee/lua-resty-woothee/releases/tag/v1.11.0-1){target=_blank} 
 released on Mar 30 2020.

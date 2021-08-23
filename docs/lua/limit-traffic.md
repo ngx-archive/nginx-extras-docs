@@ -11,7 +11,7 @@ yum -y install lua-resty-limit-traffic
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-limit-traffic [v0.7](https://github.com/openresty/lua-resty-limit-traffic/releases/tag/v0.07){target=_blank} 
 released on Jul 06 2020.

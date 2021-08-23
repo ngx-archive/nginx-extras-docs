@@ -11,7 +11,7 @@ yum -y install lua-resty-base-encoding
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-base-encoding [v1.3.0](https://github.com/spacewander/lua-resty-base-encoding/releases/tag/1.3.0){target=_blank} 
 released on Jul 21 2018.

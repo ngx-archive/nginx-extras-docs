@@ -11,7 +11,7 @@ yum -y install lua-resty-waf
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-waf [v0.11.1](https://github.com/p0pr0ck5/lua-resty-waf/releases/tag/v0.11.1){target=_blank} 
 released on May 09 2017.

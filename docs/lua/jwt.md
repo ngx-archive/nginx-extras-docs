@@ -11,7 +11,7 @@ yum -y install lua-resty-jwt
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-jwt [v0.1.11](https://github.com/SkyLothar/lua-resty-jwt/releases/tag/v0.1.11){target=_blank} 
 released on Jul 11 2017.

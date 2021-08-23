@@ -11,7 +11,7 @@ yum -y install lua-resty-smtp
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-smtp [v0.0.3](https://github.com/duhoobo/lua-resty-smtp/releases/tag/v0.0.3){target=_blank} 
 released on Mar 06 2015.

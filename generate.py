@@ -156,7 +156,7 @@ yum -y install lua-resty-{handle}
 
 """
     intro += f"""
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-{handle} [v{release['version']}](https://github.com/{repo}/releases/tag/{release['tag_name']}){{target=_blank}} 
 released on {release['tag_date'].strftime("%b %d %Y")}.

@@ -11,7 +11,7 @@ yum -y install lua-resty-requests
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-requests [v0.7.3](https://github.com/tokers/lua-resty-requests/releases/tag/v0.7.3){target=_blank} 
 released on Jul 18 2019.

@@ -11,7 +11,7 @@ yum -y install lua-resty-worker-events
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-worker-events [v2.0.1](https://github.com/Kong/lua-resty-worker-events/releases/tag/2.0.1){target=_blank} 
 released on Jun 28 2021.

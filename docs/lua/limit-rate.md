@@ -11,7 +11,7 @@ yum -y install lua-resty-limit-rate
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-limit-rate [v0.1](https://github.com/upyun/lua-resty-limit-rate/releases/tag/v0.1){target=_blank} 
 released on Oct 25 2018.

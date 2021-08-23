@@ -11,7 +11,7 @@ yum -y install lua-resty-exec
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-exec [v3.0.3](https://github.com/jprjr/lua-resty-exec/releases/tag/3.0.3){target=_blank} 
 released on Aug 22 2017.

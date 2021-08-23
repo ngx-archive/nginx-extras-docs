@@ -11,7 +11,7 @@ yum -y install lua-resty-tarantool
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-tarantool [v0.3](https://github.com/perusio/lua-resty-tarantool/releases/tag/v0.3){target=_blank} 
 released on Oct 21 2015.

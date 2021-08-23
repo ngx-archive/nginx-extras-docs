@@ -11,7 +11,7 @@ yum -y install lua-resty-memcached
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-memcached [v0.16](https://github.com/openresty/lua-resty-memcached/releases/tag/v0.16){target=_blank} 
 released on Apr 30 2021.

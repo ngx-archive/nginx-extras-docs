@@ -11,7 +11,7 @@ yum -y install lua-resty-redis-ratelimit
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-redis-ratelimit [v0.3](https://github.com/timebug/lua-resty-redis-ratelimit/releases/tag/v0.03){target=_blank} 
 released on Oct 03 2019.

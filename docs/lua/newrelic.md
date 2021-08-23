@@ -11,7 +11,7 @@ yum -y install lua-resty-newrelic
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-newrelic [v0.1.post6](https://github.com/saks/lua-resty-newrelic/releases/tag/v0.01-6){target=_blank} 
 released on Dec 06 2016.

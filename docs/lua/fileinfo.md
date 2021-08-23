@@ -11,7 +11,7 @@ yum -y install lua-resty-fileinfo
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-fileinfo [v1.0](https://github.com/bungle/lua-resty-fileinfo/releases/tag/v1.0){target=_blank} 
 released on Oct 09 2014.

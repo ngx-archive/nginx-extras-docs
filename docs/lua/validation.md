@@ -11,7 +11,7 @@ yum -y install lua-resty-validation
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-validation [v2.7](https://github.com/bungle/lua-resty-validation/releases/tag/v2.7){target=_blank} 
 released on Aug 25 2017.

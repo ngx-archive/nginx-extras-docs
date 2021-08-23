@@ -11,7 +11,7 @@ yum -y install lua-resty-murmurhash2
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-murmurhash2 [v1.0](https://github.com/bungle/lua-resty-murmurhash2/releases/tag/v1.0){target=_blank} 
 released on Sep 29 2014.

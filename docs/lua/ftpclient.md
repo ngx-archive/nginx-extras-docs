@@ -11,7 +11,7 @@ yum -y install lua-resty-ftpclient
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-ftpclient [v1.1](https://github.com/hongliang5316/lua-resty-ftpclient/releases/tag/v1.1){target=_blank} 
 released on Aug 07 2018.

@@ -11,7 +11,7 @@ yum -y install lua-resty-aws-sdk
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-aws-sdk [v0.1.0](https://github.com/kiddkai/lua-resty-aws-sdk/releases/tag/v0.1.0){target=_blank} 
 released on Nov 22 2016.

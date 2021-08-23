@@ -11,7 +11,7 @@ yum -y install lua-resty-websocket
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-websocket [v0.8](https://github.com/openresty/lua-resty-websocket/releases/tag/v0.08){target=_blank} 
 released on Oct 10 2020.

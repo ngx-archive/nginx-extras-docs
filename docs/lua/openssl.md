@@ -11,10 +11,10 @@ yum -y install lua-resty-openssl
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
-This document describes lua-resty-openssl [v0.7.3](https://github.com/fffonion/lua-resty-openssl/releases/tag/0.7.3){target=_blank} 
-released on Jun 29 2021.
+This document describes lua-resty-openssl [v0.7.4](https://github.com/fffonion/lua-resty-openssl/releases/tag/0.7.4){target=_blank} 
+released on Aug 02 2021.
     
 <hr />
 
@@ -486,57 +486,60 @@ ngx.say(require("cjson").encode(pkey:get_key_type()))
 
 **syntax**: *signature, err = pk:sign(digest)*
 
+**syntax**: *signature, err = pk:sign(message, md_alg?, padding?, opts?)*
+
 Perform a digest signing using the private key defined in `pkey`
-instance. The `digest` parameter must be a [resty.openssl.digest](#restyopenssldigest) 
+instance. The first parameter must be a [resty.openssl.digest](#restyopenssldigest)
 instance or a string. Returns the signed text and error if any.
 
-When passing a [digest](#restyopenssldigest) instance as `digest` parameter, it should not
+When passing a [digest](#restyopenssldigest) instance as first parameter, it should not
 have been called [final()](#digestfinal), user should only use [update()](#digestupdate).
+This mode only supports RSA and EC keys.
 
-For RSA and EC keys, passing a string as `digest` parameter does the SHA256 as digest method
-by default. For Ed25519 or Ed448 keys, this function does a PureEdDSA signing and requires
-`digest` to be a string. No message digest is used for Ed keys.
+When passing a string as first parameter, `md_alg` parameter will specify the name
+to use when signing. When `md_alg` is undefined, for RSA and EC keys, this function does SHA256
+by default. For Ed25519 or Ed448 keys, this function does a PureEdDSA signing,
+no message digest should be specified and will not be used.
+
+`opts` is a table that accepts additional parameters.
+
+For RSA key, it's also possible to specify `padding` scheme. The choice of values are same
+as those in [pkey:encrypt](#pkeyencrypt). When `padding` is `RSA_PKCS1_PSS_PADDING`, it's
+possible to specify PSS salt length by setting `opts.pss_saltlen`.
 
 For EC key, this function does a ECDSA signing.
-
 Note that OpenSSL does not support EC digital signature (ECDSA) with the
 obsolete MD5 hash algorithm and will return error on this combination. See
 [EVP_DigestSign(3)](https://www.openssl.org/docs/manmaster/man3/EVP_DigestSign.html)
 for a list of algorithms and associated public key algorithms.
 
-```lua
--- RSA and EC keys
-local pk, err = require("resty.openssl.pkey").new()
-local digest, err = require("resty.openssl.digest").new("SHA256")
-digest:update("dog")
--- WRONG: 
--- digest:final("dog")
-local signature, err = pk:sign(digest)
--- uses SHA256 by default
-local signature, err = pk:sign("dog")
-ngx.say(ngx.encode_base64(signature))
-
--- Ed25519 and Ed448 keys
-local pk, err = require("resty.openssl.pkey").new({
-  type = "Ed25519",
-})
-local signature, err = pk:sign("23333")
-ngx.say(ngx.encode_base64(signature))
-```
-
 ### pkey:verify
 
 **syntax**: *ok, err = pk:verify(signature, digest)*
+
+**syntax**: *ok, err = pk:verify(signature, message, md_alg?, padding?, opts?)*
 
 Verify a signture (which can be the string returned by [pkey:sign](#pkey-sign)). The second
 argument must be a [resty.openssl.digest](#restyopenssldigest) instance that uses
 the same digest algorithm as used in `sign` or a string. `ok` returns `true` if verficiation is
 successful and `false` otherwise. Note when verfication failed `err` will not be set.
-For EC key, this function does a ECDSA verification.
 
-For RSA and EC keys, passing a string as `digest` parameter uses the SHA256 as digest method
-by default. For Ed25519 or Ed448 keys, this function does a PureEdDSA verification and requires
-both `signature` and `digest` to be string. No message digest is used for Ed keys.
+When passing [digest](#restyopenssldigest) instances as second parameter, it should not
+have been called [final()](#digestfinal), user should only use [update()](#digestupdate).
+This mode only supports RSA and EC keys.
+
+When passing a string as second parameter, `md_alg` parameter will specify the name
+to use when verifying. When `md_alg` is undefined, for RSA and EC keys, this function does SHA256
+by default. For Ed25519 or Ed448 keys, this function does a PureEdDSA verification,
+no message digest should be specified and will not be used.
+
+`opts` is a table that accepts additional parameters.
+
+For RSA key, it's also possible to specify `padding` scheme. The choice of values are same
+as those in [pkey:encrypt](#pkeyencrypt). When `padding` is `RSA_PKCS1_PSS_PADDING`, it's
+possible to specify PSS salt length by setting `opts.pss_saltlen`.
+
+For EC key, this function does a ECDSA verification.
 
 ```lua
 -- RSA and EC keys
@@ -549,12 +552,16 @@ local signature, err = pk:sign(digest)
 -- uses SHA256 by default
 local signature, err = pk:sign("dog")
 ngx.say(ngx.encode_base64(signature))
+-- uses SHA256 and PSS padding
+local signature_pss, err = pk:sign("dog", "sha256", pk.PADDINGS.RSA_PKCS1_PSS_PADDING)
 
 digest, err = require("resty.openssl.digest").new("SHA256")
 digest:update("dog")
 local ok, err = pk:verify(signature, digest)
 -- uses SHA256 by default
 local ok, err = pk:verify(signature, "dog")
+-- uses SHA256 and PSS padding
+local ok, err = pk:verify(signature_pss, "dog", "sha256", pk.PADDINGS.RSA_PKCS1_PSS_PADDING)
 
 -- Ed25519 and Ed448 keys
 local pk, err = require("resty.openssl.pkey").new({
@@ -2203,6 +2210,16 @@ set for the extension.
 See [examples/tls-alpn-01.lua](https://github.com/fffonion/lua-resty-openssl/blob/master/examples/tls-alpn-01.lua)
 for an example to create extension with an unknown nid.
 
+### extension:to_der
+
+**syntax**: *der, ok = extension:to_der()*
+
+Returns the ASN.1 encoded (DER) value of the extension.
+
+`nid_or_txt` is a number or text representation of [NID]. Note `DER` is a binary
+encoding format. Consider using [extension:text](#extensiontext) for human readable
+or printable output.
+
 ### extension.from_data
 
 **syntax**: *ext, ok = extension.from_data(table, nid_or_txt, crit?)*
@@ -2215,6 +2232,16 @@ Creates a new `extension` instance. `table` can be instance of:
 
 `nid_or_txt` is a number or text representation of [NID] and
 `crit` is the critical flag of the extension.
+
+### extension.to_data
+
+**syntax**: *ext, ok = extension:to_data(nid_or_txt)*
+
+Convert the `extension` to another wrapper instance. Currently supported following:
+
+- [x509.altname](#restyopensslx509altname)
+
+`nid_or_txt` is a number or text representation of [NID].
 
 ### extension.istype
 
@@ -2245,7 +2272,9 @@ Returns the name of extension as ASN.1 Object. User can further use helper funct
 
 **syntax**: *txt, err = extension:text()*
 
-Returns the text representation of extension
+Returns the text representation of extension. This functions calls `X509V3_EXT_print` under the hood,
+and fallback to `ASN1_STRING_print` if the former failed. It thus has exact same output with that
+of `openssl x509 -text`.
 
 ```lua
 local objects = require "resty.openssl.objects"

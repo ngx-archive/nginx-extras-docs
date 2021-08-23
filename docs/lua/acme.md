@@ -11,10 +11,10 @@ yum -y install lua-resty-acme
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
-This document describes lua-resty-acme [v0.7.0](https://github.com/fffonion/lua-resty-acme/releases/tag/0.7.0){target=_blank} 
-released on Jun 25 2021.
+This document describes lua-resty-acme [v0.7.1](https://github.com/fffonion/lua-resty-acme/releases/tag/0.7.1){target=_blank} 
+released on Jul 22 2021.
     
 <hr />
 
@@ -358,6 +358,10 @@ default_config = {
   storage_config = {
     shm_name = 'acme',
   },
+  -- the challenge types enabled
+  enabled_challenge_handlers = { 'http-01' },
+  -- time to wait before signaling ACME server to validate in seconds
+  challenge_start_delay = 0,
 }
 ```
 
@@ -369,8 +373,6 @@ If `domain_key_paths` is not specified, a new private key will be generated
 for each certificate (4096-bits RSA and 256-bits prime256v1 ECC). Note that
 generating such key will block worker and will be especially noticable on VMs
 where entropy is low.
-
-See also [Storage Adapters](#storage-adapters) below.
 
 Pass config table directly to ACME client as second parameter. The following example
 demonstrates how to use a CA provider other than Let's Encrypt and also set
@@ -386,6 +388,12 @@ resty.acme.autossl.init({
   }
 )
 ```
+
+See also [Storage Adapters](#storage-adapters) below.
+
+When using distributed storage types, it's useful to bump up `challenge_start_delay` to allow
+changes in storage to propogate around. When `challenge_start_delay` is set to 0, no wait
+will be performed before start validating challenges.
 
 ### autossl.get_certkey
 
@@ -429,8 +437,10 @@ default_config = {
   },
   -- the challenge types enabled, selection of `http-01` and `tls-alpn-01`
   enabled_challenge_handlers = {"http-01"},
-    -- select preferred root CA issuer's Common Name if appliable
+  -- select preferred root CA issuer's Common Name if appliable
   preferred_chain = nil,
+  -- callback function that allows to wait before signaling ACME server to validate
+  challenge_start_callback = nil,
 }
 ```
 
@@ -464,6 +474,20 @@ need to implement their own `eab_handler`:
 user can use use `"ISRG Root X1"` to force use the new default chain in Let's Encrypt. When no
 value is configured or the configured name is not found in any chain, the default chain will be
 used.
+
+`challenge_start_callback` is a callback function to allow the client to wait before signalling
+ACME server to start validate challenge. It's useful in a distributed setup where challenges take
+time to propogate. `challenge_start_callback` accepts `challenge_type` and `challenge_token`.
+The client calls this function every second until it returns `true` indicating challenge should start;
+if this `challenge_start_callback` is not set, no wait will be performed.
+
+```lua
+challenge_start_callback = function(challenge_type, challenge_token)
+  -- do something here
+  -- if we are good
+  return true
+end
+```
 
 See also [Storage Adapters](#storage-adapters) below.
 

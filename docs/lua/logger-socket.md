@@ -11,7 +11,7 @@ yum -y install lua-resty-logger-socket
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-logger-socket [v0.1](https://github.com/cloudflare/lua-resty-logger-socket/releases/tag/v0.1){target=_blank} 
 released on Feb 18 2015.

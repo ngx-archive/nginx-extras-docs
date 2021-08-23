@@ -11,7 +11,7 @@ yum -y install lua-resty-jit-uuid
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-jit-uuid [v0.0.7](https://github.com/thibaultcha/lua-resty-jit-uuid/releases/tag/0.0.7){target=_blank} 
 released on Dec 16 2017.

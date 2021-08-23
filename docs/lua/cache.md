@@ -11,7 +11,7 @@ yum -y install lua-resty-cache
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-cache [v1.0.0](https://github.com/lloydzhou/lua-resty-cache/releases/tag/v1.0.0){target=_blank} 
 released on Aug 07 2015.

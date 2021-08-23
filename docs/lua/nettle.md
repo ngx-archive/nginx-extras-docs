@@ -11,7 +11,7 @@ yum -y install lua-resty-nettle
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-nettle [v2.1](https://github.com/bungle/lua-resty-nettle/releases/tag/v2.1){target=_blank} 
 released on Apr 07 2021.

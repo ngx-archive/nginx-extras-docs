@@ -11,7 +11,7 @@ yum -y install lua-resty-repl
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-repl [v0.1](https://github.com/saks/lua-resty-repl/releases/tag/0.01){target=_blank} 
 released on Aug 29 2016.

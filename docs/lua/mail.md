@@ -11,7 +11,7 @@ yum -y install lua-resty-mail
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-mail [v1.0.2](https://github.com/GUI/lua-resty-mail/releases/tag/v1.0.2){target=_blank} 
 released on Feb 24 2019.

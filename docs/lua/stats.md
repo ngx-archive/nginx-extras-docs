@@ -11,7 +11,7 @@ yum -y install lua-resty-stats
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-stats [v1.0.3](https://github.com/jie123108/lua-resty-stats/releases/tag/v1.0.3){target=_blank} 
 released on Nov 28 2020.

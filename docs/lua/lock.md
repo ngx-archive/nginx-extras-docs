@@ -11,7 +11,7 @@ yum -y install lua-resty-lock
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-lock [v0.8](https://github.com/openresty/lua-resty-lock/releases/tag/v0.08){target=_blank} 
 released on Feb 24 2019.

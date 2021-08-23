@@ -11,10 +11,10 @@ yum -y install lua-resty-consul
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
-This document describes lua-resty-consul [v0.3.2](https://github.com/hamishforbes/lua-resty-consul/releases/tag/v0.3.2){target=_blank} 
-released on Feb 21 2019.
+This document describes lua-resty-consul [v0.4.0](https://github.com/hamishforbes/lua-resty-consul/releases/tag/v0.4.0){target=_blank} 
+released on Aug 18 2021.
     
 <hr />
 
@@ -204,7 +204,7 @@ Returns a [lua-resty-http](https://github.com/pintsized/lua-resty-http) response
 On error returns `nil` and an error message.
 
 
-## Transaction helper
+## Transaction Helper
 
 ### txn
 

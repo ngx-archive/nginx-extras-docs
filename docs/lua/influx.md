@@ -11,7 +11,7 @@ yum -y install lua-resty-influx
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-influx [v0.2.1](https://github.com/p0pr0ck5/lua-resty-influx/releases/tag/0.2.1){target=_blank} 
 released on Dec 27 2017.

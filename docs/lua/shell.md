@@ -11,7 +11,7 @@ yum -y install lua-resty-shell
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-shell [v0.3](https://github.com/openresty/lua-resty-shell/releases/tag/v0.03){target=_blank} 
 released on Jul 01 2020.

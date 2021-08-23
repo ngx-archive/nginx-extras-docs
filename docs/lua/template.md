@@ -11,7 +11,7 @@ yum -y install lua-resty-template
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-template [v2.0](https://github.com/bungle/lua-resty-template/releases/tag/v2.0){target=_blank} 
 released on Feb 24 2020.

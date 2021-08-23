@@ -11,7 +11,7 @@ yum -y install lua-resty-pubsub
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-pubsub [v1.4](https://github.com/wingify/lua-resty-pubsub/releases/tag/v1.4){target=_blank} 
 released on Apr 17 2021.

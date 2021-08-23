@@ -11,7 +11,7 @@ yum -y install lua-resty-httpipe
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-httpipe [v0.5](https://github.com/timebug/lua-resty-httpipe/releases/tag/v0.05){target=_blank} 
 released on Nov 25 2015.

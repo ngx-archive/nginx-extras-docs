@@ -11,7 +11,7 @@ yum -y install lua-resty-ntlm
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-ntlm [v0.2](https://github.com/gosp/lua-resty-ntlm/releases/tag/v0.2){target=_blank} 
 released on Feb 07 2018.

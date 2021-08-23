@@ -17,8 +17,8 @@ load_module modules/ngx_http_ajp_module.so;
 ```
 
 
-This document describes nginx-module-ajp [v0.3.1](https://github.com/dvershinin/nginx_ajp_module/releases/tag/v0.3.1){target=_blank} 
-released on Feb 22 2020.
+This document describes nginx-module-ajp [v0.3.2](https://github.com/dvershinin/nginx_ajp_module/releases/tag/v0.3.2){target=_blank} 
+released on Jul 07 2021.
     
 <hr />
 

@@ -11,7 +11,7 @@ yum -y install lua-resty-kafka
 ```
 
 
-To use this Lua library with NGINX, ensure that [nginx-module-lua](modules/lua.md) is installed.
+To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-kafka [v0.9](https://github.com/doujiang24/lua-resty-kafka/releases/tag/v0.09){target=_blank} 
 released on Apr 19 2020.
