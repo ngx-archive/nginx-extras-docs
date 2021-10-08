@@ -15,8 +15,8 @@ yum -y install lua-resty-balancer
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
-This document describes lua-resty-balancer [v0.3](https://github.com/openresty/lua-resty-balancer/releases/tag/v0.03){target=_blank} 
-released on Jun 25 2019.
+This document describes lua-resty-balancer [v0.4](https://github.com/openresty/lua-resty-balancer/releases/tag/v0.04){target=_blank} 
+released on Sep 26 2021.
     
 <hr />
 
@@ -121,6 +121,7 @@ The `id` should be `table.concat({host, string.char(0), port})` like the nginx c
 when we need to keep consistency with nginx chash.
 
 The `id` can be any string value when we do not need to keep consistency with nginx chash.
+The `weight` should be a non negative integer.
 
 ```lua
 local nodes = {

@@ -23,6 +23,7 @@
 | [nginx-module-fancyindex](modules/fancyindex.md)                 | NGINX Fancy Index module                                                      |
 | [nginx-module-fips-check](modules/fips-check.md)                 | FIPS status check module for NGINX                                            |
 | [nginx-module-flv](modules/flv.md)                               | Media streaming server based on nginx-module-rtmp                             |
+| [nginx-module-form-input](modules/form-input.md)                 | NGINX Form input module                                                       |
 | [nginx-module-geoip2](modules/geoip2.md)                         | NGINX GeoIP2 module                                                           |
 | [nginx-module-google](modules/google.md)                         | NGINX Module for Google Mirror creation                                       |
 | [nginx-module-graphite](modules/graphite.md)                     | An nginx module for collecting stats into Graphite                            |
@@ -52,6 +53,7 @@
 | [nginx-module-secure-token](modules/secure-token.md)             | Secure token module for NGINX                                                 |
 | [nginx-module-security-headers](modules/security-headers.md)     | NGINX module for sending security headers                                     |
 | [nginx-module-security](modules/security.md)                     | ModSecurity v3 Nginx Connector                                                |
+| [nginx-module-set-misc](modules/set-misc.md)                     | NGINX Set-Misc module                                                         |
 | [nginx-module-shibboleth](modules/shibboleth.md)                 | Shibboleth Auth Request module for NGINX                                      |
 | [nginx-module-slowfs](modules/slowfs.md)                         | NGINX SlowFS Cache Module                                                     |
 | [nginx-module-small-light](modules/small-light.md)               | Dynamic image transformation module For NGINX                                 |

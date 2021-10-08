@@ -15,8 +15,8 @@ yum -y install lua-resty-acme
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
-This document describes lua-resty-acme [v0.7.1](https://github.com/fffonion/lua-resty-acme/releases/tag/0.7.1){target=_blank} 
-released on Jul 22 2021.
+This document describes lua-resty-acme [v0.7.2](https://github.com/fffonion/lua-resty-acme/releases/tag/0.7.2){target=_blank} 
+released on Sep 17 2021.
     
 <hr />
 
@@ -660,6 +660,12 @@ It can be manually installed with `opm install api7/lua-resty-etcd` or `luarocks
 
 ## TODO
 - autossl: ocsp staping
+
+
+## Testing
+Setup e2e test environment by running `bash t/prepare_env.sh`.
+
+Then run `cpanm install Test::Nginx::Socket` and then `prove -r t`.
 
 
 ## Credits

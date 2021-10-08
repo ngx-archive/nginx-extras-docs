@@ -17,8 +17,8 @@ load_module modules/ngx_nchan_module.so;
 ```
 
 
-This document describes nginx-module-nchan [v1.2.8](https://github.com/slact/nchan/releases/tag/v1.2.8){target=_blank} 
-released on Apr 13 2021.
+This document describes nginx-module-nchan [v1.2.12](https://github.com/slact/nchan/releases/tag/v1.2.12){target=_blank} 
+released on Sep 22 2021.
     
 <hr />
 <img class="logo" alt="NCHAN" src="https://nchan.io/github-logo.png" />
@@ -45,7 +45,7 @@ In a web browser, you can use Websocket or EventSource natively, or the [NchanSu
 
 ## Status and History
 
-The latest Nchan release is 1.2.8 (April 12, 2021) ([changelog](https://nchan.io/changelog)).
+The latest Nchan release is 1.2.12 (September 22, 2021) ([changelog](https://nchan.io/changelog)).
 
 The first iteration of Nchan was written in 2009-2010 as the [Nginx HTTP Push Module](https://pushmodule.slact.net), and was vastly refactored into its present state in 2014-2016.
 
@@ -1189,7 +1189,7 @@ Additionally, `nchan_stub_status` data is also exposed as variables. These are a
   arguments: 1  
   default: `\n`  
   context: server, location, if  
-  > Message separator string for the http-raw-stream subscriber. Automatically terminated with a newline character.    
+  > Message separator string for the http-raw-stream subscriber. Automatically terminated with a newline character if not explicitly set to an empty string.    
 
 - **nchan_subscriber_info**  
   arguments: 0  
@@ -1347,11 +1347,22 @@ Additionally, `nchan_stub_status` data is also exposed as variables. These are a
   legacy name: push_message_timeout  
   > Publisher configuration setting the length of time a message may be queued before it is considered expired. If you do not want messages to expire, set this to 0. Note that messages always expire from oldest to newest, so an older message may prevent a newer one with a shorter timeout from expiring. An Nginx variable can also be used to set the timeout dynamically.    
 
+- **nchan_redis_cluster_check_interval**  
+  arguments: 1  
+  default: `5s`  
+  context: http, server, upstream, location  
+  > Send a CLUSTER INFO command to each connected Redis node to see if the cluster config epoch has changed. Sent only when in Cluster mode and if any other command that may result in a MOVE error has not been sent in the configured time.    
+
 - **nchan_redis_connect_timeout**  
   arguments: 1  
   default: `600ms`  
   context: upstream  
   > Redis server connection timeout.    
+
+- **nchan_redis_discovered_ip_range_blacklist** `<CIDR range>`  
+  arguments: 1 - 7  
+  context: upstream  
+  > do not attempt to connect to **autodiscovered** nodes with IPs in the specified ranges. Useful for blacklisting private network ranges for clusters and Redis slaves. NOTE that this blacklist applies only to autodiscovered nodes, and not ones specified in the upstream block    
 
 - **nchan_redis_idle_channel_cache_timeout** `<time>`  
   arguments: 1  
@@ -1397,7 +1408,7 @@ Additionally, `nchan_stub_status` data is also exposed as variables. These are a
 - **nchan_redis_storage_mode** `[ distributed | backup | nostore ]`  
   arguments: 1  
   default: `distributed`  
-  context: http, server, upstream  
+  context: http, server, upstream, location  
   > The mode of operation of the Redis server. In `distributed` mode, messages are published directly to Redis, and retrieved in real-time. Any number of Nchan servers in distributed mode can share the Redis server (or cluster). Useful for horizontal scalability, but suffers the latency penalty of all message publishing going through Redis first.  
   >   
   > In `backup` mode, messages are published locally first, then later forwarded to Redis, and are retrieved only upon chanel initialization. Only one Nchan server should use a Redis server (or cluster) in this mode. Useful for data persistence without sacrificing response times to the latency of a round-trip to Redis.  

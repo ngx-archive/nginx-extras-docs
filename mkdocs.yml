@@ -39,6 +39,7 @@ nav:
   - fancyindex: modules/fancyindex.md
   - fips-check: modules/fips-check.md
   - flv: modules/flv.md
+  - form-input: modules/form-input.md
   - geoip2: modules/geoip2.md
   - google: modules/google.md
   - graphite: modules/graphite.md
@@ -68,6 +69,7 @@ nav:
   - secure-token: modules/secure-token.md
   - security: modules/security.md
   - security-headers: modules/security-headers.md
+  - set-misc: modules/set-misc.md
   - shibboleth: modules/shibboleth.md
   - slowfs: modules/slowfs.md
   - small-light: modules/small-light.md
