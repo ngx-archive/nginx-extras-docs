@@ -1,4 +1,4 @@
-# *form-input*: NGINX Form input module
+# *form-input*: NGINX form input module
 
 
 ## Installation

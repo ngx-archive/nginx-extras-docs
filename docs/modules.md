@@ -2,6 +2,7 @@
 |------------------------------------------------------------------|-------------------------------------------------------------------------------|
 | [nginx-module-accept-language](modules/accept-language.md)       | NGINX Accept-Language module                                                  |
 | [nginx-module-ajp](modules/ajp.md)                               | Support AJP protocol proxy with NGINX                                         |
+| [nginx-module-array-var](modules/array-var.md)                   | Array-typed variables for NGINX                                               |
 | [nginx-module-auth-ldap](modules/auth-ldap.md)                   | LDAP Authentication module for nginx                                          |
 | [nginx-module-auth-pam](modules/auth-pam.md)                     | PAM authentication dynamic module for NGINX                                   |
 | [nginx-module-aws-auth](modules/aws-auth.md)                     | NGINX module to proxy to authenticated AWS services                           |
@@ -18,18 +19,20 @@
 | [nginx-module-dynamic-etag](modules/dynamic-etag.md)             | NGINX module for adding ETag to dynamic content                               |
 | [nginx-module-dynamic-limit-req](modules/dynamic-limit-req.md)   | NGINX module to dynamically lock IP and release it periodically               |
 | [nginx-module-echo](modules/echo.md)                             | nginx Echo module                                                             |
+| [nginx-module-encrypted-session](modules/encrypted-session.md)   | Encrypt and decrypt NGINX variable values                                     |
 | [nginx-module-execute](modules/execute.md)                       | NGINX Execute module                                                          |
 | [nginx-module-f4fhds](modules/f4fhds.md)                         | NGINX module for Adobe f4f format                                             |
 | [nginx-module-fancyindex](modules/fancyindex.md)                 | NGINX Fancy Index module                                                      |
 | [nginx-module-fips-check](modules/fips-check.md)                 | FIPS status check module for NGINX                                            |
 | [nginx-module-flv](modules/flv.md)                               | Media streaming server based on nginx-module-rtmp                             |
-| [nginx-module-form-input](modules/form-input.md)                 | NGINX Form input module                                                       |
+| [nginx-module-form-input](modules/form-input.md)                 | NGINX form input module                                                       |
 | [nginx-module-geoip2](modules/geoip2.md)                         | NGINX GeoIP2 module                                                           |
 | [nginx-module-google](modules/google.md)                         | NGINX Module for Google Mirror creation                                       |
 | [nginx-module-graphite](modules/graphite.md)                     | An nginx module for collecting stats into Graphite                            |
 | [nginx-module-headers-more](modules/headers-more.md)             | NGINX Headers More dynamic module                                             |
 | [nginx-module-hmac-secure-link](modules/hmac-secure-link.md)     | Alternative NGINX HMAC Secure Link module with support for OpenSSL hashes     |
 | [nginx-module-html-sanitize](modules/html-sanitize.md)           | NGINX module to sanitize HTML 5 with whitelisted elements, attributes and CSS |
+| [nginx-module-iconv](modules/iconv.md)                           | NGINX iconv module                                                            |
 | [nginx-module-immutable](modules/immutable.md)                   | NGINX module for setting immutable caching on static assets                   |
 | [nginx-module-ipscrub](modules/ipscrub.md)                       | IP address anonymizer module for NGINX                                        |
 | [nginx-module-jpeg](modules/jpeg.md)                             | NGINX JPEG filter module                                                      |
