@@ -17,8 +17,8 @@ load_module modules/ngx_http_encrypted_session_module.so;
 ```
 
 
-This document describes nginx-module-encrypted-session [v0.8](https://github.com/openresty/encrypted-session-nginx-module/releases/tag/v0.08){target=_blank} 
-released on Apr 19 2018.
+This document describes nginx-module-encrypted-session [v0.9](https://github.com/openresty/encrypted-session-nginx-module/releases/tag/v0.09){target=_blank} 
+released on Nov 18 2021.
     
 <hr />
 
@@ -41,7 +41,7 @@ encrypted_session_key "abcdefghijklmnopqrstuvwxyz123456";
 encrypted_session_iv "1234567812345678";
 
 ## default: 1d (1 day)
-encrypted_session_expires 2; # in sec
+encrypted_session_expires 3600; # in sec
 
 location /encrypt {
     set $raw 'text to encrypted'; # from the ngx_rewrite module

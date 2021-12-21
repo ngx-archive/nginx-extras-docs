@@ -39,6 +39,7 @@
 | [nginx-module-js-challenge](modules/js-challenge.md)             | NGINX Javascript challenge module                                             |
 | [nginx-module-jwt](modules/jwt.md)                               | NGINX JWT Module                                                              |
 | [nginx-module-length-hiding](modules/length-hiding.md)           | NGINX Length Hiding Filter Module                                             |
+| [nginx-module-log-zmq](modules/log-zmq.md)                       | ZeroMQ logger module for NGINX                                                |
 | [nginx-module-lua](modules/lua.md)                               | Lua scripting support for NGINX                                               |
 | [nginx-module-memc](modules/memc.md)                             | Extended version of the standard NGINX memcached module                       |
 | [nginx-module-naxsi](modules/naxsi.md)                           | NGINX Anti XSS & SQL Injection module                                         |

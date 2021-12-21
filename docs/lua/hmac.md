@@ -15,8 +15,8 @@ yum -y install lua-resty-hmac
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
-This document describes lua-resty-hmac [v0.5](https://github.com/jkeys089/lua-resty-hmac/releases/tag/v0.05){target=_blank} 
-released on Sep 19 2020.
+This document describes lua-resty-hmac [v0.6](https://github.com/jkeys089/lua-resty-hmac/releases/tag/v0.06){target=_blank} 
+released on Dec 15 2021.
     
 <hr />
 
@@ -145,7 +145,7 @@ This MUST be called after `hmac_sha256:final()` in order to calculate a new MAC 
 
 This module is licensed under the BSD license.
 
-Copyright (C) 2012-2020, Thought Foundry Inc.
+Copyright (C) 2012-2021, Thought Foundry Inc.
 
 All rights reserved.
 

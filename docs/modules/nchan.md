@@ -17,8 +17,8 @@ load_module modules/ngx_nchan_module.so;
 ```
 
 
-This document describes nginx-module-nchan [v1.2.12](https://github.com/slact/nchan/releases/tag/v1.2.12){target=_blank} 
-released on Sep 22 2021.
+This document describes nginx-module-nchan [v1.2.14](https://github.com/slact/nchan/releases/tag/v1.2.14){target=_blank} 
+released on Dec 20 2021.
     
 <hr />
 <img class="logo" alt="NCHAN" src="https://nchan.io/github-logo.png" />
@@ -45,7 +45,7 @@ In a web browser, you can use Websocket or EventSource natively, or the [NchanSu
 
 ## Status and History
 
-The latest Nchan release is 1.2.12 (September 22, 2021) ([changelog](https://nchan.io/changelog)).
+The latest Nchan release is 1.2.14 (December 20, 2021) ([changelog](https://nchan.io/changelog)).
 
 The first iteration of Nchan was written in 2009-2010 as the [Nginx HTTP Push Module](https://pushmodule.slact.net), and was vastly refactored into its present state in 2014-2016.
 
@@ -703,6 +703,14 @@ http {
 Redis Cluster connections are designed to be resilient and try to recover from errors. Interrupted connections will have their commands queued until reconnection, and Nchan will publish any messages it successfully received while disconnected. Nchan is also adaptive to cluster modifications. It will add new nodes and remove them as needed.
 
 All Nchan servers sharing a Redis server or cluster should have their times synchronized (via ntpd or your favorite ntp daemon). Failure to do so may result in missed or duplicate messages.
+
+#### Using Redis securely
+
+Redis servers can be connected to via TLS by using the [nchan_redis_ssl](#nchan_redis_ssl) config setting in an `upstream` block, or by using the `rediss://`  schema for the server URLs.
+
+A password and optional username for the `AUTH` command can be set by the [nchan_redis_username](#nchan_redis_username) and [nchan_redis_password](#nchan_redis_password) config settings in an `upstream` block, or by using the `redis://<username>:<password>@hostname` server URL schema.
+
+Note that autodiscovered Redis nodes inherit their parent's SSL, username, and password settings.
 
 #### Tweaks and Optimizations
 
@@ -1393,6 +1401,12 @@ Additionally, `nchan_stub_status` data is also exposed as variables. These are a
   > Use an upstream config block for Redis servers.    
   [more details](#connecting-to-a-redis-server)  
 
+- **nchan_redis_password**  
+  arguments: 1  
+  default: `<none>`  
+  context: upstream  
+  > Set Redis password for AUTH command. All servers in the upstream block will use this password _unless_ a different password is specified by a server URL.    
+
 - **nchan_redis_ping_interval**  
   arguments: 1  
   default: `4m`  
@@ -1404,6 +1418,50 @@ Additionally, `nchan_stub_status` data is also exposed as variables. These are a
   context: upstream  
   > Used in upstream { } blocks to set redis servers. Redis url is in the form 'redis://:password@hostname:6379/0'. Shorthands 'host:port' or 'host' are permitted.    
   [more details](#connecting-to-a-redis-server)  
+
+- **nchan_redis_ssl** `[ on | off ]`  
+  arguments: 1  
+  default: `off`  
+  context: upstream  
+  > Enables SSL/TLS for all connections to Redis servers in this upstream block. When enabled, no unsecured connections are permitted    
+
+- **nchan_redis_ssl_ciphers**  
+  arguments: 1  
+  default: `<system default>`  
+  context: upstream  
+  > Acceptable cipers when using TLS for Redis connections    
+
+- **nchan_redis_ssl_client_certificate**  
+  arguments: 1  
+  context: upstream  
+  > Path to client certificate when using TLS for Redis connections    
+
+- **nchan_redis_ssl_client_certificate_key**  
+  arguments: 1  
+  context: upstream  
+  > Path to client certificate key when using TLS for Redis connections    
+
+- **nchan_redis_ssl_server_name**  
+  arguments: 1  
+  context: upstream  
+  > Server name to verify (CN) when using TLS for Redis connections    
+
+- **nchan_redis_ssl_trusted_certificate**  
+  arguments: 1  
+  context: upstream  
+  > Trusted certificate (CA) when using TLS for Redis connections    
+
+- **nchan_redis_ssl_trusted_certificate_path**  
+  arguments: 1  
+  default: `<system default>`  
+  context: upstream  
+  > Trusted certificate (CA) when using TLS for Redis connections. Defaults tothe system's SSL cert path unless nchan_redis_ssl_trusted_certificate is set    
+
+- **nchan_redis_ssl_verify_certificate** `[ on | off ]`  
+  arguments: 1  
+  default: `on`  
+  context: upstream  
+  > Should the server certificate be verified when using TLS for Redis connections? Useful to disable when testing with a self-signed server certificate.    
 
 - **nchan_redis_storage_mode** `[ distributed | backup | nostore ]`  
   arguments: 1  
@@ -1427,6 +1485,12 @@ Additionally, `nchan_stub_status` data is also exposed as variables. These are a
   context: http, server, location  
   > Use of this command is discouraged in favor of upstreams blocks with (`nchan_redis_server`)[#nchan_redis_server]. The path to a redis server, of the form 'redis://:password@hostname:6379/0'. Shorthand of the form 'host:port' or just 'host' is also accepted.    
   [more details](#connecting-to-a-redis-server)  
+
+- **nchan_redis_username**  
+  arguments: 1  
+  default: `<none>`  
+  context: upstream  
+  > Set Redis username for AUTH command (available when using ACLs on the Redis server). All servers in the upstream block will use this username _unless_ a different username is specified by a server URL.    
 
 - **nchan_shared_memory_size** `<size>`  
   arguments: 1  

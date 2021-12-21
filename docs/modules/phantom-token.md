@@ -17,8 +17,8 @@ load_module modules/ngx_curity_http_phantom_token_module.so;
 ```
 
 
-This document describes nginx-module-phantom-token [v1.1.1](https://github.com/curityio/nginx_phantom_token_module/releases/tag/1.1.1){target=_blank} 
-released on Feb 17 2021.
+This document describes nginx-module-phantom-token [v1.2.0](https://github.com/curityio/nginx_phantom_token_module/releases/tag/1.2.0){target=_blank} 
+released on Oct 21 2021.
     
 <hr />
 
@@ -26,6 +26,8 @@ released on Feb 17 2021.
 [![Availability](https://img.shields.io/badge/availability-binary-blue)](https://curity.io/resources/code-examples/status/)
 
 NGINX module that introspects access tokens according to [RFC 7662](https://tools.ietf.org/html/rfc7662), producing a "phantom token" that can be forwarded to back-end APIs and Web services.
+
+More details can be found in [The Phantom Token Approach](https://curity.io/resources/learn/phantom-token-pattern/) article.
 
 This module, when enabled, filters incoming requests, denying access to those which do *not* have a valid OAuth access token presented in an `Authorization` header. From this header, the access_token is extracted and introspected using the configured endpoint. Curity replies to this request according to the standard. For an active access token, the body of Curity's response contains the JWT that replaces the access token in the header of the request that is forwarded by NGINX to the back-end. If the token is not valid or absent, no request to the back-end is made and the caller is given a 401, unauthorized, error. This flow is shown in the following diagram:
 
@@ -264,7 +266,7 @@ To build this module, simply do the following:
 make && make install
 ```
 
-This will download the NGINX source code if it is not already local. If it is, the location may be provided when prompted. By default, version 1.19.0 will be downloaded; a different version can be fetched by setting `NGINX_VERSION` before running the `configure` script. Any [additional parameters](http://nginx.org/en/docs/configure.html) (e.g., `--prefix`) that NGINX's `configure` script supports can also be provided. When this module's `configure` script is run, it will pass along `--with-compat` to NGINX's script. It asks if a dynamic module should be created (thus passing along `--add-dynamic-module`) or if the module should be compiled into the NGINX binary (thus passing `--add-module`); by default, it created a dynamically-linked module. It will also ask if debug flags should be enabled; if so, `--with-debug` and certain GCC flags will be passed on to NGINX's `configure` script to make debugging easier. After the script is run, just execute `make && make install`. These too will delegate to NGINX's `Makefile`. After this, the module will be usable and can be configured as described above.
+This will download the NGINX source code if it is not already local. If it is, the location may be provided when prompted. By default, version 1.21.3 will be downloaded; a different version can be fetched by setting `NGINX_VERSION` before running the `configure` script. Any [additional parameters](http://nginx.org/en/docs/configure.html) (e.g., `--prefix`) that NGINX's `configure` script supports can also be provided. When this module's `configure` script is run, it will pass along `--with-compat` to NGINX's script. It asks if a dynamic module should be created (thus passing along `--add-dynamic-module`) or if the module should be compiled into the NGINX binary (thus passing `--add-module`); by default, it created a dynamically-linked module. It will also ask if debug flags should be enabled; if so, `--with-debug` and certain GCC flags will be passed on to NGINX's `configure` script to make debugging easier. After the script is run, just execute `make && make install`. These too will delegate to NGINX's `Makefile`. After this, the module will be usable and can be configured as described above.
 
 > *WARNING* If `--without-pcre`, `--without-http_gzip_module` and potentially other flags are provided to the `configure` script and a module is created, it will _not_ be compatible with NGINX Plus or the pre-compiled open source NGINX binaries; if you include such flags (when building the module), you will only be able to load it into a custom build of NGINX that also excludes the same functionality. If the `configure` script exits with an error about a missing dependency, like [PCRE](https://www.pcre.org/) and [zlib](http://zlib.net/), install those instead of excluding them if compatibility with pre-build NGINX binaries is desired.</p>
 
@@ -322,7 +324,7 @@ NGINX must be in the system path; the tests will run the first `nginx` command t
 This module is fit for production usage. 
 
 ## More Information
-For more information about Curity, its capabilities, and how to use it to issue phantom tokens, visit [curity.io](https://curity.io/product/token-service/#phantom_tokens). For background information on using Curity for API access, consult the [API integration section of the Curity developer manual](https://support.curity.io/docs/2.0.2/developer-guide/api-integration/overview.html). For additional insights in how to apply this pattern to microservices and APIs, read _[How to Control User Identity within Microservices](http://nordicapis.com/how-to-control-user-identity-within-microservices/)_ on the Nordic APIs blog.
+For more information about Curity, its capabilities, and how to use it to issue phantom tokens, visit [curity.io](https://curity.io/product/token-service/#phantom_tokens). For background information on using Curity for API access, consult the [API integration section of the Curity developer manual](https://support.curity.io/docs/latest/developer-guide/api-integration/overview.html). For additional insights in how to apply this pattern to microservices and APIs, read _[How to Control User Identity within Microservices](http://nordicapis.com/how-to-control-user-identity-within-microservices/)_ on the Nordic APIs blog.
 
 ## Licensing
 

@@ -17,8 +17,8 @@ load_module modules/ngx_http_fancyindex_module.so;
 ```
 
 
-This document describes nginx-module-fancyindex [v0.5.1](https://github.com/aperezdc/ngx-fancyindex/releases/tag/v0.5.1){target=_blank} 
-released on Oct 26 2020.
+This document describes nginx-module-fancyindex [v0.5.2](https://github.com/aperezdc/ngx-fancyindex/releases/tag/v0.5.2){target=_blank} 
+released on Oct 28 2021.
     
 <hr />
 

@@ -55,6 +55,7 @@ nav:
   - js-challenge: modules/js-challenge.md
   - jwt: modules/jwt.md
   - length-hiding: modules/length-hiding.md
+  - log-zmq: modules/log-zmq.md
   - lua: modules/lua.md
   - memc: modules/memc.md
   - naxsi: modules/naxsi.md

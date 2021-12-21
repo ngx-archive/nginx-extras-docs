@@ -15,8 +15,8 @@ yum -y install lua-resty-openssl
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
-This document describes lua-resty-openssl [v0.7.5](https://github.com/fffonion/lua-resty-openssl/releases/tag/0.7.5){target=_blank} 
-released on Sep 17 2021.
+This document describes lua-resty-openssl [v0.8.4](https://github.com/fffonion/lua-resty-openssl/releases/tag/0.8.4){target=_blank} 
+released on Dec 20 2021.
     
 <hr />
 
@@ -59,6 +59,17 @@ consul its manual for differences between OpenSSL API.
 
 This meta module provides a version sanity check against linked OpenSSL library.
 
+### openssl.load_library
+
+**syntax**: *name, err = openssl.load_library()*
+
+Try to load OpenSSL shared libraries. This function tries couple of known patterns
+the library could be named and return the name of `crypto` library if it's being
+successfully loaded and error if any.
+
+When running inside `resty` CLI or OpenResty with SSL enabled, calling this function
+is not necessary.
+
 ### openssl.load_modules
 
 **syntax**: *openssl.load_modules()*
@@ -88,7 +99,9 @@ Load all available sub modules into current module:
   ssl_ctx = require("resty.openssl.ssl_ctx"),
 ```
 
-Starting OpenSSL 3.0, [`provider`](#restyopensslprovider) is also available.
+Starting OpenSSL 3.0, [`provider`](#restyopensslprovider) and [`mac`](#restyopensslmac)
+[`ctx`](#restyopensslctx)
+is also available.
 
 ### openssl.luaossl_compat
 
@@ -106,11 +119,112 @@ Note that not all `luaossl` API has been implemented, please check readme for so
 
 Returns a boolean indicating if FIPS mode is enabled.
 
-### openssl.get_fips_mode
+### openssl.set_fips_mode
 
 **syntax**: *ok, err = openssl.set_fips_mode(enabled)*
 
 Toggle FIPS mode on or off.
+
+lua-resty-openssl supports following modes:
+
+**OpenSSL 1.0.2 series with fips 2.0 module**
+
+Compile the module per [security policy](https://www.openssl.org/docs/fips/SecurityPolicy-2.0.2.pdf),
+
+**OpenSSL 3.0.0 fips provider (haven't certified)**
+
+Refer to https://wiki.openssl.org/index.php/OpenSSL_3.0 Section 7
+Compile the provider per guide, install the fipsmodule.cnf that
+matches hash of FIPS provider fips.so.
+
+On OpenSSL 3.0, this function also turns on and off default
+properties for EVP functions. When turned on, all applications using
+EVP_* API will be redirected to FIPS-compliant implementations and
+have no access to non-FIPS-compliant algorithms.
+
+Calling this function is equivalent of loading `fips` provider and
+call [openssl.set_default_properties("fips=yes")](#opensslset_default_properties).
+
+If fips provider is loaded but default properties are not set, use following
+to explictly fetch FIPS implementation.
+```lua
+local provider = require "resty.openssl.provider"
+assert(provider.load("fips"))
+local cipher = require "resty.openssl.cipher"
+local c = assert(cipher.new("aes256"))
+print(c:get_provider_name()) -- prints "default"
+local c = assert(cipher.new("aes256", "fips=yes"))
+print(c:get_provider_name()) -- prints "fips"
+```
+
+**BroingSSL fips-20190808 and fips-20210429 (later haven't been certified)**
+
+Compile the module per [security policy](https://csrc.nist.gov/CSRC/media/projects/cryptographic-module-validation-program/documents/security-policies/140sp3678.pdf)
+
+Check if FIPS is acticated by running `assert(openssl.set_fips_mode(true))`.
+BoringSSL doesn't support "turn FIPS mode off" once it's compiled.
+
+### openssl.set_default_properties
+
+**syntax**: *ok, err = openssl.set_default_properties(props)*
+
+Sets the default properties for all future EVP algorithm fetches, implicit as well as explicit. See "ALGORITHM FETCHING" in crypto(7) for information about implicit and explicit fetching.
+
+### openssl.list_cipher_algorithms
+
+**syntax**: *ret = openssl.list_cipher_algorithms()*
+
+Return available cipher algorithms in an array.
+
+### openssl.list_digest_algorithms
+
+**syntax**: *ret = openssl.list_digest_algorithms()*
+
+Return available digest algorithms in an array.
+
+### openssl.list_mac_algorithms
+
+**syntax**: *ret = openssl.list_mac_algorithms()*
+
+Return available MAC algorithms in an array.
+
+### openssl.list_kdf_algorithms
+
+**syntax**: *ret = openssl.list_kdf_algorithms()*
+
+Return available KDF algorithms in an array.
+
+## resty.openssl.ctx
+
+A module to provide OSSL_LIB_CTX context switches.
+
+  OSSL_LIB_CTX is an internal OpenSSL library context type. Applications may allocate their own, but may also use NULL to use a default context with functions that take an OSSL_LIB_CTX argument.
+
+See [OSSL_LIB_CTX.3](#https://www.openssl.org/docs/manmaster/man3/OSSL_LIB_CTX.html) for deeper
+reading. It can be used to replace `ENGINE` in prior 3.0 world.
+
+The context is currently effective in [cipher](#resty.openssl.cipher),
+[pkey](#resty.openssl.pkey), [digest](#resty.openssl.digest), [mac](#resty.openssl.mac),
+[kdf](#resty.openssl.kdf) and [provider](#resty.openssl.provider).
+
+This module is only available on OpenSSL 3.0.
+ 
+### ctx.new
+
+**syntax**: *ok, err = ctx.new(request_context_only?, conf_file?)*
+
+Create a new context and use as default context for this module. When
+`request_context_only` is set to true, the context is only used inside current
+request's context. `conf_file` can optionally specify an OpenSSL conf file
+to create the context.
+
+The created context is automatically freed with its given lifecycle.
+
+### ctx.free
+
+**syntax**: *ctx.free(request_context_only?)*
+
+Free the context that was previously created by [ctx.new](#ctxnew).
 
 ## resty.openssl.version
 
@@ -278,6 +392,10 @@ X448 | Y | Y | | | Y (ECDH) |
 
 `Ed25519`, `X25519`, `Ed448` and `X448` keys are only supported since OpenSSL 1.1.0.
 
+Direct support of encryption and decryption for EC and ECX does not exist, but
+processes like ECIES is possible with [pkey:derive](#pkeyderive),
+[kdf](#restyopensslkdf) and [cipher](#restyopensslcipher)
+
 ### pkey.new
 
 **syntax**: *pk, err = pkey.new(config)*
@@ -392,6 +510,19 @@ local pem, err = pkey.paramgen({
 })
 ```
 
+### pkey:get_provider_name
+
+**syntax**: *name = pkey:get_provider_name()*
+
+Returns the provider name of `pkey`.
+
+This function is available since OpenSSL 3.0.
+
+## pkey:gettable_params, pkey:settable_params, pkey:get_param, pkey:set_params
+
+Query settable or gettable params and set or get params.
+See [Generic EVP parameter getter/setter](#generic-evp-parameter-gettersetter).
+
 ### pkey:get_parameters
 
 **syntax**: *parameters, err = pk:get_parameters()*
@@ -484,6 +615,20 @@ ngx.say(require("cjson").encode(pkey:get_key_type()))
 -- outputs '{"ln":"X448","nid":1035,"sn":"X448","id":"1.3.101.111"}'
 ```
 
+### pkey:get_default_digest_type
+
+**syntax**: *obj, err = pk:get_default_digest_type()*
+
+Returns a ASN1_OBJECT of key type of the private key as a table. An additional field `mandatory` is also
+returned in the table, if `mandatory` is true then other digests can not be used.
+
+```lua
+local pkey, err = require("resty.openssl.pkey").new()
+
+ngx.say(require("cjson").encode(pkey:get_default_digest_type()))
+-- outputs '{"ln":"sha256","nid":672,"id":"2.16.840.1.101.3.4.2.1","mandatory":false,"sn":"SHA256"}'
+```
+
 ### pkey:sign
 
 **syntax**: *signature, err = pk:sign(digest)*
@@ -501,7 +646,8 @@ This mode only supports RSA and EC keys.
 When passing a string as first parameter, `md_alg` parameter will specify the name
 to use when signing. When `md_alg` is undefined, for RSA and EC keys, this function does SHA256
 by default. For Ed25519 or Ed448 keys, this function does a PureEdDSA signing,
-no message digest should be specified and will not be used.
+no message digest should be specified and will not be used. BoringSSL doesn't have default
+digest thus `md_alg` must be specified.
 
 `opts` is a table that accepts additional parameters.
 
@@ -533,7 +679,8 @@ This mode only supports RSA and EC keys.
 When passing a string as second parameter, `md_alg` parameter will specify the name
 to use when verifying. When `md_alg` is undefined, for RSA and EC keys, this function does SHA256
 by default. For Ed25519 or Ed448 keys, this function does a PureEdDSA verification,
-no message digest should be specified and will not be used.
+no message digest should be specified and will not be used. BoringSSL doesn't have default
+digest thus `md_alg` must be specified.
 
 `opts` is a table that accepts additional parameters.
 
@@ -929,16 +1076,34 @@ Module to interact with symmetric cryptography (EVP_CIPHER).
 
 ### cipher.new
 
-**syntax**: *d, err = cipher.new(cipher_name)*
+**syntax**: *d, err = cipher.new(cipher_name, properties?)*
 
 Creates a cipher instance. `cipher_name` is a case-insensitive string of cipher algorithm name.
-To view a list of cipher algorithms implemented, use `openssl list -cipher-algorithms`.
+To view a list of cipher algorithms implemented, use
+[openssl.list_cipher_algorithms](#openssllist_cipher_algorithms)
+or `openssl list -cipher-algorithms`
+
+Staring from OpenSSL 3.0, this functions accepts an optional `properties` parameter
+to explictly select provider to fetch algorithms.
 
 ### cipher.istype
 
 **syntax**: *ok = cipher.istype(table)*
 
 Returns `true` if table is an instance of `cipher`. Returns `false` otherwise.
+
+### cipher:get_provider_name
+
+**syntax**: *name = cipher:get_provider_name()*
+
+Returns the provider name of `cipher`.
+
+This function is available since OpenSSL 3.0.
+
+## cipher:gettable_params, cipher:settable_params, cipher:get_param, cipher:set_params
+
+Query settable or gettable params and set or get params.
+See [Generic EVP parameter getter/setter](#generic-evp-parameter-gettersetter).
 
 ### cipher:encrypt
 
@@ -1098,19 +1263,37 @@ Module to interact with message digest (EVP_MD_CTX).
 
 ### digest.new
 
-**syntax**: *d, err = digest.new(digest_name?)*
+**syntax**: *d, err = digest.new(digest_name?, properties?)*
 
 Creates a digest instance. `digest_name` is a case-insensitive string of digest algorithm name.
-To view a list of digest algorithms implemented, use `openssl list -digest-algorithms`.
+To view a list of digest algorithms implemented, use 
+[openssl.list_digest_algorithms](#openssllist_digest_algorithms) or
+`openssl list -digest-algorithms`.
 
 If `digest_name` is omitted, it's default to `sha1`. Specially, the digest_name `"null"`
 represents a "null" message digest that does nothing: i.e. the hash it returns is of zero length.
+
+Staring from OpenSSL 3.0, this functions accepts an optional `properties` parameter
+to explictly select provider to fetch algorithms.
 
 ### digest.istype
 
 **syntax**: *ok = digest.istype(table)*
 
 Returns `true` if table is an instance of `digest`. Returns `false` otherwise.
+
+### digest:get_provider_name
+
+**syntax**: *name = digest:get_provider_name()*
+
+Returns the provider name of `digest`.
+
+This function is available since OpenSSL 3.0.
+
+## digest:gettable_params, digest:settable_params, digest:get_param, digest:set_params
+
+Query settable or gettable params and set or get params.
+See [Generic EVP parameter getter/setter](#generic-evp-parameter-gettersetter).
 
 ### digest:update
 
@@ -1141,7 +1324,7 @@ ngx.say(ngx.encode_base64(digest))
 
 **syntax**: *ok, err = digest:reset()*
 
-Reset the internal state of `digest` instance as it's just created by [digest:new](#digestnew).
+Reset the internal state of `digest` instance as it's just created by [digest.new](#digestnew).
 It calls [EVP_DigestInit_ex](https://www.openssl.org/docs/manmaster/man3/EVP_DigestInit_ex.html) under
 the hood.
 
@@ -1149,12 +1332,17 @@ the hood.
 
 Module to interact with hash-based message authentication code (HMAC_CTX).
 
+Use of this module is deprecated since OpenSSL 3.0, please use [resty.openssl.mac](#restyopensslmac)
+instead.
+
 ### hmac.new
 
 **syntax**: *h, err = hmac.new(key, digest_name?)*
 
 Creates a hmac instance. `digest_name` is a case-insensitive string of digest algorithm name.
-To view a list of digest algorithms implemented, use `openssl list -digest-algorithms`.
+To view a list of digest algorithms implemented, use
+[openssl.list_digest_algorithms](#openssllist_digest_algorithms) or
+`openssl list -digest-algorithms`.
 
 If `digest_name` is omitted, it's default to `sha1`.
 
@@ -1193,17 +1381,86 @@ ngx.say(ngx.encode_base64(hmac))
 
 **syntax**: *ok, err = hmac:reset()*
 
-Reset the internal state of `hmac` instance as it's just created by [hmac:new](#hmacnew).
+Reset the internal state of `hmac` instance as it's just created by [hmac.new](#hmacnew).
 It calls [HMAC_Init_ex](https://www.openssl.org/docs/manmaster/man3/HMAC_Init_ex.html) under
 the hood.
+
+## resty.openssl.mac
+
+Module to interact with message authentication code (EVP_MAC).
+
+### mac.new
+
+**syntax**: *h, err = mac.new(key, mac, cipher?, digest?, properties?)*
+
+Creates a mac instance. `mac` is a case-insensitive string of digest algorithm name.
+To view a list of digest algorithms implemented, use
+[openssl.list_mac_algorithms](#openssllist_mac_algorithms) or
+`openssl list -mac-algorithms`.
+`cipher` is a case-insensitive string of digest algorithm name.
+To view a list of digest algorithms implemented, use
+[openssl.list_cipher_algorithms](#openssllist_cipher_algorithms) or
+`openssl list -cipher-algorithms`.
+`digest` is a case-insensitive string of digest algorithm name.
+To view a list of digest algorithms implemented, use
+[openssl.list_digest_algorithms](#openssllist_digest_algorithms) or
+`openssl list -digest-algorithms`.
+`properties` parameter can be used to explictly select provider to fetch algorithms.
+
+### mac.istype
+
+**syntax**: *ok = mac.istype(table)*
+
+Returns `true` if table is an instance of `mac`. Returns `false` otherwise.
+
+### mac:get_provider_name
+
+**syntax**: *name = mac:get_provider_name()*
+
+Returns the provider name of `mac`.
+
+This function is available since OpenSSL 3.0.
+
+## mac:gettable_params, mac:settable_params, mac:get_param, mac:set_params
+
+Query settable or gettable params and set or get params.
+See [Generic EVP parameter getter/setter](#generic-evp-parameter-gettersetter).
+
+### mac:update
+
+**syntax**: *ok, err = mac:update(partial, ...)*
+
+Updates the MAC with one or more strings.
+
+### mac:final
+
+**syntax**: *str, err = mac:final(partial?)*
+
+Returns the MAC in raw binary string, optionally accept one string to digest.
+
+```lua
+local d, err = require("resty.openssl.mac").new("goose", "HMAC", nil, "sha256")
+d:update("🦢")
+local mac, err = d:final()
+ngx.say(ngx.encode_base64(mac))
+-- outputs "k2UcrRp25tj1Spff89mJF3fAVQ0lodq/tJT53EYXp0c="
+-- OR:
+local d, err = require("resty.openssl.mac").new("goose", "HMAC", nil, "sha256")
+local hmac, err = d:final("🦢")
+ngx.say(ngx.encode_base64(mac))
+-- outputs "k2UcrRp25tj1Spff89mJF3fAVQ0lodq/tJT53EYXp0c="
+```
 
 ## resty.openssl.kdf
 
 Module to interact with KDF (key derivation function).
 
-### kdf.derive
+### kdf.derive (legacy)
 
 **syntax**: *key, err = kdf.derive(options)*
+
+Use of this module is deprecated since OpenSSL 3.0, please use [kdf.new](#kdfnew)
+instead.
 
 Derive a key from given material. Various KDFs are supported based on OpenSSL version:
 
@@ -1220,6 +1477,8 @@ Derive a key from given material. Various KDFs are supported based on OpenSSL ve
 | pass    | string | Initial key material to derive from | (empty string) |
 | salt    | string | Add some salt | (empty string) |
 | md    | string | Message digest method name to use, not effective for `scrypt` type | `"sha1"` |
+| properties | string | Staring from OpenSSL 3.0, this functions accepts an optional `properties` parameter
+to explictly select provider to fetch algorithms. | |
 | pbkdf2_iter     | number | PBKDF2 iteration count. RFC 2898 suggests an iteration count of at least 1000. Any value less than 1 is treated as a single iteration.  | `1` |
 | hkdf_key     | string | HKDF key  | **required** |
 | hkdf_mode     | number | HKDF mode to use, one of `kdf.HKDEF_MODE_EXTRACT_AND_EXPAND`, `kdf.HKDEF_MODE_EXTRACT_ONLY` or `kdf.HKDEF_MODE_EXPAND_ONLY`. This is only effective with OpenSSL >= 1.1.1. To learn about mode, please refer to [EVP_PKEY_CTX_set1_hkdf_key(3)](https://www.openssl.org/docs/manmaster/man3/EVP_PKEY_CTX_set1_hkdf_key.html). Note with `kdf.HKDEF_MODE_EXTRACT_ONLY`, `outlen` is ignored and the output will be fixed size of `HMAC-<md>`.  | `kdf.HKDEF_MODE_EXTRACT_AND_EXPAND`|
@@ -1254,6 +1513,92 @@ key, err = kdf.derive({
 ngx.say(ngx.encode_base64(key))
 -- outputs "9giFtxace5sESmRb8qxuOw=="
 ```
+
+### kdf.new
+
+**syntax**: *k, err = kdf.new(kdf_name?, properties?)*
+
+Creates a kdf instance. `kdf_name` is a case-insensitive string of kdf algorithm name.
+To view a list of kdf algorithms implemented, use
+[openssl.list_kdf_algorithms](#openssllist_kdf_algorithms) or
+`openssl list -kdf-algorithms`.
+
+Staring from OpenSSL 3.0, this functions accepts an optional `properties` parameter
+to explictly select provider to fetch algorithms.
+
+### kdf.istype
+
+**syntax**: *ok = kdf.istype(table)*
+
+Returns `true` if table is an instance of `kdf`. Returns `false` otherwise.
+
+### kdf:get_provider_name
+
+**syntax**: *name = kdf:get_provider_name()*
+
+Returns the provider name of `kdf`.
+
+This function is available since OpenSSL 3.0.
+
+## kdf:gettable_params, kdf:settable_params, kdf:get_param, kdf:set_params
+
+Query settable or gettable params and set or get params.
+See [Generic EVP parameter getter/setter](#generic-evp-parameter-gettersetter).
+
+### kdf:derive
+
+**syntax**: *ok, err = kdf:derive(outlen, options?, options_count?)*
+
+Derive a key with length of `outlen` with `options`. Certain algorithms output fixed
+length of key where `outlen` should be unset.
+
+`options` is a table map holding parameters passing to `kdf`. To view the list of parameters
+acceptable by selecter algorithm and provider, use `kdf:settable_params`.
+
+Optionally, if length of `options` is known, user can provide its length through `options_count`
+to gain better performance where `options` table is relatively large.
+
+```lua
+local k = assert(kdf.new("PBKDF2"))
+key = assert(k:derive(16, {
+    pass = "1234567",
+    iter = 1000,
+    digest = "md5",
+    salt = "",
+}))
+ngx.say(ngx.encode_base64(key))
+-- outputs "cDRFLQ7NWt+AP4i0TdBzog=="
+assert(k:reset())
+-- kdf instance is reusable, user can set common parameters
+-- through set_params and don't need to repeat in derive()
+assert(k:set_params({
+    iter = 1000,
+    digest = "md5",
+    salt = "",
+}))
+key = assert(k:derive(16, {
+    pass = "1234567",
+}))
+ngx.say(ngx.encode_base64(key))
+-- outputs "cDRFLQ7NWt+AP4i0TdBzog=="
+
+local k = assert(kdf.new("HKDF"))
+key = assert(k:derive(16, {
+    digest = "md5",
+    key = "secret",
+    salt = "salt",
+    info = "some info",
+    mode = kdf.HKDEF_MODE_EXPAND_ONLY,
+    -- as HKDF also accepts mode as string, use the literal below also works
+    -- mode = "EXPAND_ONLY"
+}))
+```
+
+### kdf:reset
+
+**syntax**: *ok, err = kdf:reset()*
+
+Reset the internal state of `kdf` instance as it's just created by [kdf.new](#kdfnew).
 
 ## resty.openssl.objects
 
@@ -1371,25 +1716,35 @@ Returns `true` if table is an instance of `x509`. Returns `false` otherwise.
 
 ### x509:digest
 
-**syntax**: *d, err = x509:digest(digest_name?)*
+**syntax**: *d, err = x509:digest(digest_name?, properties?)*
 
 Returns a digest of the DER representation of the X509 certificate object in raw binary text.
 
 `digest_name` is a case-insensitive string of digest algorithm name.
-To view a list of digest algorithms implemented, use `openssl list -digest-algorithms`.
+To view a list of digest algorithms implemented, use
+[openssl.list_digest_algorithms](#openssllist_digest_algorithms) or
+`openssl list -digest-algorithms`.
 
 If `digest_name` is omitted, it's default to `sha1`.
 
+Staring from OpenSSL 3.0, this functions accepts an optional `properties` parameter
+to explictly select provider to fetch algorithms.
+
 ### x509:pubkey_digest
 
-**syntax**: *d, err = x509:pubkey_digest(digest_name?)*
+**syntax**: *d, err = x509:pubkey_digest(digest_name?, properties?)*
 
 Returns a digest of the DER representation of the pubkey in the X509 object in raw binary text.
 
 `digest_name` is a case-insensitive string of digest algorithm name.
-To view a list of digest algorithms implemented, use `openssl list -digest-algorithms`.
+To view a list of digest algorithms implemented, use
+[openssl.list_digest_algorithms](#openssllist_digest_algorithms) or
+`openssl list -digest-algorithms`.
 
 If `digest_name` is omitted, it's default to `sha1`.
+
+Staring from OpenSSL 3.0, this functions accepts an optional `properties` parameter
+to explictly select provider to fetch algorithms.
 
 ### x509:check_private_key
 
@@ -1401,7 +1756,7 @@ Returns a boolean indicating if it's a match and err describing the reason.
 
 Note this function also checks if k itself is indeed a private key or not.
 
-### x509:get_*, x509:set_*
+### x509:get_\*, x509:set_\*
 
 **syntax**: *ok, err = x509:set_**attribute**(instance)*
 
@@ -1578,6 +1933,8 @@ Sign the certificate using the private key specified by `pkey`, which must be a
 parameter to set digest method, whichmust be a [resty.openssl.digest](#restyopenssldigest) instance.
 Returns a boolean indicating if signing is successful and error if any.
 
+In BoringSSL when `digest` is not set it's fallback to `SHA256`.
+
 ### x509:verify
 
 **syntax**: *ok, err = x509:verify(pkey)*
@@ -1631,7 +1988,7 @@ Returns a boolean indicating if it's a match and err describing the reason.
 
 Note this function also checks if k itself is indeed a private key or not.
 
-### csr:get_*, csr:set_*
+### csr:get_\*, csr:set_\*
 
 **syntax**: *ok, err = csr:set_**attribute**(instance)*
 
@@ -1746,6 +2103,8 @@ Sign the certificate request using the private key specified by `pkey`, which mu
 parameter to set digest method, whichmust be a [resty.openssl.digest](#restyopenssldigest) instance.
 Returns a boolean indicating if signing is successful and error if any.
 
+In BoringSSL when `digest` is not set it's fallback to `SHA256`.
+
 ### csr:verify
 
 **syntax**: *ok, err = csr:verify(pkey)*
@@ -1792,7 +2151,7 @@ Duplicates a `X509_CRL*` to create a new `crl` instance.
 
 Returns `true` if table is an instance of `crl`. Returns `false` otherwise.
 
-### crl:get_*, crl:set_*
+### crl:get_\*, crl:set_\*
 
 **syntax**: *ok, err = crl:set_**attribute**(instance)*
 
@@ -1900,6 +2259,8 @@ Sign the CRL using the private key specified by `pkey`, which must be a
 [resty.openssl.pkey](#restyopensslpkey) that stores private key. Optionally accept `digest`
 parameter to set digest method, whichmust be a [resty.openssl.digest](#restyopenssldigest) instance.
 Returns a boolean indicating if signing is successful and error if any.
+
+In BoringSSL when `digest` is not set it's fallback to `SHA256`.
 
 ### crl:verify
 
@@ -2720,6 +3081,95 @@ name:add("L", "Mars")
         gc of individual elements. (See x509.altname).
     - Shallow copy for stack is fine because in current design user can't modify the element in the
       stack directly. Each elemente is duplicated when added to stack and when returned.
+
+## Generic EVP parameter getter/setter
+
+Starting from OpenSSL 3.0, this library provides a genric interface to get and set abitrary parameters
+from underlying implementation. This works for [cipher](#resty.openssl.cipher),
+[pkey](#resty.openssl.pkey), [digest](#resty.openssl.digest), [mac](#resty.openssl.mac) and
+[kdf](#resty.openssl.kdf).
+
+Some can be used to provide equal results with existing functions, for example the following
+code produces same result.
+
+```lua
+local pkey = require("resty.openssl.pkey").new({ type = "EC" })
+pkey:get_param("priv", nil, "bn") == pkey:get_parameters().private
+
+local cipher = require("resty.openssl.cipher").new("aes-256-gcm")
+cipher:encrypt(string.rep("0", 32), string.rep("0", "12"), "secret", false, "aad")
+cipher:get_param("tag", 16) == cipher:get_aead_tag()
+```
+
+### gettable_params
+
+**syntax**: *schema, err = x:gettable_params(raw?)*
+
+Returns the readable schema as a Lua table for all gettable params.
+When `raw` is set to true, the function returns the raw schema instead.
+
+### settable_params
+
+**syntax**: *schema, err = x:settable_params(raw?)*
+
+Returns the readable schema as a Lua table for all settable params.
+When `raw` is set to true, the function returns the raw schema instead.
+
+```lua
+local c = require("resty.openssl.cipher").new("aes-256-gcm")
+print(cjson.encode(c:settable_params()))
+-- outputs [["ivlen","unsigned integer (max 8 bytes large)"],["tag","octet string (arbitrary size)"],["tlsaad","octet string (arbitrary size)"],["tlsivfixed","octet string (arbitrary size)"],["tlsivinv","octet string (arbitrary size)"]]
+print(cjson.encode(c:gettable_params()))
+-- outputs [["keylen","unsigned integer (max 8 bytes large)"],["ivlen","unsigned integer (max 8 bytes large)"],["taglen","unsigned integer (max 8 bytes large)"],["iv","octet string (arbitrary size)"],["updated-iv","octet string (arbitrary size)"],["tag","octet string (arbitrary size)"],["tlsaadpad","unsigned integer (max 8 bytes large)"],["tlsivgen","octet string (arbitrary size)"]]
+```
+
+### get_param
+
+**syntax**: *value, err = x:get_param(key, want_size?, want_type?)*
+
+Read the param `key` and return its value. The return value is a Lua number
+or a string.
+Certain params requires exact size to be set, in such case,
+`want_size` should be specified; if `want_size` is not specified and, the
+library use a buffer of 100 bytes to hold the return value.
+Certain params returns a special type, user should explictly set `want_type`
+as a string to correctly decode them. Currently `want_type` can only be
+`"bn"` or unset. Note it may also be necessary to increase temporary buffer
+size `want_size` when `want_type` is `"bn"`.
+
+```lua
+local c = require("resty.openssl.cipher").new("aes-256-gcm")
+print(c:get_param("taglen"))
+-- outputs 16
+print(c:get_param("tag"))
+-- returns error, tag must have a explict size
+print(c:get_param("tag", 16))
+-- outputs the tag
+local p = require("resty.openssl.pkey").new())
+print(p:get_param("d"):to_hex())
+-- returns error, d (private exponent) is a BIGNUM
+print(p:get_param("d", 256, "bn"):to_hex())
+-- returns d as resty.openssl.bn instance
+```
+
+### set_params
+
+**syntax**: *ok, err = x:set_params(params)*
+
+Set params passed in with Lua table `params`. The library does limited type check, user
+is responsible for validity of input.
+
+```lua
+local k = require("resty.openssl.kdf").new("HKDF")
+k:set_params({
+    digest = "md5",
+    salt = "salt",
+    info = "some info",
+    mode = kdf.HKDEF_MODE_EXPAND_ONLY,
+    -- as HKDF also accepts mode as string, use the literal below also works
+    -- mode = "EXPAND_ONLY"
+}))
+```
 
 ## Code generation
 

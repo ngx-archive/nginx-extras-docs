@@ -16,7 +16,7 @@ yum -y install lua-resty-mlcache
 To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
 This document describes lua-resty-mlcache [v2.5.0](https://github.com/thibaultcha/lua-resty-mlcache/releases/tag/2.5.0){target=_blank} 
-released on Nov 19 2020.
+released on Dec 15 2021.
     
 <hr />
 
