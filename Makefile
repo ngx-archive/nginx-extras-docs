@@ -9,3 +9,9 @@ all:clean
 clean:
 	find docs/modules -type f -exec rm -f {} +
 	rm -rf docs/modules.md
+
+.PHONY: update
+update:all
+	git add --all .
+	git commit -m "up"
+	git push
