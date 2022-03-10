@@ -17,8 +17,8 @@ load_module modules/ngx_http_naxsi_module.so;
 ```
 
 
-This document describes nginx-module-naxsi [v1.3](https://github.com/nbs-system/naxsi/releases/tag/1.3){target=_blank} 
-released on Nov 17 2020.
+This document describes nginx-module-naxsi [v1.3](https://github.com/dvershinin/naxsi/releases/tag/1.3){target=_blank} 
+released on Feb 22 2022.
     
 <hr />
 ![naxsi](https://raw.githubusercontent.com/nbs-system/naxsi/master/logo.png)
@@ -117,4 +117,4 @@ mZug
 ## GitHub
 
 You may find additional configuration tips and documentation for this module in the [GitHub repository for 
-nginx-module-naxsi](https://github.com/nbs-system/naxsi){target=_blank}.
+nginx-module-naxsi](https://github.com/dvershinin/naxsi){target=_blank}.

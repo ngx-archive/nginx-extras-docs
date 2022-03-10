@@ -17,8 +17,8 @@ load_module modules/ngx_nchan_module.so;
 ```
 
 
-This document describes nginx-module-nchan [v1.2.14](https://github.com/slact/nchan/releases/tag/v1.2.14){target=_blank} 
-released on Dec 20 2021.
+This document describes nginx-module-nchan [v1.2.15](https://github.com/slact/nchan/releases/tag/v1.2.15){target=_blank} 
+released on Dec 27 2021.
     
 <hr />
 <img class="logo" alt="NCHAN" src="https://nchan.io/github-logo.png" />
@@ -45,7 +45,7 @@ In a web browser, you can use Websocket or EventSource natively, or the [NchanSu
 
 ## Status and History
 
-The latest Nchan release is 1.2.14 (December 20, 2021) ([changelog](https://nchan.io/changelog)).
+The latest Nchan release is 1.2.15 (December 27, 2021) ([changelog](https://nchan.io/changelog)).
 
 The first iteration of Nchan was written in 2009-2010 as the [Nginx HTTP Push Module](https://pushmodule.slact.net), and was vastly refactored into its present state in 2014-2016.
 

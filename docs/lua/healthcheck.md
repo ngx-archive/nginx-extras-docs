@@ -15,8 +15,8 @@ yum -y install lua-resty-healthcheck
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
-This document describes lua-resty-healthcheck [v2.0.0](https://github.com/Kong/lua-resty-healthcheck/releases/tag/2.0.0){target=_blank} 
-released on Sep 22 2020.
+This document describes lua-resty-healthcheck [v1.5.0](https://github.com/Kong/lua-resty-healthcheck/releases/tag/1.5.0){target=_blank} 
+released on Feb 09 2022.
     
 <hr />
 
@@ -102,61 +102,37 @@ programmatic API using functions such as `checker:report_http_status(host, port,
 See the [online LDoc documentation](http://kong.github.io/lua-resty-healthcheck)
 for the complete API.
 
-## Async behaviour
-
-Since this library heavily uses the SHM to share data between workers, it must
-use locks. The locks themselves need access to `ngx.sleep` which is not available
-in all contexts. Most notably not during startup; `init` and `init_worker`.
-
-The library will try and acquire the lock and update, but if it fails it will
-schedule an async update (timer with delay 0).
-
-One workaround for this in the initial phases would be to replace `ngx.sleep` with
-a version that does a blocking sleep in `init`/`init_worker`. This will enable
-the usage of locks in those phases.
-
-
 ## History
 
 Versioning is strictly based on [Semantic Versioning](https://semver.org/)
 
-### Releasing new versions:
+### 1.5.0 (09-Feb-2022)
 
-* update changelog below (PR's should be merged including a changelog entry)
-* based on changelog determine new SemVer version
-* create a new rockspec
-* render the docs using `ldoc` (don't do this within PR's)
-* commit as "release x.x.x" (do not include rockspec revision)
-* tag the commit with "x.x.x" (do not include rockspec revision)
-* push commit and tag
-* upload rock to luarocks: `luarocks upload rockspecs/[name] --api-key=abc`
+* New option `checks.active.headers` supports one or more lists of values indexed by
+  header name. [#87](https://github.com/Kong/lua-resty-healthcheck/pull/87)
+* Introduce dealyed_clear() function, used to remove addresses after a time interval.
+  This function may be used when an address is being removed but may be added again
+  before the interval expires, keeping its health status.
+  [#88](https://github.com/Kong/lua-resty-healthcheck/pull/88)
 
-### 2.0.0 (22-Sep-2020)
+### 1.4.2 (29-Jun-2021)
 
-* BREAKING: fallback for deprecated top-level field `type` is now removed
-  (deprecated since `0.5.0`) [#56](https://github.com/Kong/lua-resty-healthcheck/pull/56)
-* BREAKING: Bump `lua-resty-worker-events` dependency to `2.0.0`. This makes
-  a lot of the APIs in this library asynchronous as the worker events `post`
-  and `post_local` won't anymore call `poll` on a running worker automatically,
-  for more information, see:
-  https://github.com/Kong/lua-resty-worker-events#200-16-september-2020
-* BREAKING: tcp_failures can no longer be 0 on http(s) checks (unless http(s)_failures
-  are also set to 0) [#55](https://github.com/Kong/lua-resty-healthcheck/pull/55)
-* feature: Added support for https_sni [#49](https://github.com/Kong/lua-resty-healthcheck/pull/49)
-* fix: properly log line numbers by using tail calls [#29](https://github.com/Kong/lua-resty-healthcheck/pull/29)
-* fix: when not providing a hostname, use IP [#48](https://github.com/Kong/lua-resty-healthcheck/pull/48)
-* fix: makefile; make install
-* feature: added a status version field [#54](https://github.com/Kong/lua-resty-healthcheck/pull/54)
-* feature: add headers for probe request [#54](https://github.com/Kong/lua-resty-healthcheck/pull/54)
-* fix: exit early when reloading during a probe [#47](https://github.com/Kong/lua-resty-healthcheck/pull/47)
-* fix: prevent target-list from being nil, due to async behaviour [#44](https://github.com/Kong/lua-resty-healthcheck/pull/44)
-* fix: replace timer and node-wide locks with resty-timer, to prevent interval
-  skips [#59](https://github.com/Kong/lua-resty-healthcheck/pull/59)
-* change: added additional logging on posting events [#25](https://github.com/Kong/lua-resty-healthcheck/issues/25)
-* fix: do not run out of timers during init/init_worker when adding a vast
-  amount of targets [#57](https://github.com/Kong/lua-resty-healthcheck/pull/57)
-* fix: do not call on the module table, but use a method for locks. Also in
-  [#57](https://github.com/Kong/lua-resty-healthcheck/pull/57)
+* Fix: prevent new active checks being scheduled while a health check is running.
+  [#72](https://github.com/Kong/lua-resty-healthcheck/pull/72)
+* Fix: remove event watcher when stopping an active health check.
+  [#74](https://github.com/Kong/lua-resty-healthcheck/pull/74); fixes Kong issue
+  [#7406](https://github.com/Kong/kong/issues/7406)
+
+### 1.4.1 (17-Feb-2021)
+
+* Fix: make sure that a single worker will actively check hosts' statuses.
+  [#67](https://github.com/Kong/lua-resty-healthcheck/pull/67)
+
+### 1.4.0 (07-Jan-2021)
+
+* Use a single timer to actively health check targets. This reduces the number
+  of timers used by health checkers, as they used to use two timers by each
+  target. [#62](https://github.com/Kong/lua-resty-healthcheck/pull/62)
 
 ### 1.3.0 (17-Jun-2020)
 
@@ -246,7 +222,7 @@ Versioning is strictly based on [Semantic Versioning](https://semver.org/)
 ## Copyright and License
 
 ```
-Copyright 2017-2020 Kong Inc.
+Copyright 2017-2021 Kong Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

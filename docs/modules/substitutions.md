@@ -17,8 +17,8 @@ load_module modules/ngx_http_subs_filter_module.so;
 ```
 
 
-This document describes nginx-module-substitutions [v0.6.5](https://github.com/dvershinin/ngx_http_substitutions_filter_module/releases/tag/v0.6.5){target=_blank} 
-released on May 28 2020.
+This document describes nginx-module-substitutions [v0.6.6](https://github.com/dvershinin/ngx_http_substitutions_filter_module/releases/tag/v0.6.6){target=_blank} 
+released on Dec 30 2021.
     
 <hr />
 nginx_substitutions_filter

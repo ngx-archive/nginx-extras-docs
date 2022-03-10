@@ -37,6 +37,7 @@
 | [nginx-module-ipscrub](modules/ipscrub.md)                       | IP address anonymizer module for NGINX                                        |
 | [nginx-module-jpeg](modules/jpeg.md)                             | NGINX JPEG filter module                                                      |
 | [nginx-module-js-challenge](modules/js-challenge.md)             | NGINX Javascript challenge module                                             |
+| [nginx-module-json-var](modules/json-var.md)                     | NGINX JSON variables module                                                   |
 | [nginx-module-jwt](modules/jwt.md)                               | NGINX JWT Module                                                              |
 | [nginx-module-length-hiding](modules/length-hiding.md)           | NGINX Length Hiding Filter Module                                             |
 | [nginx-module-log-zmq](modules/log-zmq.md)                       | ZeroMQ logger module for NGINX                                                |

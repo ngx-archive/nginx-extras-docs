@@ -15,8 +15,8 @@ yum -y install lua-resty-openidc
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
-This document describes lua-resty-openidc [v1.7.4](https://github.com/zmartzone/lua-resty-openidc/releases/tag/v1.7.4){target=_blank} 
-released on Nov 17 2020.
+This document describes lua-resty-openidc [v1.7.5](https://github.com/zmartzone/lua-resty-openidc/releases/tag/v1.7.5){target=_blank} 
+released on Dec 21 2021.
     
 <hr />
 [<img width="184" height="96" align="right" src="http://openid.net/wordpress-content/uploads/2016/04/oid-l-certification-mark-l-rgb-150dpi-90mm@2x.png" alt="OpenID Certification">](https://openid.net/certification)
@@ -42,19 +42,6 @@ It supports server-wide caching of resolved Discovery documents and validated Ac
 It can be used as a reverse proxy terminating OAuth/OpenID Connect in front of an origin server so that
 the origin server/services can be protected with the relevant standards without implementing those on
 the server itself.
-
-## Support
-
-#### Community Support
-
-For generic questions, see the Wiki pages with Frequently Asked Questions at:  
-[https://github.com/zmartzone/lua-resty-openidc/wiki](https://github.com/zmartzone/lua-resty-openidc/wiki)  
-Any questions/issues should go to issues tracker.
-
-#### Commercial Services
-
-For commercial Support contracts, Professional Services, Training and use-case specific support you can contact:  
-[sales@zmartzone.eu](mailto:sales@zmartzone.eu)
 
 ## Sample Configuration for Google+ Signin
 
@@ -204,6 +191,7 @@ MIIEogIBAAKCAQEAiThmpvXBYdur716D2q7fYKirKxzZIU5QrkBGDvUOwg5izcTv
              --     `openidc_authorize` immediately prior to saving the session
              --  -- `on_authenticated` hook is invoked *after* receiving authorization response in
              --     `openidc_authorization_response` immediately prior to saving the session
+             --     Starting with lua-resty-openidc 1.7.5 this receives the decoded id_token as second and the response of the token endpoint as third argument      
              --  -- `on_regenerated` is invoked immediately after the
                      a new access token has been obtained via token
                      refresh and is called with the regenerated session table
@@ -211,6 +199,7 @@ MIIEogIBAAKCAQEAiThmpvXBYdur716D2q7fYKirKxzZIU5QrkBGDvUOwg5izcTv
              --     `openidc_logout`
              --
              --  Any, all or none of the hooks may be used. Empty `lifecycle` does nothing.
+             --  A hook that returns a truthy value causes the lifecycle action they are taking part of to fail.
 
              -- Optional : add decorator for HTTP request that is
              -- applied when lua-resty-openidc talks to the OpenID Connect
@@ -279,9 +268,9 @@ local res, err = require("resty.openidc").authenticate(opts, nil, "deny")
 
 ## Sessions and Locking
 
-The `authenicate` function returns the current session object as its
+The `authenticate` function returns the current session object as its
 forth return argument. If you have configured lua-resty-session to use
-a server side storade backend that uses locking, the session may still
+a server side storage backend that uses locking, the session may still
 be locked when it is returned. In this case you may want to close it
 explicitly
 
@@ -289,6 +278,55 @@ explicitly
 local res, err, target, session = require("resty.openidc").authenticate(opts)
 session:close()
 ```
+
+## Caching
+
+lua-resty-openidc can use [shared memory
+caches](https://github.com/openresty/lua-nginx-module/#lua_shared_dict)
+for several things. If you want it to use the caches, you must use
+`lua_shared_dict` in your `nginx.conf` file.
+
+Currently up to four caches are used
+
+* the cache named `discovery` stores the OpenID Connect Disovery
+  metadata of your OpenID Connect Provider. Cache items expire after
+  24 hours unless overriden by `opts.discovery_expires_in` (a value
+  given in seconds) . This cache will store one item per issuer URI
+  and you can look up the discovery document yourself to get an
+  estimate for the size required - usually a few kB per OpenID Connect
+  Provider.
+* the cache named `jwks` stores the key material of your OpenID
+  Connect Provider if it is provided via the JWKS endpoint. Cache
+  items expire after 24 hours unless overriden by
+  `opts.jwks_expires_in`. This cache will store one item per JWKS URI
+  and you can look up the jwks yourself to get an estimate for the
+  size required - usually a few kB per OpenID Connect Provider.
+* the cache named `introspection` stores the result of OAuth2 token
+  introspection. Cache items expire when the corresponding token
+  expires. Tokens with unknown expiry are not cached at all. This
+  cache will contain one entry per introspected access token - usually
+  this will be a few kB per token.
+* the cache named `jwt_verification` stores the result of JWT
+  verification.  Cache items expire when the corresponding token
+  expires. Tokens with unknown expiry are not cached for two
+  minutes. This cache will contain one entry per verified JWT -
+  usually this will be a few kB per token.
+
+## Caching of Introspection and JWT Verification Results
+
+Note the `jwt_verification` and `introspection` caches are shared
+between all configured locations. If you are using locations with
+different `opts` configuration the shared cache may allow a token that
+is valid for only one location to be accepted by another if it is read
+from the cache. In order to avoid cache confusion it is recommended to
+set `opts.cache_segment` to unique strings for each set of related
+locations.
+
+## Revoke tokens
+
+The `revoke_tokens(opts, session)` function revokes the current refresh and access token. In contrast to a full logout, the session cookie will not be destroyed and the endsession endpoint will not be called. The function returns `true` if both tokens were revoked successfully. This function might be helpful in scenarios where you want to destroy/remove a session from the server side.
+
+With `revoke_token(opts, token_type_hint, token)` it is also possible to revoke a specific token. `token_type_hint` can usually be `refresh_token` or `access_token`.
 
 ## Sample Configuration for OAuth 2.0 JWT Token Validation
 
@@ -305,7 +343,7 @@ http {
   resolver 8.8.8.8;
 
   # cache for JWT verification results
-  lua_shared_dict introspection 10m;
+  lua_shared_dict jwt_verification 10m;
 
   server {
     listen 8080;
@@ -364,6 +402,13 @@ OcTuruRhqYOIJjiYZSgK/P0zUw1cjLwUJ9ig/O6ozYmof83974fygA/wK3SgFNEoFlTkTpOvZhVW
              -- the expiration time in seconds for jwk cache, default is 1 day.
              --jwk_expires_in = 24 * 60 * 60
 
+             -- It may be necessary to force verification for a bearer token and ignore the existing cached
+             -- verification results. If so you need to set set the jwt_verification_cache_ignore option to true.
+             -- jwt_verification_cache_ignore = true
+
+             -- optional name of a cache-segment if you need separate
+             -- caches for differently configured locations
+             -- cache_segment = 'api'
           }
 
           -- call bearer_jwt_verify for OAuth 2.0 JWT validation
@@ -430,6 +475,10 @@ http {
              -- Defaults to "exp" - Controls the TTL of the introspection cache
              -- https://tools.ietf.org/html/rfc7662#section-2.2
              -- introspection_expiry_claim = "exp"
+
+             -- optional name of a cache-segment if you need separate
+             -- caches for differently configured locations
+             -- cache_segment = 'api'
           }
 
           -- call introspect for OAuth 2.0 Bearer Access Token validation
@@ -528,6 +577,10 @@ http {
              -- It may be necessary to force an introspection call for an access_token and ignore the existing cached
              -- introspection results. If so you need to set set the introspection_cache_ignore option to true.
              -- introspection_cache_ignore = true
+
+             -- optional name of a cache-segment if you need separate
+             -- caches for differently configured locations
+             -- cache_segment = 'api'
           }
 
           -- call introspect for OAuth 2.0 Bearer Access Token validation
@@ -587,10 +640,18 @@ $ docker run -it --rm -e coverage=t lua-resty-openidc/test:latest
 
 as the second command
 
+## Support
+
+For generic questions, see the Wiki pages with Frequently Asked Questions at:  
+[https://github.com/zmartzone/lua-resty-openidc/wiki](https://github.com/zmartzone/lua-resty-openidc/wiki)  
+Any questions/issues should go to the Github Discussons or Issues tracker.
+
+
 ## Disclaimer
 
-*This software is open sourced by ZmartZone IAM. For commercial support
-you can contact [ZmartZone IAM](https://www.zmartzone.eu) as described above in the [Support](#support) section.*
+*This software is open sourced by ZmartZone IAM but not supported commercially as such.
+Any questions/issues should go to the Github Discussions or Issues tracker.
+See also the DISCLAIMER file in this directory.*
 
 ## GitHub
 
