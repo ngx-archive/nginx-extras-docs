@@ -17,12 +17,14 @@ load_module modules/ngx_http_security_headers_module.so;
 ```
 
 
-This document describes nginx-module-security-headers [v0.0.9](https://github.com/GetPageSpeed/ngx_security_headers/releases/tag/0.0.9){target=_blank} 
-released on Feb 29 2020.
+This document describes nginx-module-security-headers [v0.0.11](https://github.com/GetPageSpeed/ngx_security_headers/releases/tag/0.0.11){target=_blank} 
+released on Mar 18 2022.
     
 <hr />
 
-This NGINX module adds security headers and removes insecure headers easily. 
+This NGINX module adds security headers and removes insecure headers, *the right way* (c). 
+
+[![Test Build](https://github.com/GetPageSpeed/ngx_security_headers/actions/workflows/build.yml/badge.svg?event=push)](https://github.com/GetPageSpeed/ngx_security_headers/actions/workflows/build.yml)
 
 ## Synopsis
 
@@ -33,9 +35,9 @@ http {
 }
 ```
 
-Running `curl -IL http://example.com/` will yield additional headers:
+Running `curl -IL https://example.com/` will yield the added security headers:
 
-```
+<pre>
 HTTP/1.1 200 OK
 Server: nginx
 Date: Tue, 21 May 2019 16:15:46 GMT
@@ -43,28 +45,40 @@ Content-Type: text/html; charset=UTF-8
 Vary: Accept-Encoding
 Accept-Ranges: bytes
 Connection: keep-alive
-X-Frame-Options: SAMEORIGIN  <-----------
-X-XSS-Protection: 1; mode=block <-----------
-Referrer-Policy: no-referrer-when-downgrade <-----------
-```
+<b>X-Frame-Options: SAMEORIGIN
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Referrer-Policy: strict-origin-when-cross-origin
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload</b>
+</pre>
 
-Running `curl -IL http://example.com/some.css` (or `some.js`) will yield *additional* security header:
+In general, the module features sending security HTTP headers in a way that better conforms to the standards.
+For instance, `Strict-Transport-Security` header should *not* be sent for plain HTTP requests.
+The module follows this recommendation.
 
-```
-HTTP/1.1 200 OK
-...
-X-Content-Type-Options: nosniff <-----------
-```
+## Important note on `Strict-Transport-Security`
 
+The module adds several security headers, including `Strinct-Transport-Security`.
+Note that `preload` is sent in the value of this header, by default.
+This means Chrome may and will include your websites to its preload list of domains which are HTTPS only.
+
+It is *usually* what you want anyway, but bear in mind that in some edge cases you want to access
+a subdomain via plan unencrypted connection.
+
+If you absolutely sure that all your domains and subdomains used with the module will ever primarily operate
+on HTTPs, proceed without any extra step.
+
+If you are *not sure* if you have or will have a need to access your websites or any of its subdomains over
+plain insecure HTTP protocol, ensure `security_headers_hsts_preload off;` in your config before you ever
+start NGINX with the module to avoid having your domain preloaded by Chrome.
 
 ## Key Features
 
 *   Plug-n-Play: the default set of security headers can be enabled with `security_headers on;` in your NGINX configuration
-*   Sends `X-Content-Type-Options` only for relevant MIME types (CSS/JS), preserving unnecessary headers from being sent for HTML documents
-*   Similiarly, sends HTML-only relevant headers for relevant types and skips sending for others e.g. `X-Frame-Options` is useless for CSS
+*   Sends HTML-only security headers for relevant types only, not sending for others, e.g. `X-Frame-Options` is useless for CSS
 *   Plays well with conditional `GET` requests: the security headers are not included there unnecessarily
 *   Does not suffer the `add_header` directive's pitfalls
-*   Hides `X-Powered-By`, which often leaks PHP version information
+*   Hides `X-Powered-By` and other headers which often leak software version information
 *   Hides `Server` header altogether, not just the version information
 
 ## Configuration directives
@@ -80,7 +94,7 @@ Enables or disables applying security headers. The default set includes:
 * `X-Frame-Options: SAMEORIGIN`
 * `X-XSS-Protection: 1; mode=block`
 * `Referrer-Policy: strict-origin-when-cross-origin`
-* `X-Content-Type-Options: nosniff` (for CSS and Javascript)
+* `X-Content-Type-Options: nosniff`
 
 The values of these headers (or their inclusion) can be controlled with other `security_headers_*` directives below.
 
@@ -102,7 +116,7 @@ It's worth noting that some of those headers bear functional use, e.g. [`X-Page-
 > ... it is used to prevent infinite loops and unnecessary rewrites when PageSpeed 
 > fetches resources from an origin that also uses PageSpeed
 
-So it's best to specify `hide_server_tokens on;` in a front-facing NGINX insances, e.g.
+So it's best to specify `hide_server_tokens on;` in a front-facing NGINX instances, e.g.
 the one being accessed by actual browsers, and not the ones consumed by Varnish or other software.
 
 In most cases you will be just fine with `security_headers on;` and `hide_server_tokens on;`, without any adjustments.
@@ -112,7 +126,7 @@ A special value `omit` disables sending a particular header by the module (usefu
 
 ### `security_headers_xss`
 
-- **syntax**: `security_headers off | on | block | omit`
+- **syntax**: `security_headers_xss off | on | block | omit`
 - **default**: `block`
 - **context**: `http`, `server`, `location`
 
@@ -139,14 +153,6 @@ Special `omit` value will disable sending the header by the module.
 
 Controls inclusion and value of [`Referrer-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy) header. 
 Special `omit` value will disable sending the header by the module. 
-
-### `security_headers_nosniff_types`
-
-- **syntax**: `security_headers_nosniff_types <mime_type> [..]`
-- **default**: `text/css text/javascript application/javascript`
-- **context**: `http`, `server`, `location`
-
-Defines MIME types, for which `X-Content-Type-Options: nosniff` is sent.
 
 ## GitHub
 

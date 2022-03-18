@@ -36,7 +36,9 @@ def enrich_with_yml_info(md, module_config, release):
         intro = f"""
 ## Installation
 
-CentOS/RHEL 6, 7, 8 and Amazon Linux 2 are supported.
+CentOS/RHEL 6, 7, 8 and Amazon Linux 2 are supported and require a [subscription](https://www.getpagespeed.com/repo-subscribe).
+
+Fedora Linux is supported free of charge and doesn't require a subscription.
 
 ### OS-specific complete installation and configuration guides available:
 
@@ -123,9 +125,11 @@ def enrich_lib_with_yml_info(md, module_config, release):
         intro = f"""
 ## Installation
 
-CentOS/RHEL 6, 7, 8 and Amazon Linux 2 are supported.
+CentOS/RHEL 6, 7, 8 and Amazon Linux 2 are supported and require a commercial subscription.
 
 If you haven't set up RPM repository subscription, [sign up](https://www.getpagespeed.com/repo-subscribe). Then you can proceed with the following steps.
+
+Fedora Linux is supported free of charge and doesn't require a subscription.
 
 ### OS-specific complete installation and configuration guides available:
 

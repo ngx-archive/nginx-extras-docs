@@ -15,8 +15,8 @@ yum -y install lua-resty-openssl
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
-This document describes lua-resty-openssl [v0.8.5](https://github.com/fffonion/lua-resty-openssl/releases/tag/0.8.5){target=_blank} 
-released on Feb 02 2022.
+This document describes lua-resty-openssl [v0.8.7](https://github.com/fffonion/lua-resty-openssl/releases/tag/0.8.7){target=_blank} 
+released on Mar 18 2022.
     
 <hr />
 
@@ -194,6 +194,21 @@ Return available MAC algorithms in an array.
 
 Return available KDF algorithms in an array.
 
+### openssl.list_ssl_ciphers
+
+**syntax**: *cipher_string, err = openssl.list_ssl_ciphers(cipher_list?, ciphersuites?, protocol?)*
+
+Return default SSL ciphers as a string. `cipher_list` (prior TLSv1.3) and
+`ciphersuites` (TLSv1.3) can be used to expand the cipher settings matches
+`protocol`.
+
+```lua
+openssl.list_ssl_ciphers()
+openssl.list_ssl_ciphers("ECDHE-ECDSA-AES128-SHA")
+openssl.list_ssl_ciphers("ECDHE-ECDSA-AES128-SHA", nil, "TLSv1.2")
+openssl.list_ssl_ciphers("ECDHE-ECDSA-AES128-SHA", "TLS_CHACHA20_POLY1305_SHA256", "TLSv1.3")
+```
+
 ## resty.openssl.ctx
 
 A module to provide OSSL_LIB_CTX context switches.
@@ -205,15 +220,15 @@ reading. It can be used to replace `ENGINE` in prior 3.0 world.
 
 The context is currently effective following modules:
 
-- [cipher](#resty.openssl.cipher)
-- [digest](#resty.openssl.digest)
-- [kdf](#resty.openssl.kdf)
-- [mac](#resty.openssl.mac)
+- [cipher](#restyopensslcipher)
+- [digest](#restyopenssldigest)
+- [kdf](#restyopensslkdf)
+- [mac](#restyopensslmac)
 - [pkcs12.encode](#pkcs12encode)
-- [pkey](#resty.openssl.pkey)
-- [provider](#resty.openssl.provider)
-- [rand](#resty.openssl.rand)
-- [x509](#resty.openssl.x509), [x509.csr](#resty.openssl.x509.csr), [x509.crl](#resty.openssl.x509.crl) and some [x509.store](#resty.openssl.x509.store) functions
+- [pkey](#restyopensslpkey)
+- [provider](#restyopensslprovider)
+- [rand](#restyopensslrand)
+- [x509](#restyopensslx509), [x509.csr](#restyopensslx509csr), [x509.crl](#restyopensslx509crl) and some [x509.store](#restyopensslx509store) functions
 
 This module is only available on OpenSSL 3.0.
  
@@ -227,6 +242,17 @@ request's context. `conf_file` can optionally specify an OpenSSL conf file
 to create the context.
 
 The created context is automatically freed with its given lifecycle.
+
+```lua
+-- initialize a AES cipher instance from given provider implementation only
+-- for current request, without interfering other part of code
+-- or future requests from using the same algorithm.
+assert(require("resty.openssl.ctx").new(true))
+local p = assert(require("resty.openssl.provider").load("myprovider"))
+local c = require("resty.openssl.cipher").new("aes256")
+print(c:encrypt(string.rep("0", 32), string.rep("0", 16), "🦢"))
+-- don't need to release provider and ctx, they are GC'ed automatically
+```
 
 ### ctx.free
 
@@ -328,8 +354,10 @@ Load provider with `name`. If `try` is set to true, OpenSSL will not disable the
 fall-back providers if the provider cannot be loaded and initialized. If the provider
 loads successfully, however, the fall-back providers are disabled.
 
-For now this functions loads provider into the default context, meaning it will affect
-other applications in the same process using the default context as well.
+By default this functions loads provider into the default context, meaning it will affect
+other applications in the same process using the default context as well. If such behaviour
+is not desired, consider using [ctx](#restyopensslctx) to load
+provider only to limited scope.
 
 ### provider.istype
 
@@ -2225,6 +2253,23 @@ and thus used by [crl:get_extension](#crlget_extension) and [crl:set_extension](
 
 Return the [NID] or the short name (SN) of the signature of the CRL.
 
+### crl:get_by_serial
+
+**syntax**: *found_revoked, err = crl:get_by_serial(serial)*
+
+Find if given `serial` is in the CRL, `serial` can be [bn](#resty.openssl.bn) instance, or
+a hexadecimal string. Returns a table if found where:
+
+```
+{
+  serial_number: serial number of the revoked cert in hexadecimal string,
+  revoked_date: revoked date of the cert as unix timestamp
+}
+```
+
+Returns `false` if not found; specially if a serial number is removed from CRL, then
+`false, "not revoked (removeFromCRL)"` is returned.
+
 ### crl:get_extension
 
 **syntax**: *extension, pos, err = crl:get_extension(nid_or_txt, last_pos?)*
@@ -2301,11 +2346,50 @@ verification is successful and error if any.
 Outputs CRL in PEM-formatted text or DER-formatted binary.
 The first argument can be a choice of `PEM` or `DER`; when omitted, this function outputs PEM by default.
 
+### crl:text
+
+**syntax**: *str, err = crl:text()*
+
+Outputs CRL in a human-readable format.
+
 ### crl:to_PEM
 
 **syntax**: *pem, err = crl:to_PEM()*
 
 Outputs the CRL in PEM-formatted text.
+
+### crl:__metamethods
+
+**syntax**: *for i, revoked in ipairs(crl)*
+
+**syntax**: *len = #crl*
+
+**syntax**: *revoked = crl[i]*
+
+Access the revoked list as it's a Lua table. Make sure your LuaJIT compiled
+with `-DLUAJIT_ENABLE_LUA52COMPAT` flag; otherwise use `all`, `each`, `index` and `count`
+instead.
+
+See also [functions for stack-like objects](#functions-for-stack-like-objects).
+
+Each returned object is a table where:
+
+```
+{
+  serial_number: serial number of the revoked cert in hexadecimal string,
+  revoked_date: revoked date of the cert as unix timestamp
+}
+```
+
+```lua
+local f = io.open("t/fixtures/TrustAsiaEVTLSProCAG2.crl"):read("*a")
+local crl = assert(require("resty.openssl.x509.crl").new(f))
+
+for _, obj in ipairs(crl) do
+  ngx.say(require("cjson").encode(obj))
+end
+-- outputs '{"revocation_date":1577753344,"serial_number":"09159859CAC0C90203BB34C5A012C2A3"}'
+```
 
 ## resty.openssl.x509.name
 
@@ -3001,6 +3085,8 @@ Return the peer certificate as a [x509](#restyopensslx509) instance. Depending o
 of `ssl`, peer certificate means the server certificate on client side, or the client certificate
 on server side.
 
+This function should be called after SSL handshake.
+
 ### ssl:get_peer_cert_chain
 
 **syntax**: *chain, err = ssl:get_peer_certificate()*
@@ -3008,6 +3094,179 @@ on server side.
 Return the whole peer certificate chain as a [x509.chain](#restyopensslx509chain) instance.
 Depending on the type of `ssl`, peer certificate means the server certificate on client side,
 or the client certificate on server side.
+
+This function should be called after SSL handshake.
+
+### ssl:set_ciphersuites, ssl:set_cipher_list
+
+**syntax**: *ok, err = ssl:set_ciphersuites(cipher_suite)*
+**syntax**: *ok, err = ssl:set_cipher_list(cipher_list)*
+
+Set the cipher suites string used in handshake. Use `ssl:set_ciphersuites
+for TLSv1.3 and `ssl:set_cipher_list` for lower.
+
+This function should be called before SSL handshake; for server this means this function
+is only effective in `ssl_certificate_by` or `ssl_client_hello_by` phases.
+
+### ssl:get_ciphers
+
+**syntax**: *ciphers, err = ssl:get_ciphers()*
+
+Get the cipher list string used in handshake as a string.
+
+### ssl:get_cipher_name
+
+**syntax**: *cipher_name, err = ssl:get_cipher_name()*
+
+Get the negotiated cipher name as a string.
+
+This function should be called after SSL handshake.
+
+### ssl:set_timeout
+
+**syntax**: *ok, err = ssl:set_timeout(tm)*
+
+Set the timeout value for current session in seconds `tm`.
+
+### ssl:get_timeout
+
+**syntax**: *tm, err = ssl:set_timeout(tm)*
+
+Get the timeout value for current session in seconds.
+
+### ssl:set_verify
+
+**syntax**: *ok, err = ssl:set_verify(mode)*
+
+Set the verify mode in current session. Available modes are:
+
+```
+  ssl.SSL_VERIFY_NONE                 = 0x00,
+  ssl.SSL_VERIFY_PEER                 = 0x01,
+  ssl.SSL_VERIFY_FAIL_IF_NO_PEER_CERT = 0x02,
+  ssl.SSL_VERIFY_CLIENT_ONCE          = 0x04,
+  ssl.SSL_VERIFY_POST_HANDSHAKE       = 0x08,
+```
+
+This function should be called before SSL handshake; for server this means this function
+is only effective in `ssl_certificate_by` or `ssl_client_hello_by` phases.
+
+### ssl:add_client_ca
+
+**syntax**: *ok, err = ssl:add_client_ca(x509)*
+
+Add the CA name extracted from `x509` to the list of CAs sent to the client
+when requesting a client certificate. `x509` is a [x509](#resty.openssl.x509)
+instance. This function doesn't affect the verification result of client certificate.
+
+This function should be called before SSL handshake; for server this means this function
+is only effective in `ssl_certificate_by` or `ssl_client_hello_by` phases.
+
+### ssl:set_options
+
+**syntax**: *bitmask, err = ssl:set_options(option, ...)*
+
+Set one or more options in current session. Available options are:
+
+<details>
+<summary>SSL options</summary>
+
+```
+  ssl.SSL_OP_NO_EXTENDED_MASTER_SECRET                = 0x00000001,
+  ssl.SSL_OP_CLEANSE_PLAINTEXT                        = 0x00000002,
+  ssl.SSL_OP_LEGACY_SERVER_CONNECT                    = 0x00000004,
+  ssl.SSL_OP_TLSEXT_PADDING                           = 0x00000010,
+  ssl.SSL_OP_SAFARI_ECDHE_ECDSA_BUG                   = 0x00000040,
+  ssl.SSL_OP_IGNORE_UNEXPECTED_EOF                    = 0x00000080,
+  ssl.SSL_OP_DISABLE_TLSEXT_CA_NAMES                  = 0x00000200,
+  ssl.SSL_OP_ALLOW_NO_DHE_KEX                         = 0x00000400,
+  ssl.SSL_OP_DONT_INSERT_EMPTY_FRAGMENTS              = 0x00000800,
+  ssl.SSL_OP_NO_QUERY_MTU                             = 0x00001000,
+  ssl.SSL_OP_COOKIE_EXCHANGE                          = 0x00002000,
+  ssl.SSL_OP_NO_TICKET                                = 0x00004000,
+  ssl.SSL_OP_CISCO_ANYCONNECT                         = 0x00008000,
+  ssl.SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION   = 0x00010000,
+  ssl.SSL_OP_NO_COMPRESSION                           = 0x00020000,
+  ssl.SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION        = 0x00040000,
+  ssl.SSL_OP_NO_ENCRYPT_THEN_MAC                      = 0x00080000,
+  ssl.SSL_OP_ENABLE_MIDDLEBOX_COMPAT                  = 0x00100000,
+  ssl.SSL_OP_PRIORITIZE_CHACHA                        = 0x00200000,
+  ssl.SSL_OP_CIPHER_SERVER_PREFERENCE                 = 0x00400000,
+  ssl.SSL_OP_TLS_ROLLBACK_BUG                         = 0x00800000,
+  ssl.SSL_OP_NO_ANTI_REPLAY                           = 0x01000000,
+  ssl.SSL_OP_NO_SSLv3                                 = 0x02000000,
+  ssl.SSL_OP_NO_TLSv1                                 = 0x04000000,
+  ssl.SSL_OP_NO_TLSv1_2                               = 0x08000000,
+  ssl.SSL_OP_NO_TLSv1_1                               = 0x10000000,
+  ssl.SSL_OP_NO_TLSv1_3                               = 0x20000000,
+  ssl.SSL_OP_NO_DTLSv1                                = 0x04000000,
+  ssl.SSL_OP_NO_DTLSv1_2                              = 0x08000000,
+  ssl.SSL_OP_NO_RENEGOTIATION                         = 0x40000000,
+  ssl.SSL_OP_CRYPTOPRO_TLSEXT_BUG                     = 0x80000000,
+```
+</details>
+
+Multiple options can be passed in seperatedly, or in a bitwise or bitmask.
+
+```lua
+assert(ssl:set_options(bit.bor(ssl.SSL_OP_NO_TLSv1_1, ssl.SSL_OP_NO_TLSv1_2)))
+-- same as
+assert(ssl:set_options(ssl.SSL_OP_NO_TLSv1_1, ssl.SSL_OP_NO_TLSv1_2))
+```
+
+Returns the options of current session in bitmask.
+
+This function should be called before SSL handshake; for server this means this function
+is only effective in `ssl_client_hello_by` phase.
+
+
+### ssl:get_options
+
+**syntax**: *bitmask, err = ssl:get_options(readable?)*
+
+Get the options for current session. If `readable` is not set or set to `false`, the function
+return the bit mask for all optinos; if `readable` is set to `true,` the function returns
+a sorted Lua table containing literals for all options.
+
+### ssl:clear_options
+
+**syntax**: *bitmask, err = ssl:clear_options(option, ...)*
+
+Clear one or more options in current session.
+Available options are same as that in [ssl:set_options](#sslset_options).
+
+Multiple options can be passed in seperatedly, or in a bitwise or bitmask.
+
+```lua
+assert(ssl:clear_options(bit.bor(ssl.SSL_OP_NO_TLSv1_1, ssl.SSL_OP_NO_TLSv1_2)))
+-- same as
+assert(ssl:clear_options(ssl.SSL_OP_NO_TLSv1_1, ssl.SSL_OP_NO_TLSv1_2))
+```
+
+Returns the options of current session in bitmask.
+
+This function should be called before SSL handshake; for server this means this function
+is only effective in `ssl_client_hello_by` phase.
+
+### ssl:set_protocols
+
+**syntax**: *bitmask, err = ssl:set_protocols(protocol, ...)*
+
+Set avaialable protocols for handshake, this is a convenient function that
+calls [ssl:set_options](#sslset_options) and [ssl:clear_options](#sslclear_options) to
+set appropriate options.
+
+Returns the options of current session in bitmask.
+
+This function should be called before SSL handshake; for server this means this function
+is only effective in `ssl_client_hello_by` phase.
+
+```lua
+assert(ssl:set_protocols("TLSv1.1", "TLSv1.2"))
+-- same as
+assert(ssl:set_options(ssl.SSL_OP_NO_SSL_MASK))
+assert(ssl:clear_options(ssl.SSL_OP_NO_TLSv1_1, ssl.SSL_OP_NO_TLSv1_2))
+```
 
 ## resty.openssl.ssl_ctx
 
@@ -3029,6 +3288,13 @@ Wraps the `SSL_CTX*` instance from current downstream request.
 
 Wraps the `SSL_CTX*` instance from a TCP cosocket, the cosocket must have already
 been called `sslhandshake`.
+
+### ssl_ctx:set_alpns
+
+**syntax**: *ok, err = ssl_ctx:set_alpns(alpn, ...)*
+
+Set the ALPN list to be negotiated with peer. Each `alpn` is the plaintext
+literal for the protocol, like `"h2"`.
 
 ## Functions for stack-like objects
 
