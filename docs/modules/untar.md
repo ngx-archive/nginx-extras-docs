@@ -17,8 +17,8 @@ load_module modules/ngx_http_untar_module.so;
 ```
 
 
-This document describes nginx-module-untar [v1.0](https://github.com/ajax16384/ngx_http_untar_module/releases/tag/v1.0){target=_blank} 
-released on Mar 01 2020.
+This document describes nginx-module-untar [v1.1](https://github.com/ajax16384/ngx_http_untar_module/releases/tag/v1.1){target=_blank} 
+released on Mar 21 2022.
     
 <hr />
 This [nginx](https://nginx.org/) module can serve static file content directly from tar archives.
@@ -64,7 +64,7 @@ Invokes untar of **untar_file** from **untar_archive**
 
 ## TODO
 * Limit cache archive descriptors, free expired archive descriptors
-* Add tar item checksum to ETag
+* GNU extension modification time format
 
 ## GitHub
 

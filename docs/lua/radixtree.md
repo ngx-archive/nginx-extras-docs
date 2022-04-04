@@ -15,8 +15,8 @@ yum -y install lua-resty-radixtree
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
-This document describes lua-resty-radixtree [v2.8.1](https://github.com/api7/lua-resty-radixtree/releases/tag/v2.8.1){target=_blank} 
-released on Jul 08 2021.
+This document describes lua-resty-radixtree [v2.8.2](https://github.com/api7/lua-resty-radixtree/releases/tag/v2.8.2){target=_blank} 
+released on Apr 01 2022.
     
 <hr />
 

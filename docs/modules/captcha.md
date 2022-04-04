@@ -1,10 +1,18 @@
 # *[BETA!] captcha*: NGINX Captcha Module
 
-
 ## Installation
 
-### CentOS/RHEL 6, 7, 8 or Amazon Linux 2
+CentOS/RHEL 6, 7, 8 and Amazon Linux 2 are supported and require a [subscription](https://www.getpagespeed.com/repo-subscribe).
 
+Fedora Linux is supported free of charge and doesn't require a subscription.
+
+### OS-specific complete installation and configuration guides available:
+
+*   [CentOS/RHEL 7](https://bit.ly/nginx-captcha-el)
+*   [CentOS/RHEL 8](https://bit.ly/nginx-captcha-el)
+*   [Amazon Linux 2](https://bit.ly/nginx-captcha-el)
+
+### Other supported operating systems        
 ```bash
 yum -y install https://extras.getpagespeed.com/release-latest.rpm
 yum -y install nginx-module-captcha
