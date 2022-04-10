@@ -30,12 +30,17 @@ NGINX Extras provide you with production-grade, SELinux compatible packages for 
 
 Since Tengine claims 100% compatibility with the stable NGINX branch, you can easily install all the
 numerous module packages from NGINX Extras to empower your Tengine furthermore, e.g. to add the 
-[PageSpeed module](modules/pagespeed.md). Commercial subscription for GetPageSpeed repository is
-required:
+[PageSpeed module](modules/pagespeed.md). 
+
+Commercial subscription for GetPageSpeed repository is required only to install NGINX modules for Tengine.
+You must provide the Tengine compatible NGINX version when installing modules, like so:
 
 ```bash
-yum -y install nginx-module-pagespeed
+yum -y install 'nginx-module-pagespeed-1.18.0.*'
 ```
+
+Here we specified to install `nginx-module-pagespeed` for NGINX 1.18.0, which is matching the current
+Tengine to NGINX binary compatibility.
  
 ## Tengine Features
 
