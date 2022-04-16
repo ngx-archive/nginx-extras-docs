@@ -36,7 +36,7 @@ and/or have the time to deal with potential (although rare) backwards incompatib
 You can install mainline NGINX module packages easily by enabling the `mainline` sub-repository:
 
 ```bash
-sudo yum -y install yum-utils
+sudo yum -y --disablerepo getpagespeed-extras install yum-utils
 sudo yum-config-manager --enable getpagespeed-extras-mainline
 ```
 
