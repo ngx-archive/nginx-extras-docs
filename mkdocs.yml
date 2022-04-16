@@ -96,6 +96,9 @@ nav:
   - webp: modules/webp.md
   - zip: modules/zip.md
 - Lua Scripting: lua-scripting.md
+- Distributions:
+    - nginx-mod.md
+    - tengine.md
 - RPM Repository: https://www.getpagespeed.com/redhat
 plugins:
 - search

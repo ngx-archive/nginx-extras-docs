@@ -11,8 +11,7 @@ NGINX Extras provide you with production-grade, SELinux compatible packages for 
 === "CentOS/RHEL 6, 7 and Amazon Linux 2"
 
     ```bash
-    sudo yum -y install https://extras.getpagespeed.com/release-latest.rpm
-    sudo yum -y --disablerepo getpagespeed-extras install yum-utils
+    sudo yum -y install https://extras.getpagespeed.com/release-latest.rpm yum-utils
     sudo yum-config-manager --enable getpagespeed-extras-tengine
     sudo yum -y install tengine
     ``` 
@@ -20,8 +19,7 @@ NGINX Extras provide you with production-grade, SELinux compatible packages for 
 === "CentOS/RHEL 8"
 
     ```bash
-    sudo dnf -y install https://extras.getpagespeed.com/release-latest.rpm
-    sudo dnf -y --disablerepo getpagespeed-extras install dnf-plugins-core
+    sudo dnf -y install https://extras.getpagespeed.com/release-latest.rpm dnf-plugins-core
     sudo dnf config-manager --enable getpagespeed-extras-tengine
     sudo dnf -y install tengine
     ```
