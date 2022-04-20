@@ -357,7 +357,7 @@ repository for
 nginx-module-{handle}](https://github.com/{module_config['repo']}){{target=_blank}}.
 """
     readme_contents = ensure_one_h1(readme_contents)
-    # print(readme_contents)
+    return readme_contents
 
 
 def process_modules_glob(g):
