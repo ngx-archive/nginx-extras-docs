@@ -42,6 +42,7 @@ nav:
   - fips-check: modules/fips-check.md
   - flv: modules/flv.md
   - form-input: modules/form-input.md
+  - geoip: modules/geoip.md
   - geoip2: modules/geoip2.md
   - google: modules/google.md
   - graphite: modules/graphite.md
@@ -49,6 +50,7 @@ nav:
   - hmac-secure-link: modules/hmac-secure-link.md
   - html-sanitize: modules/html-sanitize.md
   - iconv: modules/iconv.md
+  - image-filter: modules/image-filter.md
   - immutable: modules/immutable.md
   - ipscrub: modules/ipscrub.md
   - jpeg: modules/jpeg.md
@@ -62,8 +64,10 @@ nav:
   - naxsi: modules/naxsi.md
   - nchan: modules/nchan.md
   - ndk: modules/ndk.md
+  - njs: modules/njs.md
   - pagespeed: modules/pagespeed.md
   - passenger: modules/passenger.md
+  - perl: modules/perl.md
   - phantom-token: modules/phantom-token.md
   - postgres: modules/postgres.md
   - pta: modules/pta.md
@@ -94,11 +98,9 @@ nav:
   - upsync: modules/upsync.md
   - vts: modules/vts.md
   - webp: modules/webp.md
+  - xslt: modules/xslt.md
   - zip: modules/zip.md
 - Lua Scripting: lua-scripting.md
-- Distributions:
-    - nginx-mod.md
-    - tengine.md
 - RPM Repository: https://www.getpagespeed.com/redhat
 plugins:
 - search

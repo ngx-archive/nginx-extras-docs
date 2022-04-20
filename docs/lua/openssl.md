@@ -15,8 +15,8 @@ yum -y install lua-resty-openssl
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
-This document describes lua-resty-openssl [v0.8.7](https://github.com/fffonion/lua-resty-openssl/releases/tag/0.8.7){target=_blank} 
-released on Mar 18 2022.
+This document describes lua-resty-openssl [v0.8.8](https://github.com/fffonion/lua-resty-openssl/releases/tag/0.8.8){target=_blank} 
+released on Apr 14 2022.
     
 <hr />
 
@@ -2605,8 +2605,12 @@ data = {
   subject = resty.openssl.x509 instance,
   request = resty.openssl.x509.csr instance,
   crl = resty.openssl.x509.crl instance,
+  issuer_pkey = resty.openssl.pkey instance, -- >= OpenSSL 3.0
 }
 ```
+
+From OpenSSL 3.0, `issuer_pkey` can be specified as a fallback source for
+generating the authority key identifier extension when `issuer` is same as `subject`.
 
 When `data` is a string, it's the full nconf string. Using section lookup from `value` to
 `data` is also supported.
@@ -3024,9 +3028,37 @@ must be in hashed form, as documented in
 Staring from OpenSSL 3.0, this functions accepts an optional `properties` parameter
 to explictly select provider to fetch algorithms.
 
+### store:set_purpose
+
+**syntax**: *ok, err = store:set_purpose(purpose)*
+
+Set the X509_STORE to match Key Usage and Extendend Key Usage when verifying the cert.
+Possible values are:
+
+```
+	sslclient 	SSL client
+	sslserver 	SSL server
+	nssslserver	Netscape SSL server
+	smimesign 	S/MIME signing
+	smimeencrypt	S/MIME encryption
+	crlsign   	CRL signing
+	any       	Any Purpose
+	ocsphelper	OCSP helper
+	timestampsign	Time Stamp signing
+```
+
+Normally user should use `verify_method` parameter of [store:verify](#storeverify) unless the purpose
+is not included in the default verify methods.
+
+### store:set_depth
+
+**syntax**: *ok, err = store:set_depth(depth)*
+
+Set the verify depth.
+
 ### store:verify
 
-**syntax**: *chain, err = store:verify(x509, chain?, return_chain?, properties?)*
+**syntax**: *chain, err = store:verify(x509, chain?, return_chain?, properties?, verify_method?)*
 
 Verifies a X.509 object with the store. The first argument must be
 [resty.openssl.x509](#restyopensslx509) instance. Optionally accept a validation chain as second
@@ -3038,6 +3070,11 @@ returns `true` only. If verification failed, returns `nil` and error explaining 
 
 Staring from OpenSSL 3.0, this functions accepts an optional `properties` parameter
 to explictly select provider to fetch algorithms.
+
+`verify_method` can be set to use predefined verify parameters such as `"default"`, `"pkcs7"`,
+`"smime_sign"`, `"ssl_client"` and `"ssl_server"`. This set corresponding `purpose`, `trust` and
+couple of other defaults but **does not** override the parameters set from
+[store:set_purpose](#storeset_purpose).
 
 ## resty.openssl.x509.revoked
 

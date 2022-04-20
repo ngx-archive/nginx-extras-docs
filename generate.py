@@ -2,6 +2,8 @@ import base64
 import glob
 import os
 import re
+from os.path import dirname, basename
+
 import pandoc
 
 import yaml
@@ -21,12 +23,13 @@ print(lastversion.__file__)
 
 def enrich_with_yml_info(md, module_config, release):
     handle = module_config['handle']
-    repo = module_config['repo']
+    repo = None
+    if 'repo' in module_config:
+        repo = module_config['repo']
     if str(release['version']) == "0":
         new_title = f"# *[BETA!] {handle}*: {module_config['summary']}"
     else:
         new_title = f"# *{handle}*: {module_config['summary']}"
-    upstream_name = module_config['repo'].split('/')[-1]
     sonames = module_config['soname']
     lines = md.splitlines()
     first_line = lines[0]
@@ -82,11 +85,12 @@ Enable the module by adding the following at the top of `/etc/nginx/nginx.conf`:
     print(sonames)
     for s in sonames:
         intro += f"```nginx\nload_module modules/{s}.so;\n```\n"
-    intro += f"""
+    if repo:
+        intro += f"""
 
 This document describes nginx-module-{handle} [v{release['version']}](https://github.com/{repo}/releases/tag/{release['tag_name']}){{target=_blank}} 
 released on {release['tag_date'].strftime("%b %d %Y")}.
-    """
+"""
     if str(release['version']) == "0":
         intro += "\nProduction stability is *not guaranteed*."
     if 'release_ticket' in module_config:
@@ -309,6 +313,53 @@ def normalize_to_md(readme_contents, file_name):
     return doc.gfm.decode("utf-8")
 
 
+def get_readme_contents_from_github(handle, module_config):
+    print(f"Fetching release for {module_config['repo']}")
+    release = lastversion.latest(module_config['repo'], output_format='dict')
+    if 'readme' not in release:
+        return None
+    readme_contents = base64.b64decode(release['readme']['content']).decode("utf-8")
+    readme_contents = normalize_to_md(readme_contents, release['readme']['name'])
+    readme_contents = remove_md_sections(readme_contents, [
+        'installation',
+        'install',
+        'installing',
+        'build',
+        'build from source',
+        'how to install',
+        'how to build',
+        'building as a dynamic module',
+        'installation:',
+        'compilation',
+        'how to install',
+        'patch to collect ssl_cache_usage, ssl_handshake_time content_time, gzip_time, '
+        'upstream_time, upstream_connect_time, upstream_header_time graphs (optional)',
+        'table of contents',
+        'install in centos 7',
+        'c macro configurations',
+        'requirements',
+        'building',
+        'compatibility',
+        'toc',
+        'dependencies',
+        'installation for stable nginx',
+        'version'
+    ])
+
+    readme_contents = enrich_with_yml_info(readme_contents, module_config, release)
+
+    readme_contents = readme_contents + f"""
+
+## GitHub
+
+You may find additional configuration tips and documentation for this module in the [GitHub 
+repository for 
+nginx-module-{handle}](https://github.com/{module_config['repo']}){{target=_blank}}.
+"""
+    readme_contents = ensure_one_h1(readme_contents)
+    # print(readme_contents)
+
+
 def process_modules_glob(g):
     for module_file_name in glob.glob(g):
         print(f"Processing {module_file_name}")
@@ -319,49 +370,29 @@ def process_modules_glob(g):
             # scalar values to Python the dictionary format
             module_config = yaml.load(f, Loader=yaml.FullLoader)
             module_config['handle'] = handle
-            print(f"Fetching release for {module_config['repo']}")
-            release = lastversion.latest(module_config['repo'], output_format='dict')
-            if 'readme' not in release:
-                continue
-            readme_contents = base64.b64decode(release['readme']['content']).decode("utf-8")
-            readme_contents = normalize_to_md(readme_contents, release['readme']['name'])
-            readme_contents = remove_md_sections(readme_contents, [
-                'installation',
-                'install',
-                'installing',
-                'build',
-                'build from source',
-                'how to install',
-                'how to build',
-                'building as a dynamic module',
-                'installation:',
-                'compilation',
-                'how to install',
-                'patch to collect ssl_cache_usage, ssl_handshake_time content_time, gzip_time, '
-                'upstream_time, upstream_connect_time, upstream_header_time graphs (optional)',
-                'table of contents',
-                'install in centos 7',
-                'c macro configurations',
-                'requirements',
-                'building',
-                'compatibility',
-                'toc',
-                'dependencies',
-                'installation for stable nginx',
-                'version'
-            ])
+            readme_contents = ''
+            if basename(dirname(module_file_name)) == 'internal':
+                print("Internal module!")
+                if 'directives_url' in module_config:
+                    directives_urls = module_config['directives_url']
+                    if not isinstance(directives_urls, list):
+                        directives_urls = [directives_urls]
+                readme_contents = readme_contents + f"""
 
-            readme_contents = enrich_with_yml_info(readme_contents, module_config, release)
+## Directives
 
-            readme_contents = readme_contents + f"""
+You may find information about configuration directives for this module at the following links:        
 
-## GitHub
-
-You may find additional configuration tips and documentation for this module in the [GitHub repository for 
-nginx-module-{handle}](https://github.com/{module_config['repo']}){{target=_blank}}.
 """
-            readme_contents = ensure_one_h1(readme_contents)
-            # print(readme_contents)
+
+                for url in directives_urls:
+                    readme_contents = readme_contents + f"*   {url}"
+                release = lastversion.latest('nginx', output_format='dict')
+                readme_contents = enrich_with_yml_info(readme_contents, module_config, release)
+            else:
+                readme_contents = get_readme_contents_from_github(handle, module_config)
+            if not readme_contents:
+                continue
             with open(f"docs/modules/{handle}.md", "w") as module_md_f:
                 module_md_f.write(readme_contents)
             table.append(
@@ -430,6 +461,7 @@ nginx-module-{handle}](https://github.com/{lib_config['repo']}){{target=_blank}}
 process_lua_glob("../nginx-lua-extras/resty/*.yml")
 process_modules_glob("../nginx-extras/modules/*.yml")
 process_modules_glob("../nginx-extras/modules/others/*.yml")
+process_modules_glob("../nginx-extras/modules/internal/*.yml")
 
 with open(f"docs/modules.md", "w") as index_md_f:
     table.sort()

@@ -15,8 +15,8 @@ yum -y install lua-resty-maxminddb
 
 To use this Lua library with NGINX, ensure that [nginx-module-lua](../modules/lua.md) is installed.
 
-This document describes lua-resty-maxminddb [v1.3.2](https://github.com/anjia0532/lua-resty-maxminddb/releases/tag/v1.3.2){target=_blank} 
-released on Aug 26 2020.
+This document describes lua-resty-maxminddb [v1.3.3](https://github.com/anjia0532/lua-resty-maxminddb/releases/tag/v1.3.3){target=_blank} 
+released on Apr 13 2022.
     
 <hr />
 Name
