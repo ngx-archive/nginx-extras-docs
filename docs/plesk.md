@@ -1,4 +1,4 @@
-# NGINX Extras for Plesk
+# Plesk
 
 NGINX Extras ships with module packages for Plesk control panel.
 

@@ -1,3 +1,8 @@
+---
+hide:
+  - navigation
+---
+
 # NGINX Extras Documentation
 
 The NGINX Extras is the largest [_commercial_](https://www.getpagespeed.com/repo-subscribe){target=_blank} collection of prebuilt dynamic NGINX modules on the Internet.
@@ -54,6 +59,8 @@ This installs NGINX, and modules: PageSpeed, Brotli, Dynamic ETag, Immutable (pe
 ## Complete module list
 
 {!docs/modules.md!}
+
+--8<-- "includes/abbreviations.md"
 
 
 
