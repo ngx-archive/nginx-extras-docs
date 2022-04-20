@@ -494,6 +494,7 @@ with open("mkdocs.yml") as mkdocs_f:
         {'Overview': 'index.md'},
         {'Modules': final_all_modules},
         {'Lua Scripting': 'lua-scripting.md'},
+        {'Distributions': ['branches.md', 'nginx-mod.md', 'tengine.md', 'plesk.md']},
         {'RPM Repository': 'https://www.getpagespeed.com/redhat'}
     ]
     mkdocs_config['nav'] = nav

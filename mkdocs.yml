@@ -101,6 +101,11 @@ nav:
   - xslt: modules/xslt.md
   - zip: modules/zip.md
 - Lua Scripting: lua-scripting.md
+- Distributions:
+  - branches.md
+  - nginx-mod.md
+  - tengine.md
+  - plesk.md
 - RPM Repository: https://www.getpagespeed.com/redhat
 plugins:
 - search
