@@ -4,7 +4,9 @@ As you may know, [our repository](https://www.getpagespeed.com/redhat){target=_b
 
 However, some performance-oriented folks are always looking for speeding up what's already fast - that is NGINX itself. 
 
-There are some open-source patches for it, mainly by Cloudflare to improve things further. So I've decided to save trouble for many people relying on a manual compilation, and build this better patched NGINX as a package that is compatible with all the NGINX modules we have! I call it - NGINX-MOD.
+There are some open-source patches for it, mainly by Cloudflare to improve things further. 
+To save trouble for many people relying on a manual compilation, we build this better patched NGINX as a package that is compatible with all the NGINX modules we have! 
+Its official name is NGINX-MOD.
 
 NGINX-MOD is based on the latest *stable* NGINX with the following additions:
 
